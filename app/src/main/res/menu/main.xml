@@ -16,4 +16,10 @@
         android:iconTintMode="screen"
         android:icon="@drawable/ic_baseline_favorite_24"/> -->
 
+    <item android:title="xp goal"
+        android:id="@+id/xp_goal"
+        android:orderInCategory="100"
+        android:actionLayout="@layout/xp_goal_action_bar_button"
+        app:showAsAction="ifRoom"/>
+
 </menu>

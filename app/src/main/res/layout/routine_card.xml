@@ -27,7 +27,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:textColor="@color/dragon1"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:text="9am"/>
 
         <TextView
@@ -35,13 +35,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:paddingEnd="110dp"
-            android:text="Routine Very Long to Just see what happens"
+            android:paddingEnd="180dp"
+            android:text="Routine Very Looooooooooooooooooooooooooooooooooooooong"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/startTimeTV"
             app:layout_constraintBottom_toBottomOf="parent"
             android:textColor="@color/dragon1"
-            android:textSize="18sp"/>
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/routineTallyTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0/0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/hideShowBtn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/dragon1"
+            android:textSize="16sp"/>
 
         <ImageButton
             android:id="@+id/hideShowBtn"

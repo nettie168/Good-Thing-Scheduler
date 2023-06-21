@@ -51,6 +51,8 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHold
 
         holder.startTimeTV.setText(LocalTime.of(routine.getStartHour(),routine.getStartMinute()).toString());
         holder.routineText.setText(routine.getRoutine());
+        String routineTallyString = "0"+"/"+routine.getHabitArrayList().size();
+        holder.routineTally.setText(routineTallyString);
         //Log.i("All params for "+routine.getRoutine(),routine.getId()+" "+routine.getStartHour()+" "+routine.getStartMinute()+" "+routine.getEndHour()+" "+routine.getEndMinute()+" "+routine.getDaysOfWeek()+" "+routine.getOpenClosed());
 
         if(routine.getOpenClosed()==1){
@@ -152,6 +154,7 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHold
         public ImageButton hideShowBtn;
         private final TextView startTimeTV;
         private ImageButton moreBtn;
+        private TextView routineTally;
 
         public ViewHolder(View view){
             super(view);
@@ -160,6 +163,7 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHold
             habitRecyclerView = (RecyclerView) view.findViewById(R.id.habitRecyclerView);
             hideShowBtn = view.findViewById(R.id.hideShowBtn);
             moreBtn = view.findViewById(R.id.moreToDo);
+            routineTally = view.findViewById(R.id.routineTallyTV);
         }
     }
 

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/xpGoalActionBarBtn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minWidth="32dp"
+    android:minHeight="32dp"
+    android:contentDescription="@string/xp_goal"
+    android:src="@drawable/baseline_emoji_events_24"
+    app:tint="@color/white">
+</ImageButton>

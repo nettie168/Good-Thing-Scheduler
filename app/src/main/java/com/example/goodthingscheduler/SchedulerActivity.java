@@ -21,11 +21,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.goodthingscheduler.XPCount.XPCountModel;
 import com.example.goodthingscheduler.XPCount.XPDayDBHandler;
 import com.example.goodthingscheduler.XPCount.XPUtils;
+import com.example.goodthingscheduler.XPTarget.XPGoalActivity;
 import com.example.goodthingscheduler.scheduleAddRoutineHabits.AddRoutineActivity;
 import com.example.goodthingscheduler.scheduleHabits.RoutineUtils;
 import com.example.goodthingscheduler.Calendar.CalendarUtils;
@@ -72,6 +74,7 @@ public class SchedulerActivity extends AppCompatActivity {
     Boolean isWaving;
 
     public Button xpCountBtn;
+    private ImageButton xpGoalBtn;
     //public static int xpCount;
 
     static ArrayList<String> notes = new ArrayList<>();
@@ -128,6 +131,16 @@ public class SchedulerActivity extends AppCompatActivity {
         }*/
 
         xpCountBtn.setText(String.valueOf(XPUtils.dayXP.getXp())); //xpCount where is it initialised?
+
+        //XP Goal
+        MenuItem item1 = menu.findItem(R.id.xp_goal);
+        MenuItemCompat.setActionView(item1, R.layout.xp_goal_action_bar_button);
+        xpGoalBtn = (ImageButton) MenuItemCompat.getActionView(item1);
+      //  xpGoalBtn = findViewById(R.id.xpGoalActionBarBtn);
+
+        xpGoalBtn.setOnClickListener(view ->  startActivity(new Intent(getApplicationContext(), XPGoalActivity.class))
+        );
+
         return super.onCreateOptionsMenu(menu);
     }
 
