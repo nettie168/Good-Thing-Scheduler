@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="0dp">
+
+    <TextView
+        android:id="@+id/calendarEventTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="2dp"
+        android:singleLine="true"
+        android:textStyle="bold"
+        android:textColor="@color/design_default_color_on_secondary"
+        android:textSize="8sp"
+        android:text="sample event"/>
+
+</androidx.cardview.widget.CardView>

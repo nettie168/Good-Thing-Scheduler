@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".scheduleAddRoutineHabits.AddHabitsActivity">
+
+        <Button
+            android:id="@+id/saveHabitsBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Routine"
+            android:textAllCaps="false"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="10dp"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/routineStartTimeCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Start Time: "/>
+
+            <TextView
+                android:id="@+id/routineStartTimeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="9am"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+  <!--      <androidx.cardview.widget.CardView
+            android:id="@+id/routineEndTimeCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="End Time: "/>
+
+                <TextView
+                    android:id="@+id/routineEndTimeTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="9am"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView> -->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dayOfWeekRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbarAlwaysDrawHorizontalTrack="true"
+            android:scrollbars="horizontal"
+            />
+
+    <TextView
+        android:id="@+id/whichHabitsTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:text="Which habits would you like for this routine?"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/addHabitRV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:layout_marginBottom="50dp"/>
+
+ <!--   <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Other habits"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/allHabitsRV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/> -->
+
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

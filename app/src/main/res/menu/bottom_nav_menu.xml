@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+ <!--    <item
+     android:id="@+id/todo"
+     android:title="To Dos"
+     android:icon="@drawable/ic_baseline_task_24"
+     /> -->
+   <!--   all, bucket list, family, health, work, creations,
+     weekly, monthly todos with notes to do, and reflections of what was achieved
+      each one has option to be scheduled in date, week, month, season or year -->
+
+    <item
+        android:id="@+id/schedule"
+        android:title="Today"
+        android:icon="@drawable/ic_baseline_task_24"
+        />
+
+    <item
+        android:id="@+id/goodThings"
+        android:title="Good things"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        /> <!-- encourages you to write good thing every day,
+        and plan when to do or repeat good thing -->
+
+
+    <item
+        android:id="@+id/calendar"
+        android:title="Calendar"
+        android:icon="@drawable/ic_baseline_calendar_month_24"
+        /> <!-- Calendar with schedule (habits, tasks, events),
+        a list of default (good habits) to choose from
+        can select 3 task/habits/event as priorities
+        each habit/task/event has congrats and option to reflect when ticked/card pressed for info
+        habits can have up/down/maintain with tick box replaced with counter, timer, number input, or time (time now or input) (which can be changed)
+        has button to shift view to show "look back" with summary habits plus mood & reflections
+        habits/tasks/events have button to track/show progress (as calendar & graphs)
+        -->
+
+   <!-- <item
+        android:id="@+id/todo"
+        android:title="To Dos"
+        android:icon="@drawable/ic_baseline_auto_stories_24"
+        />
+         all, bucket list, family, health, work, creations,
+        weekly, monthly todos with notes to do, and reflections of what was achieved
+         each one has option to be scheduled in date, week, month, season or year -->
+
+ <!--  <item
+        android:id="@+id/Challenges"
+        android:title="Challenges"
+        android:icon="@drawable/ic_baseline_travel_explore_24"
+        />
+        this is the health/medical device area
+        - could leave this be and put it in later if we grew
+        for now, user could set their own challenges
+        also have basic default like exercise for 150 minutes a week (20 min a day),
+        raise your heart rate for 75 min a week, read a book a month, practice 5min of different language a day
+        write 3 good things every day, do 5 acts of kindness on one day this month
+        get up every day, go outside every day, do something you enjoy every day
+        can write down why you want to do this challenge, how it would benefit you, and how your life would be different if you did it (you're motivation, buy in)
+        these could have "points" so that if miss a day it's ok 'cos can make it up
+        can specify which habits and how many points (based on difficulty and how much "reward")
+        this could also be where you'd do "team challenges" with friend or character -->
+    <!-- could put challenges as button in calendar & todos -->
+
+  <!--  <item
+        android:id="@+id/profile"
+        android:title="Profile"
+        android:icon="@drawable/ic_baseline_person_24"
+        /> -->
+    <!--     //with friends, awards, "look back" journal & stats,
+        & how much time is allocated and spent -->
+
+</menu>

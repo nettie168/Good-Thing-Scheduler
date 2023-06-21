@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SchedulerActivity">
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu"/>
+
+ <!--   <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addToDoFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_add_24"
+        app:backgroundTint="@color/design_default_color_primary"
+        android:contentDescription="add thing"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"/> -->
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_gravity="end"
+        android:text="add"
+        android:backgroundTint="@color/skyblue"
+        app:icon="@drawable/ic_baseline_add_24"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addToDoFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:contentDescription="Add To Do"
+        android:src="@drawable/ic_baseline_task_alt_24"
+        android:backgroundTint="@color/skyblue"
+        app:layout_constraintBottom_toTopOf="@id/fab"
+        app:layout_constraintEnd_toEndOf="@id/fab"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addRoutineFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:contentDescription="Add Routine"
+        android:src="@drawable/baseline_checklist_24"
+        android:backgroundTint="@color/skyblue"
+        app:layout_constraintBottom_toTopOf="@id/addToDoFab"
+        app:layout_constraintEnd_toEndOf="@id/fab"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scheduleScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="75dp"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/dragonPic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:scaleType="fitXY"
+            android:background="@color/skyblue"
+            android:src="@drawable/naturebacktrans"
+            app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/dragonChar"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                app:layout_constraintVertical_weight="1"
+                android:src="@drawable/jump_item"
+                app:layout_constraintBottom_toBottomOf="@id/dragonPic"
+                app:layout_constraintEnd_toEndOf="@id/dragonPic"
+                app:layout_constraintStart_toStartOf="@id/dragonPic"
+                app:layout_constraintTop_toTopOf="@id/dragonPic"
+                android:layout_marginVertical="5dp"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <Button
+            android:id="@+id/reflectionBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Good Morning! How's your morning going?"
+            android:textAllCaps="false"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            app:layout_constraintTop_toBottomOf="@id/dragonPic"/>
+
+    <!--    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/dragonPic"
+            android:src="@drawable/darkgreenwave"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:scaleType="fitXY"/> -->
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="0dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/scheduleBackBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/back"
+            android:textAllCaps="false"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            />
+
+        <Button
+            android:id="@+id/todayDateTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="Today's Date"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:padding="6dp"
+            style="@style/Widget.MaterialComponents.Button.TextButton" />
+
+        <Button
+            android:id="@+id/scheduleNextBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/next"
+            android:textAllCaps="false"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            />
+    </LinearLayout>
+
+   <!--     <ListView
+            android:id="@+id/priorities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/> -->
+
+        <TextView
+            android:id="@+id/daysGoalsTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Goals and To Dos"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:padding="6dp"
+            style="@style/Widget.MaterialComponents.Button.TextButton" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/daysGoalsRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            />
+
+        <TextView
+            android:id="@+id/routinesTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Events and Routines"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:padding="6dp"
+            style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RoutinesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            />
+
+      <!--  <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleY="-1"
+            app:layout_constraintTop_toBottomOf="@id/dragonPic"
+            android:src="@drawable/darkgreenwave"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:scaleType="fitXY"/> -->
+
+
+    </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
