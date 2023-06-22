@@ -140,8 +140,6 @@ public class CalendarActivity extends AppCompatActivity {
             }
             return false;
         });
-
-
     }
 
     public void previousMonthAction(){

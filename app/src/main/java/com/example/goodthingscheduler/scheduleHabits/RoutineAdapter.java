@@ -2,7 +2,6 @@ package com.example.goodthingscheduler.scheduleHabits;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,10 +48,25 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHold
         RoutineModel routine = routineList.get(position);
         routineListDBHandler = new RoutineListDBHandler(context);
 
+        dailyHabitsDBHandler = new DailyHabitsDBHandler(context);
+        ArrayList<HabitModel> dailyHabitsDBArray = dailyHabitsDBHandler.listHabits(routine.getRoutine());
+
+
         holder.startTimeTV.setText(LocalTime.of(routine.getStartHour(),routine.getStartMinute()).toString());
         holder.routineText.setText(routine.getRoutine());
-        String routineTallyString = "0"+"/"+routine.getHabitArrayList().size();
+
+        int habitsComplete = 0;
+        for(int i =0; i < routine.getHabitArrayList().size(); i++){
+            int habitStatus = dailyHabitsDBArray.get(i).getStatus();
+            if(habitStatus > 0){
+                habitsComplete += 1;
+            }
+        }
+
+        String routineTallyString = habitsComplete+"/"+routine.getHabitArrayList().size();
         holder.routineTally.setText(routineTallyString);
+
+
         //Log.i("All params for "+routine.getRoutine(),routine.getId()+" "+routine.getStartHour()+" "+routine.getStartMinute()+" "+routine.getEndHour()+" "+routine.getEndMinute()+" "+routine.getDaysOfWeek()+" "+routine.getOpenClosed());
 
         if(routine.getOpenClosed()==1){
@@ -115,8 +129,6 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHold
             }
         });
 
-        dailyHabitsDBHandler = new DailyHabitsDBHandler(context);
-        ArrayList<HabitModel> dailyHabitsDBArray = dailyHabitsDBHandler.listHabits(routine.getRoutine());
 
         GridLayoutManager layoutManager = new GridLayoutManager(holder.habitRecyclerView.getContext(),4);
     //    LinearLayoutManager layoutManager = new LinearLayoutManager(holder.habitRecyclerView.getContext(), RecyclerView.VERTICAL, false);
@@ -133,7 +145,7 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHold
             RoutineUtils.routineSelStartMinute = routine.getStartMinute();
             RoutineUtils.routineSelId = routine.getId();
 
-            ArrayList<String> splitDaysString = new ArrayList<String>(Arrays.asList(routine.getDaysOfWeek().split(",")));
+            ArrayList<String> splitDaysString = new ArrayList<>(Arrays.asList(routine.getDaysOfWeek().split(",")));
             //Log.i("split Days",splitDaysString.toString());
             RoutineUtils.daysOfWeekSelected = splitDaysString;
          //   for(int i = 0; i < RoutineUtils.daysOfWeekSelected.size(); i++){
@@ -153,14 +165,14 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHold
         private final RecyclerView habitRecyclerView;
         public ImageButton hideShowBtn;
         private final TextView startTimeTV;
-        private ImageButton moreBtn;
-        private TextView routineTally;
+        private final ImageButton moreBtn;
+        private final TextView routineTally;
 
         public ViewHolder(View view){
             super(view);
             startTimeTV = view.findViewById(R.id.startTimeTV);
-            routineText = (TextView) view.findViewById(R.id.routineTV);
-            habitRecyclerView = (RecyclerView) view.findViewById(R.id.habitRecyclerView);
+            routineText = view.findViewById(R.id.routineTV);
+            habitRecyclerView = view.findViewById(R.id.habitRecyclerView);
             hideShowBtn = view.findViewById(R.id.hideShowBtn);
             moreBtn = view.findViewById(R.id.moreToDo);
             routineTally = view.findViewById(R.id.routineTallyTV);

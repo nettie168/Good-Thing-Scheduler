@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.goodthingscheduler.Calendar.CalendarUtils;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -43,32 +45,42 @@ public class XPDayDBHandler extends SQLiteOpenHelper {
 
         values.put(DATE,xpCount.getDate());
         values.put(XP,xpCount.getXp());
+        //Log.i("XP DB adding",xpCount.getDate()+" "+xpCount.getXp());
+        Log.i("XPDB addDayXP","date: "+xpCount.getDate()+" xp: "+xpCount.getXp());
 
-      //  db.insert(TABLE_NAME,null,values);
-        db.insertWithOnConflict(TABLE_NAME, null, values,SQLiteDatabase.CONFLICT_REPLACE);
+        db.insert(TABLE_NAME,null,values);
+        //db.insertWithOnConflict(TABLE_NAME, null, values,SQLiteDatabase.CONFLICT_REPLACE);
         db.close();
     }
 
-    public XPCountModel todayXP(String todayDate){
+    public XPCountModel todayXP(String dayDate){
         String sql = "select * from "+ TABLE_NAME;
 
         //creates a database for reading our database
         SQLiteDatabase db = this.getReadableDatabase();
-        XPCountModel todayXP = new XPCountModel(-1, "no xp for date", 0);
-
         Cursor cursor = db.rawQuery(sql, null);
+
+        XPCountModel todayXP = new XPCountModel(-1, "no xp for date", 1);
+       // XPCountModel todayXP = null;
+        //Log.i("xp in XPDB todayXP 1",dayDate+" "+todayXP.getDate());
+
         if (cursor.moveToFirst()) {
-            String date = cursor.getString(1);
+            ///Log.i("XP DB","dayDate: "+dayDate+" date in DB: "+date);
             do {
-                if(date.equals(todayDate)){
+                String date = cursor.getString(1);
+                if(date.equals(dayDate)){
                     int id = Integer.parseInt(cursor.getString(0));
                     int xp = Integer.parseInt(cursor.getString(2));
                     todayXP = new XPCountModel(id, date, xp);
+                    //Log.i("xp in if statement, XPDB todayXP","selected day: "+dayDate+" DB entry date: "+date+" DB entry XP: "+xp);
+                    //Log.i("xp in if statement, XPDB todayXP","selected day: "+dayDate+" DB entry date: "+todayXP.getDate()+" DB entry XP: "+todayXP.getXp());
+                    break;
                 }
             }
             while (cursor.moveToNext());
         }
         cursor.close();
+        //Log.i("xp in XPDB todayXP","selected day: "+dayDate+" DB entry date: "+todayXP.getDate()+" DB entry XP: "+todayXP.getXp());
         return todayXP;
     }
 
@@ -76,12 +88,14 @@ public class XPDayDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(DATE,xpCount.getDate());
+        //values.put(DATE,xpCount.getDate());
         values.put(XP,xpCount.getXp());
 
-        db.update(TABLE_NAME, values, ID_COL + " = ?", new String[]{String.valueOf(1)});
+        db.update(TABLE_NAME, values, DATE + " = ?", new String[]{String.valueOf(xpCount.getDate())});
+
+        //db.update(TABLE_NAME, values, ID_COL + " = ?", new String[]{String.valueOf(xpCount.getId())});
     //    Log.i("updated Habit","true, "+"habit Date "+habit.getDate()+" status "+habit.getStatus()+" task "+habit.getTask()+" detail "+habit.getDetail()+" id "+habit.getId());
-        Log.i("XP ID is",Integer.toString(xpCount.getId()));
+        //Log.i("XP ID is",Integer.toString(xpCount.getId()));
         db.close();
     }
 

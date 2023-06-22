@@ -74,7 +74,6 @@ public class SchedulerActivity extends AppCompatActivity {
     Boolean isWaving;
 
     public Button xpCountBtn;
-    private ImageButton xpGoalBtn;
     //public static int xpCount;
 
     static ArrayList<String> notes = new ArrayList<>();
@@ -89,56 +88,66 @@ public class SchedulerActivity extends AppCompatActivity {
 
     @Override
     public void onRestart() {
-        super.onRestart();
-        XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
-        xpCountBtn.setText(String.valueOf(XPUtils.dayXP.getXp()));
-
-        setDaysGoalsRecyclerView();
-        setRoutineRecyclerView();
-        setCategoryUtils();
-        setCalendarUtils();
-        //xpCountBtn.setText(String.valueOf(dayXP));
-
-        //  RoutineUtils.daysOfWeekSelected = new ArrayList<>();
         //When BACK BUTTON is pressed, the activity on the stack is restarted
         //Do what you want on the refresh procedure here
+        super.onRestart();
+        //re-set today's XP to XP of day in DB
+        XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
+
+        //re-set XP menu button to today's XP
+        xpCountBtn.setText(String.valueOf(XPUtils.dayXP.getXp()));
+
+        //refresh goals/to-dos
+        setDaysGoalsRecyclerView();
+        //refresh routines&habits
+        setRoutineRecyclerView();
+        //re-set Categories and Calendar
+        setCategoryUtils();
+        setCalendarUtils();
     }
 
 
-    //Action Bar Menu with XP button showing XP of that day (button opens activity with month XP graph)
+    //Action Bar Menu with XP button
+    // shows XP of that day (button opens activity with month XP graph)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
+        //inflate menu
         getMenuInflater().inflate(R.menu.main, menu);
 
+        //get XP button in menu
         MenuItem item = menu.findItem(R.id.xp_item);
         MenuItemCompat.setActionView(item, R.layout.xp_action_bar_button);
         xpCountBtn = (Button)MenuItemCompat.getActionView(item);
 
-        // Button xpButton = findViewById(R.id.xpCountActionBarBtn);
+//        Log.i("xp in menu 1",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
+        setXPUtils();
+        Log.i("xp in menu 2",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
 
-        xpDayDBHandler = new XPDayDBHandler(this);
 
-        XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
+        //set today's XP to XP of day in DB
+        //XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
 
-        if(Objects.equals(XPUtils.dayXP.getDate(), "no xp for date")){
+        //if no XP for that date in DB, XP set to 0
+      /*  if(Objects.equals(XPUtils.dayXP.getDate(), "no xp for date")){
             xpDayDBHandler.addDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(),0));
             XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
-        }
-
-   /*     if(xpDayDBHandler.DaysOfXP().size()==0){
-            //Log.i("size at Sched 1 ", String.valueOf(xpDayDBHandler.DayXP().size()));
-            xpDayDBHandler.addDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(),0));
         }*/
 
-        xpCountBtn.setText(String.valueOf(XPUtils.dayXP.getXp())); //xpCount where is it initialised?
+        //set today's XP to XP of day in DB
+        //XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
 
-        //XP Goal
+        //set XP menu button to today's XP
+        //xpCountBtn.setText(String.valueOf(XPUtils.dayXP.getXp())); //xpCount where is it initialised?
+
+        //XP Goal Button
         MenuItem item1 = menu.findItem(R.id.xp_goal);
         MenuItemCompat.setActionView(item1, R.layout.xp_goal_action_bar_button);
-        xpGoalBtn = (ImageButton) MenuItemCompat.getActionView(item1);
-      //  xpGoalBtn = findViewById(R.id.xpGoalActionBarBtn);
+      //  ImageButton xpGoalBtn;
+        //xpGoalBtn = (ImageButton) MenuItemCompat.getActionView(item1);
+        //xpGoalBtn = findViewById(R.id.xpGoalActionBarBtn);
 
-        xpGoalBtn.setOnClickListener(view ->  startActivity(new Intent(getApplicationContext(), XPGoalActivity.class))
+        xpCountBtn.setOnClickListener(view ->  startActivity(new Intent(getApplicationContext(), XPGoalActivity.class))
         );
 
         return super.onCreateOptionsMenu(menu);
@@ -149,12 +158,15 @@ public class SchedulerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //set Action Bar
+        //set Action Bar, turns colour to skyblue/#70ccfd, removes title and elevation
         ActionBar bar = getSupportActionBar();
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#70ccfd")));
         Objects.requireNonNull(bar).setElevation(0);
         bar.setTitle("");
 
+        //init DBS
+        //init XP DB
+        xpDayDBHandler = new XPDayDBHandler(this);
         habitListDBHandler = new HabitListDBHandler(this);
         dailyHabitsDBHandler = new DailyHabitsDBHandler(this);
         routineListDBHandler = new RoutineListDBHandler(this);
@@ -175,17 +187,19 @@ public class SchedulerActivity extends AppCompatActivity {
         isAllFabsVisible = false;
         setFabButtons();
 
+        //work-in-progress
         setReflections();
     }
 
     private void setCategoryUtils(){
         goodCategoriesDB = new GoodCategoriesDB(this);
 
+        //if no categories in DB, adds one
         if(goodCategoriesDB.listAllGoodCatsDB().isEmpty()){
-            //goodCategoriesDB.addGoodCategory(new GoodCategoryModel(0, "New Category", R.drawable.naturewide160dpibag, R.drawable.ic_baseline_add_24));
             goodCategoriesDB.addGoodCategory(new GoodCategoryModel(0, "All Good Things (To Do)", R.drawable.bookswide160dpi, R.drawable.ic_baseline_favorite_24));
         }
 
+        //sets category utils needed for the categories in adding to-dos (in To Do Activity)
         CategoriesUtil.categorySelected = "All Good Things (To Do)";
         CategoriesUtil.stateSelected = "To Do";
         CategoriesUtil.goodThingId = -1;
@@ -195,12 +209,43 @@ public class SchedulerActivity extends AppCompatActivity {
     }
 
     private void setCalendarUtils(){
+        //sets date if no date (used for this/Schedule Activity, To-Dos, Calendar and XP utils)
         if(CalendarUtils.selectedDate==null){// || LocalTime.now()>LocalTime.of(4,0)){ //Add an "Or is midnight"
             CalendarUtils.selectedDate = LocalDate.now();
         }
         RoutineUtils.routineSel = "";
         RoutineUtils.daysOfWeekSelected = new ArrayList<>();
         RoutineUtils.routineHabitList = new ArrayList<>();
+    }
+
+    private void setXPUtils(){
+        //set day's XP to XP from DB for selected date
+        XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
+        //Log.i("xp in setXPUtils start",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
+
+        //if today's XP date isn't the same as the selected date, add new XP to DB
+//        if(XPUtils.dayXP.equals(null)){
+  //          xpDayDBHandler.addDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(),0));
+    //        XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
+      //  }
+
+        //if there's no DB entry for that date
+        if(XPUtils.dayXP.getDate().equals("no xp for date")){
+            //add new XP day with that date, xp=0;
+            xpDayDBHandler.addDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(),0));
+            XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
+            //Log.i("xp in setXPUtils if statement",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
+        }
+
+     /*   if(!XPUtils.dayXP.getDate().equals(CalendarUtils.selectedDate.toString())){
+            xpDayDBHandler.addDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(),0));
+            XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
+            Log.i("xp in setXPUtils if statement",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
+        }*/
+
+        //set XP menu button to today's XP
+        xpCountBtn.setText(String.valueOf(XPUtils.dayXP.getXp())); //xpCount where is it initialised?
+        //Log.i("xp in setXPUtils end",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
     }
 
     private void setCharacter(){
@@ -295,7 +340,6 @@ public class SchedulerActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         daysGoalsRecyclerView.setLayoutManager(layoutManager);
 
-
     }
 
     private void setRoutineRecyclerView(){
@@ -303,7 +347,7 @@ public class SchedulerActivity extends AppCompatActivity {
 
         //List Routines in Day from RoutinesDB (can probably use listRoutinesInDay)
         ArrayList<RoutineModel> routinesInDay = routineListDBHandler.listRoutinesInDay();
-        Log.i("schedule Act","routines in day size: "+routinesInDay.size());
+        //Log.i("schedule Act","routines in day size: "+routinesInDay.size());
         //Create routine array sorted by time
         Comparator < RoutineModel > comparator = new TimeComparator();
         routinesInDay.sort( comparator );
@@ -427,6 +471,7 @@ public class SchedulerActivity extends AppCompatActivity {
         dateView.setText(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
         setRoutineRecyclerView();
         setDaysGoalsRecyclerView();
+        setXPUtils();
     }
 
     public void nextDay(){
@@ -434,6 +479,7 @@ public class SchedulerActivity extends AppCompatActivity {
         dateView.setText(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
         setRoutineRecyclerView();
         setDaysGoalsRecyclerView();
+        setXPUtils();
     }
 
     public void setBottomNavMenu(){
@@ -480,5 +526,6 @@ public class SchedulerActivity extends AppCompatActivity {
         if(toDoThingsDB != null){
             toDoThingsDB.close();
         }
+        if(xpDayDBHandler != null) xpDayDBHandler.close();
     }
 }

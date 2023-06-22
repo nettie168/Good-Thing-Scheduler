@@ -73,6 +73,7 @@ public class ToDoThingAdapter extends RecyclerView.Adapter<ToDoThingAdapter.View
                 toDoThingsDB.updateGoodThing(new ToDoThingModel(goodThing.getId(), goodThing.getCategory(), goodThing.getGoodThing(), goodThing.getInspiredBy(), "To Do", goodThing.getDateAdded(), goodThing.getDateToStart(), goodThing.getDateToEnd(), ""));
                 //Log.i("good thing after is ","good thing: "+goodThing.getGoodThing()+", id: "+goodThing.getId()+", cat: "+goodThing.getCategory()+", state: "+goodThing.getState()+", added: "+goodThing.getDateAdded()+", start: "+goodThing.getDateToStart());
                 xpDayDBHandler.updateDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(), XPUtils.dayXP.getXp()-5));
+                Log.i("to do adapter","date is "+CalendarUtils.selectedDate.toString()+" xp is"+XPUtils.dayXP.getXp()+"-5");
 
             }else{
                 goodThing.setState("Done");
@@ -81,6 +82,8 @@ public class ToDoThingAdapter extends RecyclerView.Adapter<ToDoThingAdapter.View
                 //Log.i("good thing after is ","good thing: "+goodThing.getGoodThing()+", id: "+goodThing.getId()+", cat: "+goodThing.getCategory()+", state: "+goodThing.getState()+", added: "+goodThing.getDateAdded()+", start: "+goodThing.getDateToStart());
 
                 xpDayDBHandler.updateDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(), XPUtils.dayXP.getXp()+5));
+                Log.i("to do adapter","date is "+CalendarUtils.selectedDate.toString()+" xp is"+XPUtils.dayXP.getXp()+"+5");
+
 
                 RoutineUtils.habitName = goodThing.getGoodThing();
                 Intent taskTickActivity = new Intent(context.getApplicationContext(), TaskTickedActivity.class);
