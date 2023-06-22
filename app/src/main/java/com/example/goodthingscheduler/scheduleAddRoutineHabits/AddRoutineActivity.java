@@ -66,19 +66,19 @@ public class AddRoutineActivity extends AppCompatActivity {
             routineList.add(new HabitModel("Prepare for the Day", R.drawable.ic_baseline_wb_sunny_24));
             //  AddroutineList.add(new HabitModel("Practice Courage (Feel the Fear - and do it anyway)", R.drawable.ic_baseline_wb_sunny_24));
             routineList.add(new HabitModel("Work that works for me", R.drawable.ic_baseline_assured_workload_24));
-            routineList.add(new HabitModel("Lunchtime", R.drawable.ic_baseline_water_drop_24));
+            routineList.add(new HabitModel("Lunchtime", R.drawable.ic_baseline_ramen_dining_24));
             //   routineList.add(new HabitModel("Food shop", R.drawable.ic_baseline_water_drop_24));
             routineList.add(new HabitModel("Check Finances", R.drawable.ic_baseline_credit_score_24));
             routineList.add(new HabitModel("Do Something I Love", R.drawable.ic_baseline_self_improvement_24));
             routineList.add(new HabitModel("Time in Nature", R.drawable.baseline_air_24));
             routineList.add(new HabitModel("Growing Nature", R.drawable.baseline_yard_24));
             routineList.add(new HabitModel("Magnificent Mealtime", R.drawable.ic_baseline_local_pizza_24));
-            routineList.add(new HabitModel("Spend time with Loved Ones", R.drawable.ic_baseline_local_pizza_24));
-            routineList.add(new HabitModel("Spend time with Yourself", R.drawable.ic_baseline_local_pizza_24));
+            routineList.add(new HabitModel("Spend time with Loved Ones", R.drawable.ic_baseline_diversity_3_24));
+            routineList.add(new HabitModel("Spend time with Yourself", R.drawable.ic_baseline_favorite_24));
             routineList.add(new HabitModel("Tidy Spaces", R.drawable.ic_baseline_countertops_24));
-            routineList.add(new HabitModel("Expand Your Horizons", R.drawable.ic_baseline_countertops_24));
+            routineList.add(new HabitModel("Expand Your Horizons", R.drawable.ic_baseline_travel_explore_24));
             // AddroutineList.add(new HabitModel("Evening Self-care", R.drawable.ic_baseline_spa_24));
-            routineList.add(new HabitModel("Prepare for Tomorrow", R.drawable.ic_baseline_arrow_forward_24));
+            routineList.add(new HabitModel("Prepare for Tomorrow", R.drawable.ic_baseline_calendar_month_24));
             //  AddroutineList.add(new HabitModel("Rest & Recharge", R.drawable.ic_baseline_battery_charging_full_24));
             //    AddroutineList.add(new HabitModel("Wind Down", R.drawable.ic_baseline_nights_stay_24));
       //  }
