@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.goodthingscheduler.Calendar.CalendarUtils;
 import com.example.goodthingscheduler.R;
+import com.example.goodthingscheduler.XPCount.XPCountModel;
+import com.example.goodthingscheduler.XPCount.XPDayDBHandler;
 
-import java.lang.reflect.Array;
-import java.time.YearMonth;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,6 +26,8 @@ import lecho.lib.hellocharts.view.LineChartView;
 
 public class XPGoalActivity extends AppCompatActivity {
 
+    private XPDayDBHandler xpDayDBHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,38 +39,43 @@ public class XPGoalActivity extends AppCompatActivity {
         //getSupportActionBar().setBackgroundDrawable(null);
         //getSupportActionBar().setElevation(0);
 
+        xpDayDBHandler = new XPDayDBHandler(this);
+
+
+        setXPArray();
         setLineChart();
+    }
+
+    private void setXPArray(){
+        ArrayList<LocalDate> daysInXPMonthArray;
+        daysInXPMonthArray = CalendarUtils.daysInXPMonthArray(LocalDate.now());
+        Log.i("XPGoal Activity, daysInMonth", String.valueOf(daysInXPMonthArray));
+
+        ArrayList<XPCountModel> XPinMonthArray = xpDayDBHandler.XPInMonth(daysInXPMonthArray);
+
     }
 
     private void setLineChart(){
         //find Line Chart View
         LineChartView lineChartView = findViewById(R.id.chart);
 
-        YearMonth yearMonth = YearMonth.from(CalendarUtils.selectedDate);
-
-        int daysInMonth = yearMonth.lengthOfMonth();
-        //String[] axisData;
-        //Array<String> axisData = new java.sql.Array();
-
-        //List<PointValue> yAxisValues = new ArrayList<>();
-        //List<AxisValue> xAxisValues = new ArrayList<>();
-
-        //for(int i = 0; i < daysInMonth; i++){
-          //  axisData.
-       // }
-
         //Default Code
         String[] axisData = {"1", "2", "3", "4", "5", "6", "7", "8", "9",
                 "10", "11", "12", "13", "14"};
 
         int[] yAxisData = {100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400};
+        //int[] yAxisData2 = {50, 100, 200, 250, 400, 400, 400, 700, 850, 900, 900, 1100, 1200, 1400};
+        int[] yAxisData2 = {50, 100, 200, 250, 400};
+
 
         List<PointValue> yAxisValues = new ArrayList<>();
+        List<PointValue> yAxisValues2 = new ArrayList<>();
+
         List<AxisValue> axisValues = new ArrayList<>();
 
       //  Line line = new Line(yAxisValues).setColor(Color.parseColor("#9C27B0")); //purple
         Line line = new Line(yAxisValues).setColor(Color.parseColor("#808080")); //grey
-
+        Line line2 = new Line(yAxisValues2).setColor(Color.parseColor("#9C27B0")); //grey
 
 
         for(int i = 0; i < axisData.length; i++){
@@ -75,10 +84,18 @@ public class XPGoalActivity extends AppCompatActivity {
 
         for (int i = 0; i < yAxisData.length; i++){
             yAxisValues.add(new PointValue(i, yAxisData[i]));
+            //yAxisValues2.add(new PointValue(i, yAxisData2[i]));
+        }
+
+        for (int i = 0; i < yAxisData2.length; i++){
+            yAxisValues2.add(new PointValue(i, yAxisData2[i]));
         }
 
         List<Line> lines = new ArrayList<>();
         lines.add(line);
+
+        //List<Line> lines = new ArrayList<>();
+        lines.add(line2);
 
         LineChartData data = new LineChartData();
         data.setLines(lines);

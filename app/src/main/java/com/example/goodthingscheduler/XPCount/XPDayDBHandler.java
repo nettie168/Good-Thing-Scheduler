@@ -100,7 +100,7 @@ public class XPDayDBHandler extends SQLiteOpenHelper {
     }
 
 
-    public ArrayList<XPCountModel> DaysOfXP() {
+    public ArrayList<XPCountModel> XPInMonth(ArrayList<LocalDate> daysInMonth) {
         String sql = "select * from "+ TABLE_NAME;
 
         //creates a database for reading our database
@@ -110,10 +110,16 @@ public class XPDayDBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
             do {
-                int id = Integer.parseInt(cursor.getString(0));
-                String date = cursor.getString(1);
-                int xp = Integer.parseInt(cursor.getString(2));
-                storeStates.add(new XPCountModel(id,date,xp));
+              //  for(int i=0; i < daysInMonth.size(); i++) {
+                    String date = cursor.getString(1);
+                 //   if (date.equals(daysInMonth.get(i).toString())){
+                        int id = Integer.parseInt(cursor.getString(0));
+                        int xp = Integer.parseInt(cursor.getString(2));
+                        storeStates.add(new XPCountModel(id, date, xp));
+                        Log.i("XPDayDB XPinMonth",date+" "+xp);
+                        //break;
+                 //   }
+              //  }
             }
             while (cursor.moveToNext());
         }

@@ -96,6 +96,21 @@ public class CalendarUtils {
         return LocalDate.parse(dateString, formatter);
     }
 
+    public static ArrayList<LocalDate> daysInXPMonthArray(LocalDate date) {
+        ArrayList<LocalDate> daysInMonthArray = new ArrayList<>();
+        YearMonth yearMonth = YearMonth.from(date);
+
+        int daysInMonth = yearMonth.lengthOfMonth();
+       // LocalDate firstOfMonth = CalendarUtils.selectedDate.withDayOfMonth(1);
+        //int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
+
+        for(int i = 1; i<= 14; i++){ //i<=daysInMonth
+                daysInMonthArray.add(LocalDate.of(yearMonth.plusMonths(1).getYear(),date.getMonth(),i));
+        }
+
+        return daysInMonthArray;
+    }
+
 
 
 }
