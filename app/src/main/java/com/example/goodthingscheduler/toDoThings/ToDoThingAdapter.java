@@ -72,7 +72,8 @@ public class ToDoThingAdapter extends RecyclerView.Adapter<ToDoThingAdapter.View
                 //Log.i("good thing b4 is ","good thing: "+goodThing.getGoodThing()+", id: "+goodThing.getId()+", cat: "+goodThing.getCategory()+", state: "+goodThing.getState()+", added: "+goodThing.getDateAdded()+", start: "+goodThing.getDateToStart());
                 toDoThingsDB.updateGoodThing(new ToDoThingModel(goodThing.getId(), goodThing.getCategory(), goodThing.getGoodThing(), goodThing.getInspiredBy(), "To Do", goodThing.getDateAdded(), goodThing.getDateToStart(), goodThing.getDateToEnd(), ""));
                 //Log.i("good thing after is ","good thing: "+goodThing.getGoodThing()+", id: "+goodThing.getId()+", cat: "+goodThing.getCategory()+", state: "+goodThing.getState()+", added: "+goodThing.getDateAdded()+", start: "+goodThing.getDateToStart());
-                xpDayDBHandler.updateDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(), XPUtils.dayXP.getXp()-5));
+                XPUtils.dayXP = new XPCountModel(CalendarUtils.selectedDate.toString(),XPUtils.dayXP.getXp()-5);
+                xpDayDBHandler.updateDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(), XPUtils.dayXP.getXp()));
                 Log.i("to do adapter","date is "+CalendarUtils.selectedDate.toString()+" xp is"+XPUtils.dayXP.getXp()+"-5");
 
             }else{
@@ -81,7 +82,8 @@ public class ToDoThingAdapter extends RecyclerView.Adapter<ToDoThingAdapter.View
                 toDoThingsDB.updateGoodThing(new ToDoThingModel(goodThing.getId(), goodThing.getCategory(), goodThing.getGoodThing(), goodThing.getInspiredBy(), "Done", goodThing.getDateAdded(), goodThing.getDateToStart(), goodThing.getDateToEnd(), LocalDate.now().toString()));
                 //Log.i("good thing after is ","good thing: "+goodThing.getGoodThing()+", id: "+goodThing.getId()+", cat: "+goodThing.getCategory()+", state: "+goodThing.getState()+", added: "+goodThing.getDateAdded()+", start: "+goodThing.getDateToStart());
 
-                xpDayDBHandler.updateDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(), XPUtils.dayXP.getXp()+5));
+                XPUtils.dayXP = new XPCountModel(CalendarUtils.selectedDate.toString(),XPUtils.dayXP.getXp()+5);
+                xpDayDBHandler.updateDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(), XPUtils.dayXP.getXp()));
                 Log.i("to do adapter","date is "+CalendarUtils.selectedDate.toString()+" xp is"+XPUtils.dayXP.getXp()+"+5");
 
 
