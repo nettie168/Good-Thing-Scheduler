@@ -51,7 +51,7 @@ public class XPGoalActivity extends AppCompatActivity {
         daysInXPMonthArray = CalendarUtils.daysInXPMonthArray(LocalDate.now());
         Log.i("XPGoal Activity, daysInMonth", String.valueOf(daysInXPMonthArray));
 
-        ArrayList<XPCountModel> XPinMonthArray = xpDayDBHandler.XPInMonth(daysInXPMonthArray);
+        //ArrayList<XPCountModel> XPinMonthArray = xpDayDBHandler.XPInMonth();
 
     }
 
@@ -65,7 +65,9 @@ public class XPGoalActivity extends AppCompatActivity {
 
         int[] yAxisData = {100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400};
         //int[] yAxisData2 = {50, 100, 200, 250, 400, 400, 400, 700, 850, 900, 900, 1100, 1200, 1400};
-        int[] yAxisData2 = {50, 100, 200, 250, 400};
+      //  int[] yAxisData2 = {50, 100, 200, 250, 400};
+        Integer[] yAxisData2 = xpDayDBHandler.TotalXPInMonth();
+        //ArrayList yAxisData2 = xpDayDBHandler.XPMonth();
 
 
         List<PointValue> yAxisValues = new ArrayList<>();

@@ -99,8 +99,9 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ViewHolder> 
                 holder.taskText.setTextColor(Color.WHITE);
 
                 //update XP
-                xpDayDBHandler.updateDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(), XPUtils.dayXP.getXp()+5));
-
+                XPUtils.dayXP = new XPCountModel(CalendarUtils.selectedDate.toString(),XPUtils.dayXP.getXp()+5);
+                xpDayDBHandler.updateDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(), XPUtils.dayXP.getXp()));
+                Log.i("Habit Adapter, on tick","xp is: "+XPUtils.dayXP.getXp()+5);
                 //start TaskTicked Activity
                 RoutineUtils.habitName = habitFromList.getTask();
                 RoutineUtils.habitImgId = habitFromList.getHabitImgId();
@@ -116,7 +117,9 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ViewHolder> 
                 holder.cardView.setCardBackgroundColor(Color.WHITE);
                 holder.taskText.setTextColor(Color.BLUE);
                 //update XP
-                xpDayDBHandler.updateDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(),XPUtils.dayXP.getXp()-5));
+                XPUtils.dayXP = new XPCountModel(CalendarUtils.selectedDate.toString(),XPUtils.dayXP.getXp()-5);
+                xpDayDBHandler.updateDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(),XPUtils.dayXP.getXp()));
+                Log.i("Habit Adapter, untick","xp is: "+XPUtils.dayXP.getXp()+"-5");
             }
         });
 

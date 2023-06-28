@@ -96,6 +96,7 @@ public class SchedulerActivity extends AppCompatActivity {
 
         //re-set XP menu button to today's XP
         xpCountBtn.setText(String.valueOf(XPUtils.dayXP.getXp()));
+        Log.i("Schedule Activity on Restart","Xp is "+XPUtils.dayXP.getXp());
 
         //refresh goals/to-dos
         setDaysGoalsRecyclerView();
@@ -105,6 +106,7 @@ public class SchedulerActivity extends AppCompatActivity {
         setCategoryUtils();
         setCalendarUtils();
     }
+
 
 
     //Action Bar Menu with XP button
@@ -152,6 +154,30 @@ public class SchedulerActivity extends AppCompatActivity {
 
         return super.onCreateOptionsMenu(menu);
     }
+
+ /*   public void onResume() {
+        super.onResume();
+        //re-set today's XP to XP of day in DB
+        XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
+
+        //re-set XP menu button to today's XP
+        // xpCountBtn.setText(String.valueOf(XPUtils.dayXP.getXp()));
+        Log.i("Schedule Activity on Resume","Xp is "+XPUtils.dayXP.getXp());
+
+        //refresh goals/to-dos
+        setDaysGoalsRecyclerView();
+        //refresh routines&habits
+        setRoutineRecyclerView();
+        //re-set Categories and Calendar
+        setCategoryUtils();
+        setCalendarUtils();
+        setXPUtils();
+    }*/
+
+    public void invalidateOptionsMenu() {
+        
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -221,7 +247,7 @@ public class SchedulerActivity extends AppCompatActivity {
     private void setXPUtils(){
         //set day's XP to XP from DB for selected date
         XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
-        //Log.i("xp in setXPUtils start",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
+        Log.i("xp in setXPUtils start",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
 
         //if today's XP date isn't the same as the selected date, add new XP to DB
 //        if(XPUtils.dayXP.equals(null)){
@@ -234,7 +260,7 @@ public class SchedulerActivity extends AppCompatActivity {
             //add new XP day with that date, xp=0;
             xpDayDBHandler.addDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(),0));
             XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
-            //Log.i("xp in setXPUtils if statement",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
+            Log.i("xp in setXPUtils if statement",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
         }
 
      /*   if(!XPUtils.dayXP.getDate().equals(CalendarUtils.selectedDate.toString())){
@@ -245,7 +271,7 @@ public class SchedulerActivity extends AppCompatActivity {
 
         //set XP menu button to today's XP
         xpCountBtn.setText(String.valueOf(XPUtils.dayXP.getXp())); //xpCount where is it initialised?
-        //Log.i("xp in setXPUtils end",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
+        Log.i("xp in setXPUtils end",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
     }
 
     private void setCharacter(){

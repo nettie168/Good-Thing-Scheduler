@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -16,6 +17,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.goodthingscheduler.R;
+import com.example.goodthingscheduler.ReflectionActivity;
+import com.example.goodthingscheduler.SchedulerActivity;
 import com.example.goodthingscheduler.toDoCategories.CategoryAdapter;
 
 import java.util.ArrayList;
@@ -33,9 +36,6 @@ import nl.dionsegijn.konfetti.xml.KonfettiView;
 
 public class TaskTickedActivity extends AppCompatActivity {
 
-    private AnimationDrawable jumpingAnimation;
-    private RecyclerView extendedToDosRV;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +46,7 @@ public class TaskTickedActivity extends AppCompatActivity {
        // @SuppressLint({"MissingInflatedId", "LocalSuppress"})
         ImageView jumpingDragon = findViewById(R.id.dragonJump);
         jumpingDragon.setImageResource(R.drawable.jump_item);
-        jumpingAnimation = (AnimationDrawable) jumpingDragon.getDrawable();
+        AnimationDrawable jumpingAnimation = (AnimationDrawable) jumpingDragon.getDrawable();
        // jumpingAnimation.getDuration(0);
        // jumpingAnimation.setOneShot(true);
      //   for(int i = 0; i <5; i++){
@@ -84,12 +84,15 @@ public class TaskTickedActivity extends AppCompatActivity {
         konfettiView.start(party);
 
         setExtendedToDosRV();
-        nextTaskBtn.setOnClickListener(view -> finish());
+        nextTaskBtn.setOnClickListener(view -> {
+            finish();
+            startActivity(new Intent(getApplicationContext(), SchedulerActivity.class));
+        });
 
     }
 
     private void setExtendedToDosRV(){
-        extendedToDosRV = findViewById(R.id.extendedToDoRV);
+        RecyclerView extendedToDosRV = findViewById(R.id.extendedToDoRV);
 
         ArrayList<HabitModel> extendedToDosArray = new ArrayList<>();
         extendedToDosArray.add(new HabitModel("How did "+RoutineUtils.habitName+" go?",1,RoutineUtils.habitImgId));

@@ -9,8 +9,8 @@ import android.util.Log;
 
 import com.example.goodthingscheduler.Calendar.CalendarUtils;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class XPDayDBHandler extends SQLiteOpenHelper {
     private static final String DB_NAME = "XPDayDB";
@@ -100,12 +100,14 @@ public class XPDayDBHandler extends SQLiteOpenHelper {
     }
 
 
-    public ArrayList<XPCountModel> XPInMonth(ArrayList<LocalDate> daysInMonth) {
+    public Integer[] TotalXPInMonth() {
         String sql = "select * from "+ TABLE_NAME;
 
         //creates a database for reading our database
         SQLiteDatabase db = this.getReadableDatabase();
-        ArrayList<XPCountModel> storeStates = new ArrayList<>();
+        ArrayList<Integer> storeStates = new ArrayList<>();
+
+        int daysSoFar = CalendarUtils.selectedDate.getDayOfMonth();
 
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
@@ -115,16 +117,21 @@ public class XPDayDBHandler extends SQLiteOpenHelper {
                  //   if (date.equals(daysInMonth.get(i).toString())){
                         int id = Integer.parseInt(cursor.getString(0));
                         int xp = Integer.parseInt(cursor.getString(2));
-                        storeStates.add(new XPCountModel(id, date, xp));
-                        Log.i("XPDayDB XPinMonth",date+" "+xp);
-                        //break;
-                 //   }
-              //  }
+                        if(id==1){
+                            storeStates.add(xp);
+                        }else{
+                            storeStates.add(xp+storeStates.get(storeStates.size()-1));
+                        }
             }
             while (cursor.moveToNext());
         }
         cursor.close();
-        return storeStates;
+        Integer[] xpList = new Integer[storeStates.size()];
+
+        // ArrayList to Array Conversion
+        for (int i = 0; i < storeStates.size(); i++)
+            xpList[i] = storeStates.get(i);
+        return xpList;
     }
 
 

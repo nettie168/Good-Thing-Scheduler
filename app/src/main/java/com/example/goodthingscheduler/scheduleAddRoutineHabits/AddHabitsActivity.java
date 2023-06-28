@@ -104,13 +104,13 @@ public class AddHabitsActivity extends AppCompatActivity {
                 //RoutineUtils.routineHabitList.add(new HabitModel(habit.getId(), RoutineUtils.routineSel, habit.getTask(), "", CalendarUtils.selectedDate.toString(), "ongoing", 1, "constant", 0, "Mon,Tue,Wed,Thur,Fri,Sat,Sun", 0, "", habit.getHabitImgId()));
 
                 habitsList.add(new HabitModel("wake up", 0, R.drawable.ic_baseline_wb_sunny_24));
-                habitsList.add(new HabitModel("wake up before alarm", 0, R.drawable.ic_baseline_wb_sunny_24));
+                habitsList.add(new HabitModel("wake up before alarm", 0, R.drawable.baseline_alarm_24));
                 habitsList.add(new HabitModel("get up", 0, R.drawable.ic_baseline_arrow_upward_24));
                 habitsList.add(new HabitModel("make bed", 0, R.drawable.ic_baseline_bed_24));
-                habitsList.add(new HabitModel("reflect on sleep", 0, R.drawable.ic_baseline_wb_sunny_24));
+                habitsList.add(new HabitModel("reflect on sleep", 0, R.drawable.ic_baseline_draw_24));
                 habitsList.add(new HabitModel("drink water", 0, R.drawable.ic_baseline_water_drop_24));
-                habitsList.add(new HabitModel("put on calming music", 0, R.drawable.ic_baseline_wb_sunny_24));
-                habitsList.add(new HabitModel("10 min meditation", 0, R.drawable.ic_baseline_checkroom_24));
+                habitsList.add(new HabitModel("put on calming music", 0, R.drawable.ic_baseline_music_note_24));
+                habitsList.add(new HabitModel("10 min meditation", 0, R.drawable.ic_baseline_self_improvement_24));
                 habitsList.add(new HabitModel("feed pets", 0, R.drawable.ic_baseline_water_drop_24));
                 habitsList.add(new HabitModel("make breakfast", 0, R.drawable.ic_baseline_water_drop_24));
                 habitsList.add(new HabitModel("eat breakfast", 0, R.drawable.ic_baseline_water_drop_24));
@@ -119,23 +119,22 @@ public class AddHabitsActivity extends AppCompatActivity {
                 habitsList.add(new HabitModel("eat 1 fruit", 0, R.drawable.ic_baseline_checkroom_24));
                 habitsList.add(new HabitModel("eat 1 veg", 0, R.drawable.ic_baseline_checkroom_24));
                 habitsList.add(new HabitModel("eat handful of nuts", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("stretch or yoga", 0, R.drawable.ic_baseline_water_drop_24));
+                habitsList.add(new HabitModel("stretch or yoga", 0, R.drawable.ic_baseline_self_improvement_24));
                 habitsList.add(new HabitModel("fold night clothes", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("put night clothes on bed", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("play motivating music", 0, R.drawable.ic_baseline_wb_sunny_24));
+                habitsList.add(new HabitModel("put night clothes on bed", 0, R.drawable.ic_baseline_bed_24));
+                habitsList.add(new HabitModel("play motivating music", 0, R.drawable.ic_baseline_music_note_24));
 
                 break;
             case "Exercise":
                 habitsList.add(new HabitModel("wear sports clothes", 0, R.drawable.ic_baseline_electric_bolt_24));
+                habitsList.add(new HabitModel("go for a walk", 0, R.drawable.ic_baseline_electric_bolt_24));
                 habitsList.add(new HabitModel("plank for 10-30s", 0, R.drawable.ic_baseline_electric_bolt_24));
                 habitsList.add(new HabitModel("10 press ups", 0, R.drawable.ic_baseline_electric_bolt_24));
                 habitsList.add(new HabitModel("10 leg raises", 0, R.drawable.ic_baseline_electric_bolt_24));
                 habitsList.add(new HabitModel("10 squats", 0, R.drawable.ic_baseline_electric_bolt_24));
                 habitsList.add(new HabitModel("10 mins of HITT", 0, R.drawable.ic_baseline_electric_bolt_24));
-                habitsList.add(new HabitModel("raise heart rate", 0, R.drawable.ic_baseline_electric_bolt_24));
-                habitsList.add(new HabitModel("drink water", 0, R.drawable.ic_baseline_water_drop_24));
-                habitsList.add(new HabitModel("have some nuts", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("5 min cold water shower", 0, R.drawable.ic_baseline_electric_bolt_24));
+                habitsList.add(new HabitModel("raise heart rate", 0, R.drawable.ic_baseline_favorite_24));
+                habitsList.add(new HabitModel("5 min cold water shower", 0, R.drawable.ic_baseline_shower_24));
 
                 break;
          case "Self-care":
@@ -154,16 +153,16 @@ public class AddHabitsActivity extends AppCompatActivity {
 
                 break;
             case "Prepare for the Day":
-                habitsList.add(new HabitModel("play motivating music", 0, R.drawable.ic_baseline_wb_sunny_24));
-                habitsList.add(new HabitModel("play calming music", 0, R.drawable.ic_baseline_wb_sunny_24));
+                habitsList.add(new HabitModel("play motivating music", 0, R.drawable.ic_baseline_music_note_24));
+                habitsList.add(new HabitModel("play calming music", 0, R.drawable.ic_baseline_music_note_24));
                 habitsList.add(new HabitModel("choose confident outfit", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("affirmations", 0, R.drawable.ic_baseline_checkroom_24));
+                habitsList.add(new HabitModel("affirmations", 0, R.drawable.ic_baseline_self_improvement_24));
                 habitsList.add(new HabitModel("get dressed", 0, R.drawable.ic_baseline_checkroom_24));
                 habitsList.add(new HabitModel("do hair", 0, R.drawable.ic_baseline_checkroom_24));
 
                 break;
             case "Feel the Fear - and do it anyway":
-                habitsList.add(new HabitModel("have a cold shower", 0, R.drawable.ic_baseline_checkroom_24));
+                habitsList.add(new HabitModel("have a cold shower", 0, R.drawable.ic_baseline_shower_24));
 
                 break;
             case "Work that works for me":
@@ -200,19 +199,19 @@ public class AddHabitsActivity extends AppCompatActivity {
             case "Lunchtime":
                 habitsList.add(new HabitModel("go for a walk",0,R.drawable.ic_baseline_checkroom_24));
                 habitsList.add(new HabitModel("leave work area",0,R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("listen to birds",0,R.drawable.ic_baseline_checkroom_24));
+                habitsList.add(new HabitModel("listen to birds",0,R.drawable.ic_baseline_music_note_24));
 
                 break;
             case "Check Finances":
-                habitsList.add(new HabitModel("check bank balance", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("create monthly budget", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("create daily budget", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("stick to budget", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("put money in pension", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("put money in savings", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("pay off 1 credit card", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("stay above overdraft", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("use food I already have", 0, R.drawable.ic_baseline_checkroom_24));
+                habitsList.add(new HabitModel("check bank balance", 0, R.drawable.ic_baseline_credit_score_24));
+                habitsList.add(new HabitModel("create monthly budget", 0, R.drawable.ic_baseline_credit_score_24));
+                habitsList.add(new HabitModel("create daily budget", 0, R.drawable.ic_baseline_credit_score_24));
+                habitsList.add(new HabitModel("stick to budget", 0, R.drawable.ic_baseline_credit_score_24));
+                habitsList.add(new HabitModel("put money in pension", 0, R.drawable.ic_baseline_credit_score_24));
+                habitsList.add(new HabitModel("put money in savings", 0, R.drawable.ic_baseline_credit_score_24));
+                habitsList.add(new HabitModel("pay off 1 credit card", 0, R.drawable.ic_baseline_credit_score_24));
+                habitsList.add(new HabitModel("stay above overdraft", 0, R.drawable.ic_baseline_credit_score_24));
+                habitsList.add(new HabitModel("use food I already have", 0, R.drawable.ic_baseline_credit_score_24));
                 habitsList.add(new HabitModel("use food I already have", 0, R.drawable.ic_baseline_checkroom_24));
                 habitsList.add(new HabitModel("bulk buy food", 0, R.drawable.ic_baseline_checkroom_24));
                 habitsList.add(new HabitModel("buy only what is needed", 0, R.drawable.ic_baseline_checkroom_24));
@@ -253,14 +252,14 @@ public class AddHabitsActivity extends AppCompatActivity {
 
                 break;
             case "Do Something I Love":
-                habitsList.add(new HabitModel("draw", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("listen to music", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("practice music", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("D&D", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("paint", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("read", 0, R.drawable.ic_baseline_checkroom_24));
+                habitsList.add(new HabitModel("draw", 0, R.drawable.ic_baseline_draw_24));
+                habitsList.add(new HabitModel("listen to music", 0, R.drawable.ic_baseline_music_note_24));
+                habitsList.add(new HabitModel("practice music", 0, R.drawable.ic_baseline_music_note_24));
+                habitsList.add(new HabitModel("D&D", 0, R.drawable.baseline_adb_24));
+                habitsList.add(new HabitModel("paint", 0, R.drawable.ic_baseline_brush_24));
+                habitsList.add(new HabitModel("read", 0, R.drawable.ic_baseline_menu_book_24));
                 habitsList.add(new HabitModel("dance", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("take photos", 0, R.drawable.ic_baseline_checkroom_24));
+                habitsList.add(new HabitModel("take photos", 0, R.drawable.ic_baseline_camera_alt_24));
 
                 break;
             case "Self-Development":
@@ -268,8 +267,8 @@ public class AddHabitsActivity extends AppCompatActivity {
                 habitsList.add(new HabitModel("speak 5 things in another language", 0, R.drawable.ic_baseline_checkroom_24));
                 habitsList.add(new HabitModel("watch something in another language", 0, R.drawable.ic_baseline_checkroom_24));
                 habitsList.add(new HabitModel("watch a documentary", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("practice maths", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("read a complex book", 0, R.drawable.ic_baseline_checkroom_24));
+                habitsList.add(new HabitModel("practice maths", 0, R.drawable.ic_baseline_menu_book_24));
+                habitsList.add(new HabitModel("read a complex book", 0, R.drawable.ic_baseline_menu_book_24));
                 habitsList.add(new HabitModel("learn something new", 0, R.drawable.ic_baseline_checkroom_24));
 
                 break;
@@ -317,34 +316,34 @@ public class AddHabitsActivity extends AppCompatActivity {
 
                 break;
             case "Spend time with Yourself":
-                habitsList.add(new HabitModel("play your favourite songs", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("stretch", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("reflect on how your day was", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("reflect on your feelings", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("check in with your body", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("write down any troubles as a story", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("write a happy memory", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("write a letter to a loved one", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("brain dump", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("write down what's on your mind", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("write down 3 things your body can do", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("write down 5 things you can do", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("write down 3 things you're good at", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("write down 3 things that make you smile", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("write down 3 things you're grateful for", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("listen to the birds", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("watch the sun set", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("sit with your emotions", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("allow yourself to cry", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("expressive drawing", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("expressive painting", 0, R.drawable.ic_baseline_checkroom_24));
+                habitsList.add(new HabitModel("play your favourite songs", 0, R.drawable.ic_baseline_music_note_24));
+                habitsList.add(new HabitModel("stretch", 0, R.drawable.ic_baseline_self_improvement_24));
+                habitsList.add(new HabitModel("reflect on how your day was", 0, R.drawable.ic_baseline_self_improvement_24));
+                habitsList.add(new HabitModel("reflect on your feelings", 0, R.drawable.ic_baseline_self_improvement_24));
+                habitsList.add(new HabitModel("check in with your body", 0, R.drawable.ic_baseline_self_improvement_24));
+                habitsList.add(new HabitModel("write down any troubles as a story", 0, R.drawable.ic_baseline_draw_24));
+                habitsList.add(new HabitModel("write a happy memory", 0, R.drawable.ic_baseline_draw_24));
+                habitsList.add(new HabitModel("write a letter to a loved one", 0, R.drawable.ic_baseline_draw_24));
+                habitsList.add(new HabitModel("brain dump", 0, R.drawable.ic_baseline_draw_24));
+                habitsList.add(new HabitModel("write down what's on your mind", 0, R.drawable.ic_baseline_draw_24));
+                habitsList.add(new HabitModel("write down 3 things your body can do", 0, R.drawable.ic_baseline_draw_24));
+                habitsList.add(new HabitModel("write down 5 things you can do", 0, R.drawable.ic_baseline_draw_24));
+                habitsList.add(new HabitModel("write down 3 things you're good at", 0, R.drawable.ic_baseline_draw_24));
+                habitsList.add(new HabitModel("write down 3 things that make you smile", 0, R.drawable.ic_baseline_draw_24));
+                habitsList.add(new HabitModel("write down 3 things you're grateful for", 0, R.drawable.ic_baseline_draw_24));
+                habitsList.add(new HabitModel("listen to the birds", 0, R.drawable.ic_baseline_music_note_24));
+                habitsList.add(new HabitModel("watch the sun set", 0, R.drawable.ic_baseline_wb_sunny_24));
+                habitsList.add(new HabitModel("sit with your emotions", 0, R.drawable.ic_baseline_self_improvement_24));
+                habitsList.add(new HabitModel("allow yourself to cry", 0, R.drawable.ic_baseline_water_drop_24));
+                habitsList.add(new HabitModel("expressive drawing", 0, R.drawable.ic_baseline_draw_24));
+                habitsList.add(new HabitModel("expressive painting", 0, R.drawable.ic_baseline_brush_24));
 
                 break;
             case "Expand Your Horizons":
-                habitsList.add(new HabitModel("read a book", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("try a new food", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("cook a new food", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("bake something new", 0, R.drawable.ic_baseline_checkroom_24));
+                habitsList.add(new HabitModel("read a book", 0, R.drawable.ic_baseline_menu_book_24));
+                habitsList.add(new HabitModel("try a new food", 0, R.drawable.ic_baseline_ramen_dining_24));
+                habitsList.add(new HabitModel("cook a new food", 0, R.drawable.ic_baseline_ramen_dining_24));
+                habitsList.add(new HabitModel("bake something new", 0, R.drawable.ic_baseline_bakery_dining_24));
                 habitsList.add(new HabitModel("watch a documentary", 0, R.drawable.ic_baseline_checkroom_24));
 
 
@@ -366,11 +365,11 @@ public class AddHabitsActivity extends AppCompatActivity {
 
                 break;
             case "Time in Nature":
-                habitsList.add(new HabitModel("listen to a bird", 0, R.drawable.ic_baseline_water_drop_24));
+                habitsList.add(new HabitModel("listen to a bird", 0, R.drawable.ic_baseline_music_note_24));
                 habitsList.add(new HabitModel("watch an animal", 0, R.drawable.ic_baseline_water_drop_24));
                 habitsList.add(new HabitModel("feel the weather", 0, R.drawable.ic_baseline_water_drop_24));
                 habitsList.add(new HabitModel("feel the wind", 0, R.drawable.ic_baseline_water_drop_24));
-                habitsList.add(new HabitModel("touch a tree", 0, R.drawable.ic_baseline_water_drop_24));
+                habitsList.add(new HabitModel("touch a tree", 0, R.drawable.ic_baseline_emoji_nature_24));
                 habitsList.add(new HabitModel("touch water", 0, R.drawable.ic_baseline_water_drop_24));
                 habitsList.add(new HabitModel("touch the ground", 0, R.drawable.ic_baseline_water_drop_24));
 
