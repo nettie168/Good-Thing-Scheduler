@@ -1,9 +1,14 @@
 package com.example.goodthingscheduler.Calendar;
 
+import com.example.goodthingscheduler.XPCount.XPCountModel;
+import com.example.goodthingscheduler.scheduleHabits.RoutineModel;
+
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Locale;
 
 public class CalendarUtils {
@@ -104,13 +109,20 @@ public class CalendarUtils {
        // LocalDate firstOfMonth = CalendarUtils.selectedDate.withDayOfMonth(1);
         //int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
 
-        for(int i = 1; i<= 14; i++){ //i<=daysInMonth
+        for(int i = 1; i<= daysInMonth; i++){ //i<=daysInMonth
                 daysInMonthArray.add(LocalDate.of(yearMonth.plusMonths(1).getYear(),date.getMonth(),i));
         }
 
         return daysInMonthArray;
     }
 
+    public static class XPDateComparator implements Comparator<XPCountModel> {
+        @Override
+        public int compare (XPCountModel o1 , XPCountModel o2)
+        {
+            return o1.getDate().compareTo(o2.getDate());
+        }
+    }
 
 
 }

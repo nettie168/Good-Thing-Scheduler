@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 app:layout_constraintVertical_weight="1"
-                android:src="@drawable/jump_item"
+                android:src="@drawable/wave_item"
                 app:layout_constraintBottom_toBottomOf="@id/dragonPic"
                 app:layout_constraintEnd_toEndOf="@id/dragonPic"
                 app:layout_constraintStart_toStartOf="@id/dragonPic"

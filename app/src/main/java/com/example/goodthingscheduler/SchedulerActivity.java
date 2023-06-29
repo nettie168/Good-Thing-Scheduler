@@ -124,7 +124,7 @@ public class SchedulerActivity extends AppCompatActivity {
 
 //        Log.i("xp in menu 1",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
         setXPUtils();
-        Log.i("xp in menu 2",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
+      //  Log.i("xp in menu 2",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
 
 
         //set today's XP to XP of day in DB
@@ -175,7 +175,7 @@ public class SchedulerActivity extends AppCompatActivity {
     }*/
 
     public void invalidateOptionsMenu() {
-        
+
     }
 
 
@@ -247,7 +247,7 @@ public class SchedulerActivity extends AppCompatActivity {
     private void setXPUtils(){
         //set day's XP to XP from DB for selected date
         XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
-        Log.i("xp in setXPUtils start",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
+       // Log.i("xp in setXPUtils start",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
 
         //if today's XP date isn't the same as the selected date, add new XP to DB
 //        if(XPUtils.dayXP.equals(null)){
@@ -260,7 +260,7 @@ public class SchedulerActivity extends AppCompatActivity {
             //add new XP day with that date, xp=0;
             xpDayDBHandler.addDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(),0));
             XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
-            Log.i("xp in setXPUtils if statement",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
+            //Log.i("xp in setXPUtils if statement",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
         }
 
      /*   if(!XPUtils.dayXP.getDate().equals(CalendarUtils.selectedDate.toString())){
@@ -271,7 +271,7 @@ public class SchedulerActivity extends AppCompatActivity {
 
         //set XP menu button to today's XP
         xpCountBtn.setText(String.valueOf(XPUtils.dayXP.getXp())); //xpCount where is it initialised?
-        Log.i("xp in setXPUtils end",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
+        //Log.i("xp in setXPUtils end",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
     }
 
     private void setCharacter(){
@@ -375,7 +375,7 @@ public class SchedulerActivity extends AppCompatActivity {
         ArrayList<RoutineModel> routinesInDay = routineListDBHandler.listRoutinesInDay();
         //Log.i("schedule Act","routines in day size: "+routinesInDay.size());
         //Create routine array sorted by time
-        Comparator < RoutineModel > comparator = new TimeComparator();
+        Comparator <RoutineModel> comparator = new TimeComparator();
         routinesInDay.sort( comparator );
 
         if(!routinesInDay.isEmpty()) { //and date is within 2 weeks of now (else - do "look back" - for later)

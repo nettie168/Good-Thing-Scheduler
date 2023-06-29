@@ -22,8 +22,7 @@
         android:id="@+id/addGoodThingEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="good thing to do"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:hint="@string/good_thing"
         android:drawableStart="@drawable/ic_baseline_favorite_24"
         android:inputType="text"
         android:minHeight="48dp"
@@ -34,8 +33,7 @@
               android:id="@+id/inspiredByEditText"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:hint="inspired by"
-              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+              android:hint="@string/with"
               android:drawableStart="@drawable/baseline_person_24"
               android:inputType="text"
               android:minHeight="48dp"
@@ -49,27 +47,30 @@
               android:gravity="center_horizontal">
 
               <TextView
-                  android:layout_width="wrap_content"
+                  android:layout_width="0dp"
                   android:layout_height="wrap_content"
+                  android:layout_weight="1"
                   android:layout_gravity="center_vertical"
-                  android:text="Category:"/>
+                  android:text="@string/category"/>
 
 
               <Button
                   android:id="@+id/categoryBtn"
-                  android:layout_width="wrap_content"
+                  android:layout_width="0dp"
                   android:layout_height="wrap_content"
+                  android:layout_weight="3"
                   android:layout_gravity="center"
                   android:textAllCaps="false"
                   android:layout_marginHorizontal="20dp"
                   style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                  android:text="Good Things (To Do)"/>
+                  android:text="@string/good_things_to_do"/>
 
               <ImageButton
                   android:id="@+id/addCategoryBtn"
-                  android:layout_width="50dp"
-                  android:layout_height="50dp"
-                  android:contentDescription="add Category"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:contentDescription="@string/add_category"
                   android:textAllCaps="false"
                   android:layout_gravity="center"
                   android:src="@drawable/ic_baseline_add_24" />
@@ -107,7 +108,7 @@
                   android:textColor="@color/design_default_color_primary"
                   android:layout_margin="6dp"
                   android:textSize="16sp"
-                  android:text="Date To Start"/>
+                  android:text="@string/date_to_start"/>
 
               <TextView
                   android:id="@+id/DateToStartTV"

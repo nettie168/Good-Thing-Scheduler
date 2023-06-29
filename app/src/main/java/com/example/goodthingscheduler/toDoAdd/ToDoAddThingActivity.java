@@ -43,7 +43,7 @@ public class ToDoAddThingActivity extends AppCompatActivity {
 
     private boolean addThingTrue;
 
-    GoodCategoriesDB goodCategoriesDB;
+    private GoodCategoriesDB goodCategoriesDB;
     private ToDoThingsDB goodThingsDB;
 
 
@@ -61,7 +61,11 @@ public class ToDoAddThingActivity extends AppCompatActivity {
         MenuItem item = menu.findItem(R.id.saveActionBarBtn);
 
         item.setOnMenuItemClickListener(menuItem -> {
-            save();
+            if(addThingTrue){
+                save();
+            }else{
+                onUpdate();
+            }
             return false;
         });
 
@@ -147,7 +151,7 @@ public class ToDoAddThingActivity extends AppCompatActivity {
 //            saveTopBtn.setOnClickListener(this::onClick);
             Log.i("AddGoodThing","adding");
         }else{ //is Edit
-            saveBtn.setOnClickListener(this::onUpdate);
+            saveBtn.setOnClickListener(view -> onUpdate());
 //            saveTopBtn.setOnClickListener(this::onUpdate);
             Log.i("AddGoodThing","updating");
         }
@@ -322,14 +326,17 @@ public class ToDoAddThingActivity extends AppCompatActivity {
         }
     }
 
-    private void onUpdate(View view){
+    private void onUpdate(){
         String goodThingString = goodThingEditText.getText().toString();
 
+        String inspiredByString = inspiredByET.getText().toString();
+        if(inspiredByString.isEmpty()){
+            inspiredByString = "";
+        }
+
         if(!goodThingString.isEmpty()){
-            goodThingsDB.updateGoodThing(new ToDoThingModel(CategoriesUtil.goodThingId, CategoriesUtil.categorySelected,goodThingString,CategoriesUtil.stateSelected,"date"));
+            goodThingsDB.updateGoodThing(new ToDoThingModel(CategoriesUtil.goodThingId, CategoriesUtil.categorySelected,goodThingString,inspiredByString,CategoriesUtil.stateSelected,LocalDate.now().toString(),CalendarUtils.dateToStart,CalendarUtils.dateToEnd,"date"));
             Toast.makeText(ToDoAddThingActivity.this, "Updating "+goodThingString, Toast.LENGTH_SHORT).show();
-            finish();
-            recreate();
         }else{
             goodThingsDB.deleteGoodThing(new ToDoThingModel(CategoriesUtil.goodThingId, CategoriesUtil.categorySelected,goodThingString,CategoriesUtil.stateSelected,"date"));
             Toast.makeText(ToDoAddThingActivity.this, "deleting "+CategoriesUtil.goodThing, Toast.LENGTH_SHORT).show();
@@ -340,7 +347,7 @@ public class ToDoAddThingActivity extends AppCompatActivity {
 
     public void cancelThing(View view){
         finish();
-        Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Cancelling", Toast.LENGTH_SHORT).show();
     }
 
     @Override

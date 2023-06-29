@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.example.goodthingscheduler.Calendar.CalendarUtils;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -46,7 +47,7 @@ public class XPDayDBHandler extends SQLiteOpenHelper {
         values.put(DATE,xpCount.getDate());
         values.put(XP,xpCount.getXp());
         //Log.i("XP DB adding",xpCount.getDate()+" "+xpCount.getXp());
-        Log.i("XPDB addDayXP","date: "+xpCount.getDate()+" xp: "+xpCount.getXp());
+        //Log.i("XPDB addDayXP","date: "+xpCount.getDate()+" xp: "+xpCount.getXp());
 
         db.insert(TABLE_NAME,null,values);
         //db.insertWithOnConflict(TABLE_NAME, null, values,SQLiteDatabase.CONFLICT_REPLACE);
@@ -99,8 +100,32 @@ public class XPDayDBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public ArrayList<XPCountModel> XPInMonthArray() {
+        String sql = "select * from "+ TABLE_NAME;
 
-    public Integer[] TotalXPInMonth() {
+        //creates a database for reading our database
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<XPCountModel> storeStates = new ArrayList<>();
+
+        Cursor cursor = db.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
+                    String date = cursor.getString(1);
+                    LocalDate date2 = CalendarUtils.toLocalDate(date);
+                    if (date2.getMonth().equals(LocalDate.now().getMonth())) {
+                        int id = Integer.parseInt(cursor.getString(0));
+                        int xp = Integer.parseInt(cursor.getString(2));
+                        storeStates.add(new XPCountModel(id, date, xp));
+                    }
+            }
+            while (cursor.moveToNext()) ;
+        }
+        cursor.close();
+        return storeStates;
+    }
+
+
+    public Integer[] TotalXPInMonth(ArrayList<LocalDate> daysInMonth) {
         String sql = "select * from "+ TABLE_NAME;
 
         //creates a database for reading our database
@@ -112,18 +137,20 @@ public class XPDayDBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
             do {
-              //  for(int i=0; i < daysInMonth.size(); i++) {
+                for (int i = 0; i < daysInMonth.size(); i++) {
                     String date = cursor.getString(1);
-                 //   if (date.equals(daysInMonth.get(i).toString())){
-                        int id = Integer.parseInt(cursor.getString(0));
-                        int xp = Integer.parseInt(cursor.getString(2));
-                        if(id==1){
-                            storeStates.add(xp);
-                        }else{
-                            storeStates.add(xp+storeStates.get(storeStates.size()-1));
-                        }
-            }
-            while (cursor.moveToNext());
+                       if (date.equals(daysInMonth.get(i).toString())) {
+                           int id = Integer.parseInt(cursor.getString(0));
+                           int xp = Integer.parseInt(cursor.getString(2));
+                           if (id == 1) {
+                               storeStates.add(xp);
+                           } else {
+                               storeStates.add(xp + storeStates.get(storeStates.size() - 1));
+                           }
+                       }
+                }
+                }
+                while (cursor.moveToNext()) ;
         }
         cursor.close();
         Integer[] xpList = new Integer[storeStates.size()];

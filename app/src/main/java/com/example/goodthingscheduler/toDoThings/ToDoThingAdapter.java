@@ -74,7 +74,7 @@ public class ToDoThingAdapter extends RecyclerView.Adapter<ToDoThingAdapter.View
                 //Log.i("good thing after is ","good thing: "+goodThing.getGoodThing()+", id: "+goodThing.getId()+", cat: "+goodThing.getCategory()+", state: "+goodThing.getState()+", added: "+goodThing.getDateAdded()+", start: "+goodThing.getDateToStart());
                 XPUtils.dayXP = new XPCountModel(CalendarUtils.selectedDate.toString(),XPUtils.dayXP.getXp()-5);
                 xpDayDBHandler.updateDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(), XPUtils.dayXP.getXp()));
-                Log.i("to do adapter","date is "+CalendarUtils.selectedDate.toString()+" xp is"+XPUtils.dayXP.getXp()+"-5");
+          //      Log.i("to do adapter","date is "+CalendarUtils.selectedDate.toString()+" xp is"+XPUtils.dayXP.getXp()+"-5");
 
             }else{
                 goodThing.setState("Done");
@@ -84,7 +84,7 @@ public class ToDoThingAdapter extends RecyclerView.Adapter<ToDoThingAdapter.View
 
                 XPUtils.dayXP = new XPCountModel(CalendarUtils.selectedDate.toString(),XPUtils.dayXP.getXp()+5);
                 xpDayDBHandler.updateDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(), XPUtils.dayXP.getXp()));
-                Log.i("to do adapter","date is "+CalendarUtils.selectedDate.toString()+" xp is"+XPUtils.dayXP.getXp()+"+5");
+              //  Log.i("to do adapter","date is "+CalendarUtils.selectedDate.toString()+" xp is"+XPUtils.dayXP.getXp()+"+5");
 
 
                 RoutineUtils.habitName = goodThing.getGoodThing();

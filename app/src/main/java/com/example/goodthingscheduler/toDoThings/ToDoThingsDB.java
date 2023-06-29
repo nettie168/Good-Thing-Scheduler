@@ -238,19 +238,23 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
             do {
                 String dateToStart = cursor.getString(6);
                 String dateToEnd = cursor.getString(7);
+                String goodThing = cursor.getString(2);
+                Log.i("To Do Things DB","date to start: "+dateToStart+", date to end: "+dateToEnd+" good thing: "+goodThing);
 
-                if(!dateToStart.equals("date not set") && !dateToEnd.equals("date not set")) {
-                    if (date.isEqual(CalendarUtils.toLocalDate(dateToStart)) || date.isAfter(CalendarUtils.toLocalDate(dateToStart))) {
-                        if (date.isEqual(CalendarUtils.toLocalDate(dateToEnd)) || date.isBefore(CalendarUtils.toLocalDate(dateToEnd))) {
-                            int id = Integer.parseInt(cursor.getString(0));
-                            String category = cursor.getString(1);
-                            String goodThing = cursor.getString(2);
-                            String inspiredBy = cursor.getString(3);
-                            String state = cursor.getString(4);
-                            String dateAdded = cursor.getString(5);
-                            String datesDone = cursor.getString(8);
+                if(dateToStart!=null && dateToEnd != null) {
+                    if (!dateToStart.equals("date not set") && !dateToEnd.equals("date not set")) {
+                        if (date.isEqual(CalendarUtils.toLocalDate(dateToStart)) || date.isAfter(CalendarUtils.toLocalDate(dateToStart))) {
+                            if (date.isEqual(CalendarUtils.toLocalDate(dateToEnd)) || date.isBefore(CalendarUtils.toLocalDate(dateToEnd))) {
+                                int id = Integer.parseInt(cursor.getString(0));
+                                String category = cursor.getString(1);
+                                //String goodThing = cursor.getString(2);
+                                String inspiredBy = cursor.getString(3);
+                                String state = cursor.getString(4);
+                                String dateAdded = cursor.getString(5);
+                                String datesDone = cursor.getString(8);
 
-                            storeTasks.add(new ToDoThingModel(id, category, goodThing, inspiredBy, state, dateAdded, dateToStart, dateToEnd, datesDone));
+                                storeTasks.add(new ToDoThingModel(id, category, goodThing, inspiredBy, state, dateAdded, dateToStart, dateToEnd, datesDone));
+                            }
                         }
                     }
                 }

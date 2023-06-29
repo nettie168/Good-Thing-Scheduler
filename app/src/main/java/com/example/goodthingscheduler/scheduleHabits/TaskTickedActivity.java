@@ -86,7 +86,7 @@ public class TaskTickedActivity extends AppCompatActivity {
         setExtendedToDosRV();
         nextTaskBtn.setOnClickListener(view -> {
             finish();
-            startActivity(new Intent(getApplicationContext(), SchedulerActivity.class));
+            //startActivity(new Intent(getApplicationContext(), SchedulerActivity.class));
         });
 
     }
