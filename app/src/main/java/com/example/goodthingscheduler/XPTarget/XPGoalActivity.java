@@ -102,7 +102,12 @@ public class XPGoalActivity extends AppCompatActivity {
         for (int i = 0; i < LocalDate.now().getDayOfMonth()+1; i++){
             //while(j < XPThisMonth.size()){
                 Log.i("XP top", "j = "+j +" i is "+i);
-                int xpDate = CalendarUtils.toLocalDate(XPThisMonth.get(j).getDate()).getDayOfMonth();
+                int xpDate;
+                if(!XPThisMonth.isEmpty()){ //is this needed? (also check if i==0 or i-1 is needed)
+                    xpDate = CalendarUtils.toLocalDate(XPThisMonth.get(j).getDate()).getDayOfMonth();
+                }else{
+                    xpDate = -10;
+                }
                 Log.i("XP top, xp is","date: "+XPThisMonth.get(j).getDate()+" XP: "+XPThisMonth.get(j).getXp());
                 if(i-1==xpDate-1){
                     if(i==0){

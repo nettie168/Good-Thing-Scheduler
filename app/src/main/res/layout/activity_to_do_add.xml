@@ -121,15 +121,6 @@
                   android:textSize="16sp"
                   android:text="date not set"/>
 
-   <!--           <TextView
-                  android:id="@+id/TimeToStartTV"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  app:layout_constraintTop_toTopOf="parent"
-                  app:layout_constraintEnd_toEndOf="parent"
-                  android:padding="6dp"
-                  android:textSize="16sp"
-                  android:text="time not set"/> -->
 
           </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -162,22 +153,13 @@
                   android:textSize="16sp"
                   android:text="date not set"/>
 
-      <!--        <TextView
-                  android:id="@+id/TimeDoneTV"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:padding="6dp"
-                  android:text="time not set"
-                  android:textSize="16sp"
-                  app:layout_constraintEnd_toEndOf="parent"
-                  app:layout_constraintTop_toTopOf="parent" /> -->
 
           </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.divider.MaterialDivider
               android:layout_width="match_parent"
               android:layout_height="2dp"
-              android:layout_marginVertical="5dp"/> -->
+              android:layout_marginVertical="5dp"/>
 
           <androidx.constraintlayout.widget.ConstraintLayout
               android:layout_width="match_parent"

@@ -239,7 +239,7 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
                 String dateToStart = cursor.getString(6);
                 String dateToEnd = cursor.getString(7);
                 String goodThing = cursor.getString(2);
-                Log.i("To Do Things DB","date to start: "+dateToStart+", date to end: "+dateToEnd+" good thing: "+goodThing);
+                //Log.i("To Do Things DB","date to start: "+dateToStart+", date to end: "+dateToEnd+" good thing: "+goodThing);
 
                 if(dateToStart!=null && dateToEnd != null) {
                     if (!dateToStart.equals("date not set") && !dateToEnd.equals("date not set")) {

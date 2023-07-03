@@ -524,7 +524,7 @@ public class SchedulerActivity extends AppCompatActivity {
                     return true;
                 case R.id.goodThings:
                     finish();
-                    startActivity(new Intent(getApplicationContext(),ToDoActivity.class));
+                    startActivity(new Intent(getApplicationContext(),ToDoListActivity.class));
                     overridePendingTransition(0,0);
                     return true;
                 case R.id.schedule:

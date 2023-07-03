@@ -53,9 +53,6 @@ public class AddNewCategoryActivity extends AppCompatActivity {
         initNewCatsRV();
     }
 
-    Activity thisActivity = (Activity) this;
-
-
     private void initNewCatsRV(){
 
         RecyclerView newCategoriesRV = findViewById(R.id.newCategoriesRV);
@@ -103,8 +100,8 @@ public class AddNewCategoryActivity extends AppCompatActivity {
         categoryList.add(new GoodCategoryModel(1, "Films and tv", R.drawable.bookswide160dpi, R.drawable.ic_baseline_local_movies_24));
         categoryList.add(new GoodCategoryModel(2, "Gardening and House Plants", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
         categoryList.add(new GoodCategoryModel(2, "Photography", R.drawable.naturewide160dpi, R.drawable.ic_baseline_add_a_photo_24));
-        categoryList.add(new GoodCategoryModel(2, "Tasty food", R.drawable.naturewide160dpi, R.drawable.ic_baseline_ramen_dining_24));
-        categoryList.add(new GoodCategoryModel(2, "Healthy Meals", R.drawable.naturewide160dpi, R.drawable.ic_baseline_ramen_dining_24));
+        //categoryList.add(new GoodCategoryModel(2, "Tasty food", R.drawable.naturewide160dpi, R.drawable.ic_baseline_ramen_dining_24));
+        categoryList.add(new GoodCategoryModel(2, "Healthy Mealtime", R.drawable.naturewide160dpi, R.drawable.ic_baseline_ramen_dining_24));
         categoryList.add(new GoodCategoryModel(3, "Baking", R.drawable.naturewide160dpi, R.drawable.ic_baseline_bakery_dining_24));
         categoryList.add(new GoodCategoryModel(2, "Drawing", R.drawable.bookswide160dpi, R.drawable.ic_baseline_draw_24));
        // categoryList.add(new GoodCategoryModel(2, "Time in nature", R.drawable.naturewide160dpi, R.drawable.ic_baseline_emoji_nature_24));
@@ -112,27 +109,29 @@ public class AddNewCategoryActivity extends AppCompatActivity {
       //  categoryList.add(new GoodCategoryModel(2, "Quotes", R.drawable.bookswide160dpi, R.drawable.ic_baseline_format_quote_24));
        // categoryList.add(new GoodCategoryModel(2, "Fitness", R.drawable.bookswide160dpi, R.drawable.ic_baseline_format_quote_24));
 
-        categoryList.add(new GoodCategoryModel(2, "Learn another Language", R.drawable.bookswide160dpi, R.drawable.ic_baseline_language_24));
+        categoryList.add(new GoodCategoryModel(2, "Language learning", R.drawable.bookswide160dpi, R.drawable.ic_baseline_language_24));
         categoryList.add(new GoodCategoryModel(2, "Practice Music", R.drawable.bookswide160dpi, R.drawable.ic_baseline_music_note_24));
         categoryList.add(new GoodCategoryModel(2, "Listen to Music", R.drawable.bookswide160dpi, R.drawable.ic_baseline_music_note_24));
         categoryList.add(new GoodCategoryModel(2, "Visit New Places", R.drawable.naturewide160dpi, R.drawable.ic_baseline_attractions_24));
         categoryList.add(new GoodCategoryModel(2, "Painting", R.drawable.bookswide160dpi, R.drawable.ic_baseline_brush_24));
+        categoryList.add(new GoodCategoryModel(2, "Arts & Crafts", R.drawable.bookswide160dpi, R.drawable.ic_baseline_brush_24));
 
-        ArrayList<GoodCategoryModel> routinesList = new ArrayList<>();
-        routinesList.add(new GoodCategoryModel(0,"Wake Up", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        routinesList.add(new GoodCategoryModel(0,"Exercise", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        routinesList.add(new GoodCategoryModel(0,"Self-Care", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        routinesList.add(new GoodCategoryModel(0,"Ready for the Day", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        routinesList.add(new GoodCategoryModel(0,"Work Life Balance", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        routinesList.add(new GoodCategoryModel(0,"Work that works for me", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        routinesList.add(new GoodCategoryModel(0,"Check Finances", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        routinesList.add(new GoodCategoryModel(0,"Tidy Spaces", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        routinesList.add(new GoodCategoryModel(0,"Do Something I Love", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        routinesList.add(new GoodCategoryModel(0,"Spend time with Loved Ones", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        routinesList.add(new GoodCategoryModel(0,"Magnificent Mealtime", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        routinesList.add(new GoodCategoryModel(0,"Spend time with Yourself", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        routinesList.add(new GoodCategoryModel(0,"Expand Your Horizons", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        routinesList.add(new GoodCategoryModel(0,"Prepare for Tomorrow", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
+
+        ArrayList<GoodCategoryModel> homeList = new ArrayList<>();
+        homeList.add(new GoodCategoryModel(0,"Tidy Spaces", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
+        homeList.add(new GoodCategoryModel(0,"Tidy Kitchen", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
+        homeList.add(new GoodCategoryModel(0,"Clean Bathroom", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
+        homeList.add(new GoodCategoryModel(0,"Laundry", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
+        homeList.add(new GoodCategoryModel(0,"Healthy Finances", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
+        homeList.add(new GoodCategoryModel(0,"Food shopping", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
+        homeList.add(new GoodCategoryModel(0,"Self-Care", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
+
+        ArrayList<GoodCategoryModel> workList = new ArrayList<>();
+        workList.add(new GoodCategoryModel(0,"Goals", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
+        workList.add(new GoodCategoryModel(0,"Meetings", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
+        workList.add(new GoodCategoryModel(0,"Work Life Balance", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
+        workList.add(new GoodCategoryModel(0,"Finances", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
+
 
         //Games & Puzzles (Brain Training)
         ArrayList<GoodCategoryModel> GamesList = new ArrayList<>();
@@ -237,7 +236,7 @@ public class AddNewCategoryActivity extends AppCompatActivity {
 
         ////Self-care & Well-being
         ArrayList<GoodCategoryModel> selfCareList = new ArrayList<>();
-        selfCareList.add(new GoodCategoryModel(2, "Reflection Time", R.drawable.naturewide160dpi, R.drawable.ic_baseline_self_improvement_24));
+        selfCareList.add(new GoodCategoryModel(2, "Reflections", R.drawable.naturewide160dpi, R.drawable.ic_baseline_self_improvement_24));
         selfCareList.add(new GoodCategoryModel(2, "Meditations", R.drawable.yogawide160dpi, R.drawable.ic_baseline_self_improvement_24));
         selfCareList.add(new GoodCategoryModel(2, "Yoga", R.drawable.yogawide160dpi, R.drawable.ic_baseline_self_improvement_24));
         selfCareList.add(new GoodCategoryModel(2, "Time in nature", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
@@ -282,19 +281,17 @@ public class AddNewCategoryActivity extends AppCompatActivity {
 */
         ArrayList<CategoryGroupsModel> groupsList = new ArrayList<>();
         groupsList.add(new CategoryGroupsModel("Popular",categoryList));
-     //   groupsList.add(new GoodGroupsModel("Routines",routinesList));
+        groupsList.add(new CategoryGroupsModel("Home",homeList));
         groupsList.add(new CategoryGroupsModel("Community",CommunityList));
         groupsList.add(new CategoryGroupsModel("Sports",sportsList));
         groupsList.add(new CategoryGroupsModel("Creations",CreationsList));
         groupsList.add(new CategoryGroupsModel("Games",GamesList));
         groupsList.add(new CategoryGroupsModel("Arts",ArtsList));
-     //   groupsList.add(new GoodGroupsModel("Dance",DanceList));
         groupsList.add(new CategoryGroupsModel("Travel & Adventure",TravelList));
-       // groupsList.add(new GoodGroupsModel("Self-Care",selfCareList));
-     //   groupsList.add(new GoodGroupsModel("Senses",SensationsList));
-
-
-//        Log.i("groupsList",groupsList.get(0).getThingsInGroupList().get(0).getCategoryName());
+        groupsList.add(new CategoryGroupsModel("Self-Care",selfCareList));
+        groupsList.add(new CategoryGroupsModel("Dance",DanceList));
+        //groupsList.add(new CategoryGroupsModel("Work",workList));
+        //   groupsList.add(new GoodGroupsModel("Senses",SensationsList));
 
 
         // Initialize listener

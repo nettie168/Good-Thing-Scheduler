@@ -6,12 +6,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.goodthingscheduler.toDoAdd.CategoryTagsAdapter;
+import com.example.goodthingscheduler.toDoAdd.ItemClickListener;
 import com.example.goodthingscheduler.toDoAdd.ToDoAddThingActivity;
+import com.example.goodthingscheduler.toDoAdd.ToDoTimesTagAdapter;
 import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
+import com.example.goodthingscheduler.toDoCategories.GoodCategoriesDB;
+import com.example.goodthingscheduler.toDoCategories.GoodCategoryModel;
+import com.example.goodthingscheduler.toDoThings.CategorySelectorAdapter;
 import com.example.goodthingscheduler.toDoThings.ToDoStateAdapter;
 import com.example.goodthingscheduler.toDoThings.ToDoStatesModel;
 import com.example.goodthingscheduler.toDoThings.ToDoThingModel;
@@ -27,6 +35,9 @@ public class ToDoListActivity extends AppCompatActivity {
 
     ToDoThingsDB toDoThingsDB;
     ArrayList<ToDoStatesModel> thingsInState;
+    ItemClickListener itemClickListener;
+    CategorySelectorAdapter categorySelectorAdapter;
+    private GoodCategoriesDB goodCategoriesDB;
 
     @Override
     public void onRestart() {
@@ -40,15 +51,18 @@ public class ToDoListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_do_list);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.baseline_chevron_left_24);
+        //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.baseline_chevron_left_24);
         //getSupportActionBar().setTitle("To Dos -"+" "+CategoriesUtil.categorySelected); //string is custom name you want
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setBackgroundDrawable(null);
+       // getSupportActionBar().setTitle("My Good Things");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("");
+        //getSupportActionBar().setBackgroundDrawable(null);
+        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#70ccfd")));
         getSupportActionBar().setElevation(0);
         //setBackgroundDrawable(new ColorDrawable(Color.parseColor("#70ccfd")));
 
         toDoThingsDB = new ToDoThingsDB(this);
+        goodCategoriesDB = new GoodCategoriesDB(this);
 
         CategoriesUtil.goodThingId = 1;
         CategoriesUtil.goodThing = "";
@@ -57,15 +71,40 @@ public class ToDoListActivity extends AppCompatActivity {
         setBottomNavMenu();
         setAddThingFab();
         setGoodThingsRecyclerView();
+        setCategorySelector();
     }
 
     private void setGoodTitleView(){
-        ImageView categoryImgView = findViewById(R.id.categoryImage);
+     //   ImageView categoryImgView = findViewById(R.id.categoryImage);
         TextView categoryTV = findViewById(R.id.categoryTextView);
 
         categoryTV.setText(CategoriesUtil.categorySelected);
-        categoryImgView.setImageResource(CategoriesUtil.categoryImgId);
+      //  categoryImgView.setImageResource(CategoriesUtil.categoryImgId);
+      //  categoryImgView.setBackgroundColor(Color.parseColor("#70ccfd"));
         categoryTV.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, CategoriesUtil.categoryLogoId, 0);
+    }
+
+    private void setCategorySelector(){
+        RecyclerView categorySelectorRV = findViewById(R.id.categoryRVSelector);
+
+        // Initialize listener
+        itemClickListener = s -> {
+            // Notify adapter
+            categorySelectorRV.post(() -> categorySelectorAdapter.notifyDataSetChanged());
+            CategoriesUtil.categorySelected = s;
+            setGoodTitleView();
+            setGoodThingsRecyclerView();
+        };
+
+        ArrayList<GoodCategoryModel> categoryList = goodCategoriesDB.listAllGoodCatsDB();
+        categoryList.add(new GoodCategoryModel(0, "add category", R.drawable.naturewide160dpibag, R.drawable.ic_baseline_add_24));
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        //layoutManager.setReverseLayout(true);
+        //layoutManager.setStackFromEnd(true);
+        categorySelectorRV.setLayoutManager(layoutManager);
+        categorySelectorAdapter = new CategorySelectorAdapter(categoryList, itemClickListener, this); //, thisActivity);
+        categorySelectorRV.setAdapter(categorySelectorAdapter);
     }
 
     private void setGoodThingsRecyclerView(){
@@ -173,6 +212,9 @@ public class ToDoListActivity extends AppCompatActivity {
         super.onDestroy();
         if(toDoThingsDB != null){
             toDoThingsDB.close();
+        }
+        if(goodCategoriesDB != null){
+            goodCategoriesDB.close();
         }
     }
 }

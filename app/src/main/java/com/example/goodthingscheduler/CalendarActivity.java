@@ -127,13 +127,13 @@ public class CalendarActivity extends AppCompatActivity {
                 //   case R.id.schedule:
                 finish();
                 startActivity(new Intent(getApplicationContext(), SchedulerActivity.class));
-                overridePendingTransition(0, 0);
+                //overridePendingTransition(0, 0);
                 //      return true;
                 //  case R.id.goodThings:
             }else if(item.getItemId()==R.id.goodThings){
                     finish();
-                    startActivity(new Intent(getApplicationContext(),ToDoActivity.class));
-                    overridePendingTransition(0,0);
+                    startActivity(new Intent(getApplicationContext(),ToDoListActivity.class));
+                   // overridePendingTransition(0,0);
                  //   return true;
             //    case R.id.calendar:
               //      return true;

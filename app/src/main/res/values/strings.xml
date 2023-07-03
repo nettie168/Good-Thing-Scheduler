@@ -7,4 +7,17 @@
     <string name="xp_goal">xp goal</string>
     <string name="habit_example_3_elephants_high">Habit Example 3 Elephants High</string>
     <string name="routine_icon">routine icon</string>
+    <string name="add_new_task">Add new task</string>
+    <string name="previous_month">previous month</string>
+    <string name="oct_2022">Oct 2022</string>
+    <string name="next_month">next month</string>
+    <string name="sun">SUN</string>
+    <string name="july_award">July Award</string>
+    <string name="nature_landscape">nature landscape</string>
+    <string name="good_thing">good thing</string>
+    <string name="with">with</string>
+    <string name="category">Category:</string>
+    <string name="good_things_to_do">Good Things (To Do)</string>
+    <string name="add_category">add Category</string>
+    <string name="date_to_start">Date To Start</string>
 </resources>
