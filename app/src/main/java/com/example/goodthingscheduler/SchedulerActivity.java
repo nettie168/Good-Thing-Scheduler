@@ -124,6 +124,8 @@ public class SchedulerActivity extends AppCompatActivity {
 
 //        Log.i("xp in menu 1",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
         setXPUtils();
+        xpCountBtn.setOnClickListener(view ->  startActivity(new Intent(getApplicationContext(), XPGoalActivity.class))
+        );
       //  Log.i("xp in menu 2",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
 
 
@@ -145,12 +147,11 @@ public class SchedulerActivity extends AppCompatActivity {
         //XP Goal Button
         MenuItem item1 = menu.findItem(R.id.xp_goal);
         MenuItemCompat.setActionView(item1, R.layout.xp_goal_action_bar_button);
-      //  ImageButton xpGoalBtn;
-        //xpGoalBtn = (ImageButton) MenuItemCompat.getActionView(item1);
+        ImageButton xpGoalBtn;
+        xpGoalBtn = (ImageButton) MenuItemCompat.getActionView(item1);
         //xpGoalBtn = findViewById(R.id.xpGoalActionBarBtn);
 
-        xpCountBtn.setOnClickListener(view ->  startActivity(new Intent(getApplicationContext(), XPGoalActivity.class))
-        );
+        xpGoalBtn.setOnClickListener(view ->  startActivity(new Intent(getApplicationContext(), ChallengesActivity.class)));
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -186,7 +187,7 @@ public class SchedulerActivity extends AppCompatActivity {
 
         //set Action Bar, turns colour to skyblue/#70ccfd, removes title and elevation
         ActionBar bar = getSupportActionBar();
-        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#70ccfd")));
+        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#70ccfd"))); //"#2f004d"
         Objects.requireNonNull(bar).setElevation(0);
         bar.setTitle("");
 

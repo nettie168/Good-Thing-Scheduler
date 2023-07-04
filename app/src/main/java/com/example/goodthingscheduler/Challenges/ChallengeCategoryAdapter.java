@@ -1,4 +1,4 @@
-package com.example.goodthingscheduler.scheduleAddRoutineHabits;
+package com.example.goodthingscheduler.Challenges;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,22 +12,21 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.goodthingscheduler.scheduleHabits.RoutineUtils;
+import com.example.goodthingscheduler.ChallengesActivity;
 import com.example.goodthingscheduler.R;
+import com.example.goodthingscheduler.scheduleAddRoutineHabits.AddHabitsActivity;
+import com.example.goodthingscheduler.scheduleAddRoutineHabits.AddRoutineActivity;
 import com.example.goodthingscheduler.scheduleHabits.HabitModel;
+import com.example.goodthingscheduler.scheduleHabits.RoutineUtils;
 
 import java.util.ArrayList;
 
-public class AddRoutineAdapter extends RecyclerView.Adapter<AddRoutineAdapter.ViewHolder> {
+public class ChallengeCategoryAdapter extends RecyclerView.Adapter<ChallengeCategoryAdapter.ViewHolder> {
 
     private final ArrayList<HabitModel> habitArrayList;
     private final Context context;
-   // private HabitDBHandler habitDBHandler;
-    //TODO have swipe right to move task to tomorrow
-    //swipe left to "pause, get rid, move to future
-    //icons to represent habits (not just sun)
 
-    public AddRoutineAdapter(ArrayList<HabitModel> habitArrayList, Context context) {
+    public ChallengeCategoryAdapter(ArrayList<HabitModel> habitArrayList, Context context) {
         this.habitArrayList = habitArrayList;
         this.context=context;
     }
@@ -35,7 +34,6 @@ public class AddRoutineAdapter extends RecyclerView.Adapter<AddRoutineAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.habit_row,parent,false);
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.add_routine_card,parent,false);
         return new ViewHolder(view);
     }
@@ -48,12 +46,11 @@ public class AddRoutineAdapter extends RecyclerView.Adapter<AddRoutineAdapter.Vi
         holder.routineImg.setImageResource(habit.getHabitImgId());
 
         holder.cardView.setOnClickListener(view -> {
-            //start Add Habits Activity
             RoutineUtils.routineSel = habit.getRoutine();
             RoutineUtils.routineSelStartHour = 9;
             RoutineUtils.routineSelStartMinute = 0;
-            Intent intent = new Intent(context, AddHabitsActivity.class);
-            ((AddRoutineActivity)context).finish();
+            Intent intent = new Intent(context, SubChallengesActivity.class);
+            ((ChallengesActivity)context).finish();
             context.startActivity(intent);
         });
 
