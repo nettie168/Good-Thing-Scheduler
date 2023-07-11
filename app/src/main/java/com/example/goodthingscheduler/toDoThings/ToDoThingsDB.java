@@ -21,6 +21,9 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
     private static final String CATEGORY = "category";
     private static final String GOOD_THING = "goodThing";
     private static final String INSPIRED_BY = "inspiredBy";
+    private static final String LOGO_ID = "logoID";
+    private static final String COLOUR = "colour";
+
     private static final String STATE = "state";
     private static final String DATE_ADDED = "dateAdded";
     private static final String DATE_TO_START = "dateToStart";
@@ -39,6 +42,8 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
                 + CATEGORY + " TEXT, "
                 + GOOD_THING + " TEXT, "
                 + INSPIRED_BY + " TEXT, "
+                + LOGO_ID + " INTEGER, "
+                + COLOUR + " TEXT, "
                 + STATE + " TEXT, "
                 + DATE_ADDED + " TEXT, "
                 + DATE_TO_START + " TEXT, "
@@ -61,6 +66,8 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
         values.put(CATEGORY,goodThingModel.getCategory());
         values.put(GOOD_THING, goodThingModel.getGoodThing());
         values.put(INSPIRED_BY, goodThingModel.getInspiredBy());
+        values.put(LOGO_ID, goodThingModel.getLogoId());
+        values.put(COLOUR, goodThingModel.getColour());
         values.put(STATE, goodThingModel.getState());
         values.put(DATE_ADDED, goodThingModel.getDateAdded());
         values.put(DATE_TO_START, goodThingModel.getDateToStart());
@@ -79,8 +86,10 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
         values.put(CATEGORY,goodThingModel.getCategory());
         values.put(GOOD_THING, goodThingModel.getGoodThing());
         values.put(INSPIRED_BY, goodThingModel.getInspiredBy());
+        values.put(LOGO_ID, goodThingModel.getLogoId());
+        values.put(COLOUR, goodThingModel.getColour());
         values.put(STATE, goodThingModel.getState());
-        values.put(DATE_ADDED, goodThingModel.getDateAdded());
+        //values.put(DATE_ADDED, goodThingModel.getDateAdded());
         values.put(DATE_TO_START, goodThingModel.getDateToStart());
         values.put(DATE_TO_END, goodThingModel.getDateToEnd());
         values.put(DATES_DONE,goodThingModel.getDatesDone());
@@ -135,7 +144,7 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 String category = cursor.getString(1);
-                String state = cursor.getString(4);
+                String state = cursor.getString(6);
                 for (int i=0; i < categoryName.size(); i++){
                     if (category.equals(categoryName.get(i)) &! storeStates.contains(state)){
                         storeStates.add(state);
@@ -166,17 +175,20 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
             if (cursor.moveToFirst()) {
                 do {
                     String category = cursor.getString(1);
-                    String state = cursor.getString(4);
+                    String state = cursor.getString(6);
 
                     if (category.equals(categoryName) && state.equals(stateName.get(i))) {
                         int id = Integer.parseInt(cursor.getString(0));
                         String goodThing = cursor.getString(2);
                         String inspiredBy = cursor.getString(3);
-                        String dateAdded = cursor.getString(5);
-                        String datesDone = cursor.getString(8);
-                        String dateToStart = cursor.getString(6);
-                        String dateToEnd = cursor.getString(7);
-                        storeThingsInState.add(new ToDoThingModel(id, category, goodThing, inspiredBy, state, dateAdded, dateToStart, dateToEnd, datesDone));
+                        int logoId = Integer.parseInt(cursor.getString(4));
+                        String colour = cursor.getString(5);
+                        String dateAdded = cursor.getString(7);
+                        String dateToStart = cursor.getString(8);
+                        String dateToEnd = cursor.getString(9);
+                        String datesDone = cursor.getString(10);
+
+                        storeThingsInState.add(new ToDoThingModel(id, category, goodThing, inspiredBy, logoId, colour, state, dateAdded, dateToStart, dateToEnd, datesDone));
                     }
                 }
                 while (cursor.moveToNext());
@@ -203,18 +215,20 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
             //move through SQLite db line by line
             if (cursor.moveToFirst()) {
                 do {
-                    String state = cursor.getString(4);
+                    String state = cursor.getString(6);
 
                     if (state.equals(stateName.get(i))) {
                         int id = Integer.parseInt(cursor.getString(0));
                         String category = cursor.getString(1);
                         String goodThing = cursor.getString(2);
                         String inspiredBy = cursor.getString(3);
-                        String dateAdded = cursor.getString(5);
-                        String datesDone = cursor.getString(8);
-                        String dateToStart = cursor.getString(6);
-                        String dateToEnd = cursor.getString(7);
-                        storeThingsInState.add(new ToDoThingModel(id, category, goodThing, inspiredBy, state, dateAdded, dateToStart, dateToEnd, datesDone));
+                        int logoId = Integer.parseInt(cursor.getString(4));
+                        String colour = cursor.getString(5);
+                        String dateAdded = cursor.getString(7);
+                        String dateToStart = cursor.getString(8);
+                        String dateToEnd = cursor.getString(9);
+                        String datesDone = cursor.getString(10);
+                        storeThingsInState.add(new ToDoThingModel(id, category, goodThing, inspiredBy, logoId, colour, state, dateAdded, dateToStart, dateToEnd, datesDone));
                     }
                 }
                 while (cursor.moveToNext());
@@ -236,10 +250,9 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
             do {
-                String dateToStart = cursor.getString(6);
-                String dateToEnd = cursor.getString(7);
+                String dateToStart = cursor.getString(8);
+                String dateToEnd = cursor.getString(9);
                 String goodThing = cursor.getString(2);
-                //Log.i("To Do Things DB","date to start: "+dateToStart+", date to end: "+dateToEnd+" good thing: "+goodThing);
 
                 if(dateToStart!=null && dateToEnd != null) {
                     if (!dateToStart.equals("date not set") && !dateToEnd.equals("date not set")) {
@@ -249,11 +262,12 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
                                 String category = cursor.getString(1);
                                 //String goodThing = cursor.getString(2);
                                 String inspiredBy = cursor.getString(3);
-                                String state = cursor.getString(4);
-                                String dateAdded = cursor.getString(5);
-                                String datesDone = cursor.getString(8);
-
-                                storeTasks.add(new ToDoThingModel(id, category, goodThing, inspiredBy, state, dateAdded, dateToStart, dateToEnd, datesDone));
+                                int logoId = Integer.parseInt(cursor.getString(4));
+                                String colour = cursor.getString(5);
+                                String state = cursor.getString(6);
+                                String dateAdded = cursor.getString(7);
+                                String datesDone = cursor.getString(10);
+                                storeTasks.add(new ToDoThingModel(id, category, goodThing, inspiredBy, logoId, colour, state, dateAdded, dateToStart, dateToEnd, datesDone));
                             }
                         }
                     }

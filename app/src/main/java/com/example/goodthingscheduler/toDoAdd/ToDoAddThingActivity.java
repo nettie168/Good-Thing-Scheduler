@@ -84,11 +84,12 @@ public class ToDoAddThingActivity extends AppCompatActivity {
         goodThingEditText = findViewById(R.id.addGoodThingEditText);
         inspiredByET = findViewById(R.id.inspiredByEditText);
 
-        if(!CategoriesUtil.stateSelected.equals("Hello")){
+     //   if(!CategoriesUtil.stateSelected.equals("Hello")){
+      //  goodThingEditText.setCompoundDrawables(0,0,0,0);
             goodThingEditText.setText(CategoriesUtil.goodThing);
             inspiredByET.setText(CategoriesUtil.inspiredBy);
-            Log.i("Edit Text is","here");
-        }
+       //     Log.i("Edit Text is","here");
+       // }
 
         //private TextView goodTitle;
         //String addThing = "Add Good Thing";
@@ -194,15 +195,29 @@ public class ToDoAddThingActivity extends AppCompatActivity {
         TextView dateToEndTV = findViewById(R.id.DateToEndTV);
 
         if(CalendarUtils.dateToStart == null){
-            CalendarUtils.dateToStart = "date not set";
+            CalendarUtils.dateToStart = String.valueOf(CalendarUtils.selectedDate);
         }
 
         if (CalendarUtils.dateToEnd == null){
-            CalendarUtils.dateToEnd = "date not set";
+            CalendarUtils.dateToEnd = String.valueOf(CalendarUtils.selectedDate);
         }
 
-        dateToStartTV.setText(CalendarUtils.dateToStart);
-        dateToEndTV.setText(CalendarUtils.dateToEnd);
+        if(CalendarUtils.dateToStart == null || CalendarUtils.dateToStart.equals("date not set")){
+            dateToStartTV.setText(CalendarUtils.formattedDate(LocalDate.parse(CalendarUtils.selectedDate.toString())));
+
+        }else{
+            dateToStartTV.setText(CalendarUtils.formattedDate(LocalDate.parse(CalendarUtils.dateToStart)));
+        }
+
+        if(CalendarUtils.dateToEnd == null || CalendarUtils.dateToEnd.equals("date not set")){
+            dateToEndTV.setText(CalendarUtils.formattedDate(LocalDate.parse(CalendarUtils.selectedDate.toString())));
+
+        }else{
+            dateToEndTV.setText(CalendarUtils.formattedDate(LocalDate.parse(CalendarUtils.dateToEnd)));
+        }
+
+
+        //dateToEndTV.setText(CalendarUtils.formattedDate(LocalDate.parse(CalendarUtils.dateToEnd)));
 
         dateToStartTV.setOnClickListener(view -> {
             final Calendar c = Calendar.getInstance();
@@ -219,9 +234,12 @@ public class ToDoAddThingActivity extends AppCompatActivity {
                         //recreate();
                         dateToStartTV.setText(CalendarUtils.formattedDate(date1));
                         CalendarUtils.dateToStart = date1.toString();
-                        if(CalendarUtils.dateToEnd.equals("date not set")){
-                            CalendarUtils.dateToEnd = date1.toString();
-                        }
+
+                        CalendarUtils.dateToEnd = date1.toString();
+                        dateToEndTV.setText(CalendarUtils.formattedDate(date1));
+                     //   if(CalendarUtils.dateToEnd.equals("date not set")){
+                       //     CalendarUtils.dateToEnd = date1.toString();
+                        //}
                     },
                     year, month, day);
             datePickerDialog.show();
@@ -317,7 +335,7 @@ public class ToDoAddThingActivity extends AppCompatActivity {
 
         if(!goodThingString.isEmpty() && CategoriesUtil.categorySelected!=null && CategoriesUtil.stateSelected!=null){
             //Log.i("good Thing","category is "+CategoriesUtil.categorySelected+", state is "+CategoriesUtil.stateSelected+", dates: "+CalendarUtils.dateToStart+" "+CalendarUtils.dateToEnd);
-            goodThingsDB.addGoodThing(new ToDoThingModel(0, CategoriesUtil.categorySelected,goodThingString,inspiredByString,CategoriesUtil.stateSelected,LocalDate.now().toString(),CalendarUtils.dateToStart,CalendarUtils.dateToEnd,"date"));
+            goodThingsDB.addGoodThing(new ToDoThingModel(0, CategoriesUtil.categorySelected,goodThingString,inspiredByString,CategoriesUtil.categoryLogoId, "#000000",CategoriesUtil.stateSelected,LocalDate.now().toString(),CalendarUtils.dateToStart,CalendarUtils.dateToEnd,"date"));
             Toast.makeText(ToDoAddThingActivity.this, "Added "+goodThingString + " in "+ CategoriesUtil.categorySelected, Toast.LENGTH_SHORT).show();
             finish();
         }else{
@@ -335,11 +353,11 @@ public class ToDoAddThingActivity extends AppCompatActivity {
         }
 
         if(!goodThingString.isEmpty()){
-            goodThingsDB.updateGoodThing(new ToDoThingModel(CategoriesUtil.goodThingId, CategoriesUtil.categorySelected,goodThingString,inspiredByString,CategoriesUtil.stateSelected,LocalDate.now().toString(),CalendarUtils.dateToStart,CalendarUtils.dateToEnd,"date"));
-            Toast.makeText(ToDoAddThingActivity.this, "Updating "+goodThingString, Toast.LENGTH_SHORT).show();
+            goodThingsDB.updateGoodThing(new ToDoThingModel(CategoriesUtil.goodThingId, CategoriesUtil.categorySelected,goodThingString,inspiredByString,CategoriesUtil.categoryLogoId, "#000000",CategoriesUtil.stateSelected,"",CalendarUtils.dateToStart,CalendarUtils.dateToEnd,"date"));
+            Toast.makeText(ToDoAddThingActivity.this, "Updating... "+goodThingString, Toast.LENGTH_SHORT).show();
         }else{
             goodThingsDB.deleteGoodThing(new ToDoThingModel(CategoriesUtil.goodThingId, CategoriesUtil.categorySelected,goodThingString,CategoriesUtil.stateSelected,"date"));
-            Toast.makeText(ToDoAddThingActivity.this, "deleting "+CategoriesUtil.goodThing, Toast.LENGTH_SHORT).show();
+            Toast.makeText(ToDoAddThingActivity.this, "deleting... "+CategoriesUtil.goodThing, Toast.LENGTH_SHORT).show();
         }
         finish();
     }
@@ -347,7 +365,7 @@ public class ToDoAddThingActivity extends AppCompatActivity {
 
     public void cancelThing(View view){
         finish();
-        Toast.makeText(this, "Cancelling", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Cancelling...", Toast.LENGTH_SHORT).show();
     }
 
     @Override

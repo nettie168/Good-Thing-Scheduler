@@ -232,7 +232,7 @@ public class SchedulerActivity extends AppCompatActivity {
         CategoriesUtil.goodThingId = -1;
         CategoriesUtil.goodThing="";
         CategoriesUtil.categoryImgId = R.drawable.bookswide160dpi;
-        CategoriesUtil.categoryLogoId =  R.drawable.ic_baseline_favorite_24;
+        CategoriesUtil.categoryLogoId = R.drawable.ic_baseline_favorite_24;
     }
 
     private void setCalendarUtils(){
@@ -355,9 +355,9 @@ public class SchedulerActivity extends AppCompatActivity {
 
         //Add one-off to do to DB including 1. download my app 2. Add 1 routine 3. Add 1 challenge
         if(toDoThingsDB.isEmpty()){
-            toDoThingsDB.addGoodThing(new ToDoThingModel(0, "All Good Things (To Do)", "Download Esk App", "", "Done", LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString()));
-            toDoThingsDB.addGoodThing(new ToDoThingModel(0, "All Good Things (To Do)", "Add 1 To Do", "", "To Do", LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString(), ""));
-            toDoThingsDB.addGoodThing(new ToDoThingModel(0, "All Good Things (To Do)", "Add 1 Routine", "", "To Do", LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString(), ""));
+            toDoThingsDB.addGoodThing(new ToDoThingModel(0, "All Good Things (To Do)", "Download Esk App", "", R.drawable.ic_baseline_favorite_24,"#FFFFFF","Done", LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString()));
+            toDoThingsDB.addGoodThing(new ToDoThingModel(0, "All Good Things (To Do)", "Add 1 To Do", "", R.drawable.ic_baseline_favorite_24,"#FFFFFF", "To Do", LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString(), ""));
+            toDoThingsDB.addGoodThing(new ToDoThingModel(0, "All Good Things (To Do)", "Add 1 Routine", "", R.drawable.ic_baseline_favorite_24,"#FFFFFF", "To Do", LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString(), ""));
         }
 
         ArrayList<ToDoThingModel> daysTodos = toDoThingsDB.listToDoInDay(CalendarUtils.selectedDate);

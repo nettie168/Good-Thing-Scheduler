@@ -1,6 +1,7 @@
 package com.example.goodthingscheduler.toDoThings;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,8 +37,9 @@ public class ToDoStateAdapter extends RecyclerView.Adapter<ToDoStateAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position){
         ToDoStatesModel goodThingState = goodThingsStateList.get(position);
+        holder.cardView.setCardBackgroundColor(Color.parseColor("#085c0f"));
+        holder.goodThingState.setTextColor(Color.WHITE);
         holder.goodThingState.setText(goodThingState.getState());
-        Log.i("which state",goodThingState.getState());
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(holder.goodThingsRV.getContext());
         linearLayoutManager.setInitialPrefetchItemCount(goodThingState.getThingsInStateList().size());
@@ -54,11 +57,13 @@ public class ToDoStateAdapter extends RecyclerView.Adapter<ToDoStateAdapter.View
     public static class ViewHolder extends RecyclerView.ViewHolder{
         private final TextView goodThingState;
         private final RecyclerView goodThingsRV;
+        private final CardView cardView;
 
         public ViewHolder(View view){
             super(view);
             goodThingState = view.findViewById(R.id.stateTextView);
             goodThingsRV = view.findViewById(R.id.goodThingsRV);
+            cardView = view.findViewById(R.id.statesCard);
         }
     }
 }

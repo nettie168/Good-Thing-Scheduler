@@ -2,6 +2,7 @@ package com.example.goodthingscheduler.scheduleHabits;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,6 +52,11 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHold
 
         dailyHabitsDBHandler = new DailyHabitsDBHandler(context);
         ArrayList<HabitModel> dailyHabitsDBArray = dailyHabitsDBHandler.listHabits(routine.getRoutine());
+
+        holder.routineCard.setCardBackgroundColor(Color.parseColor("#085c0f"));
+        holder.startTimeTV.setTextColor(Color.WHITE);
+        holder.routineText.setTextColor(Color.WHITE);
+        holder.routineTally.setTextColor(Color.WHITE);
 
 
         holder.startTimeTV.setText(LocalTime.of(routine.getStartHour(),routine.getStartMinute()).toString());
@@ -167,6 +174,7 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHold
         private final TextView startTimeTV;
         private final ImageButton moreBtn;
         private final TextView routineTally;
+        private final CardView routineCard;
 
         public ViewHolder(View view){
             super(view);
@@ -176,6 +184,7 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHold
             hideShowBtn = view.findViewById(R.id.hideShowBtn);
             moreBtn = view.findViewById(R.id.moreToDo);
             routineTally = view.findViewById(R.id.routineTallyTV);
+            routineCard = view.findViewById(R.id.routineCard);
         }
     }
 

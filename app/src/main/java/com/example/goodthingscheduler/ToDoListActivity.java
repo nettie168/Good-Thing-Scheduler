@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,6 +43,8 @@ public class ToDoListActivity extends AppCompatActivity {
     @Override
     public void onRestart() {
         super.onRestart();
+        setCategorySelector();
+        setGoodTitleView();
         setGoodThingsRecyclerView();
         //When BACK BUTTON is pressed, the activity on the stack is restarted
         //Do what you want on the refresh procedure here
@@ -110,21 +113,22 @@ public class ToDoListActivity extends AppCompatActivity {
     private void setGoodThingsRecyclerView(){
         RecyclerView goodThingsRV = findViewById(R.id.goodThingsRV);
 
-        ArrayList<String> categoryList = toDoThingsDB.listGoodCatDB();
+        ArrayList<String> categoryList = toDoThingsDB.listGoodCatDB(); //seems to be working
         ArrayList<String> stateList = toDoThingsDB.listGoodStatesInCatDB(categoryList);
 
         if(CategoriesUtil.categorySelected.equals("All Good Things (To Do)")){
             thingsInState = toDoThingsDB.listAllGoodThings(stateList);
+          //  Log.i("ToDoListAct","is not all things");
         }else {
             thingsInState = toDoThingsDB.listGoodThingsInStateInCatDB(CategoriesUtil.categorySelected, stateList);
+        //    Log.i("ToDoListAct","is all things");
         }
 
         if(thingsInState.isEmpty()){
             //ArrayList<ToDoThingModel> isEmptyList = new ArrayList<>();
             String helloMessage = "Add "+CategoriesUtil.categorySelected+" good thing or to do";
             //isEmptyList.add(new ToDoThingModel(0,"all",helloMessage,"Hello",""));
-            toDoThingsDB.addGoodThing(new ToDoThingModel(0, CategoriesUtil.categorySelected,helloMessage,"","To Do", LocalDate.now().toString(), "date not set","date not set","date"));
-
+            toDoThingsDB.addGoodThing(new ToDoThingModel(0, CategoriesUtil.categorySelected,helloMessage,"",CategoriesUtil.categoryLogoId,"#FFFFFF","To Do", LocalDate.now().toString(), "date not set","date not set","date"));
 
             /*ArrayList<ToDoStatesModel> isEmptyStateList = new ArrayList<>();
 

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,6 +43,7 @@ public class CalendarEventsAdapter extends RecyclerView.Adapter<CalendarEventsAd
         //    holder.calendarEventTV.setText("+");
         //}else{
             holder.calendarEventTV.setText(routine.getGoodThing());
+            holder.logo.setImageResource(routine.getLogoId());
             //Log.i("calendar event", routine.getGoodThing());
         //}
     }
@@ -54,10 +56,12 @@ public class CalendarEventsAdapter extends RecyclerView.Adapter<CalendarEventsAd
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         private final TextView calendarEventTV;
+        private final ImageView logo;
 
         public ViewHolder(View view){
             super(view);
             calendarEventTV = view.findViewById(R.id.calendarEventTV);
+            logo = view.findViewById(R.id.calendarEventLogo);
         }
     }
 

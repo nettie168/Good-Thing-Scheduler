@@ -1,6 +1,8 @@
 package com.example.goodthingscheduler.toDoThings;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +18,9 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.goodthingscheduler.R;
+import com.example.goodthingscheduler.toDoAdd.AddNewCategoryActivity;
 import com.example.goodthingscheduler.toDoAdd.ItemClickListener;
+import com.example.goodthingscheduler.toDoAdd.ToDoAddThingActivity;
 import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
 import com.example.goodthingscheduler.toDoCategories.GoodCategoryModel;
 
@@ -48,13 +52,17 @@ public class CategorySelectorAdapter extends RecyclerView.Adapter<CategorySelect
     @Override
     public void onBindViewHolder(ViewHolder holder, int position){
         GoodCategoryModel category = categoryList.get(position);
+
+
         holder.categoryRadio.setBackground(ContextCompat.getDrawable(context, category.getLogoId()));
         holder.categoryRadio.setContentDescription(category.getCategoryName());
 
         if(category.getCategoryName().contains(CategoriesUtil.categorySelected)){
             selectedPosition = holder.getAdapterPosition();
+           // holder.cardView.setCardBackgroundColor(Color.MAGENTA);
         }else{
             selectedPosition = -1;
+        //    holder.cardView.setCardBackgroundColor(Color.parseColor("#085c0f"));
         }
 
         holder.categoryRadio.setChecked(position == selectedPosition);
@@ -63,12 +71,20 @@ public class CategorySelectorAdapter extends RecyclerView.Adapter<CategorySelect
                 (compoundButton, b) -> {
                     // check condition
                     if (b) {
-                        // When checked// update selected position
-                        selectedPosition = holder.getAdapterPosition();
-                        // Call listener
-                        itemClickListener.onClick(category.getCategoryName());
-                        CategoriesUtil.categoryImgId = category.getImgId();
-                        //holder.cardView.setCardBackgroundColor(R.color.black);
+                        if(category.getCategoryName().equals("add category")){
+                            Intent intent = new Intent(context, AddNewCategoryActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(intent);
+                        }else{
+                            // When checked// update selected position
+                            selectedPosition = holder.getAdapterPosition();
+                            // Call listener
+                            itemClickListener.onClick(category.getCategoryName());
+                            CategoriesUtil.categoryImgId = category.getImgId();
+                            CategoriesUtil.categoryLogoId = category.getLogoId();
+                            holder.cardView.setCardBackgroundColor(Color.MAGENTA);
+                            //holder.cardView.setCardBackgroundColor(R.color.black);
+                        }
                     }
                 });
     }

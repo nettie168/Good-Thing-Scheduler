@@ -20,4 +20,12 @@
     <string name="good_things_to_do">Good Things (To Do)</string>
     <string name="add_category">add Category</string>
     <string name="date_to_start">Date To Start</string>
+    <string name="add">add</string>
+    <string name="add_to_do">Add To Do</string>
+    <string name="how_s_your_day_going">How\'s your day going?</string>
+    <string name="today_s_date">Today\'s Date</string>
+    <string name="goals_and_to_dos">Goals and To Dos</string>
+    <string name="events_and_routines">Events and Routines</string>
+    <string name="add_routine">Add Routine</string>
+    <string name="add_new_category">Add new category</string>
 </resources>

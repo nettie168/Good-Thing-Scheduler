@@ -5,6 +5,8 @@ public class ToDoThingModel {
     public String category;
     public String goodThing;
     public String inspiredBy;
+    public int logoId;
+    public String colour;
     public String state;
     public String dateAdded;
     public String dateToStart;
@@ -23,11 +25,13 @@ public class ToDoThingModel {
         this.goodThing = goodThing;
     }
 
-    public ToDoThingModel(int id, String category, String goodThing, String inspiredBy, String state, String dateAdded, String dateToStart, String dateToEnd, String datesDone) {
+    public ToDoThingModel(int id, String category, String goodThing, String inspiredBy, int logoId, String colour, String state, String dateAdded, String dateToStart, String dateToEnd, String datesDone) {
         this.id = id;
         this.category = category;
         this.goodThing = goodThing;
         this.inspiredBy = inspiredBy;
+        this.logoId = logoId;
+        this.colour = colour;
         this.state = state;
         this.dateAdded = dateAdded;
         this.dateToStart = dateToStart;
@@ -73,6 +77,22 @@ public class ToDoThingModel {
 
     public void setInspiredBy(String inspiredBy) {
         this.inspiredBy = inspiredBy;
+    }
+
+    public int getLogoId() {
+        return logoId;
+    }
+
+    public void setLogoId(int logoId) {
+        this.logoId = logoId;
+    }
+
+    public String getColour() {
+        return colour;
+    }
+
+    public void setColour(String colour) {
+        this.colour = colour;
     }
 
     public String getDateAdded() {

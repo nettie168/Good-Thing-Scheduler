@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grassGreen"
     tools:context=".SchedulerActivity">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -34,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_gravity="end"
-        android:text="add"
+        android:text="@string/add"
         android:backgroundTint="@color/skyblue"
         app:icon="@drawable/ic_baseline_add_24"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
@@ -45,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:contentDescription="Add To Do"
+        android:contentDescription="@string/add_to_do"
         android:src="@drawable/ic_baseline_task_alt_24"
         android:backgroundTint="@color/skyblue"
         app:layout_constraintBottom_toTopOf="@id/fab"
@@ -56,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:contentDescription="Add Routine"
+        android:contentDescription="@string/add_routine"
         android:src="@drawable/baseline_checklist_24"
         android:backgroundTint="@color/skyblue"
         app:layout_constraintBottom_toTopOf="@id/addToDoFab"
@@ -115,7 +116,7 @@
         android:id="@+id/reflectionBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="How's your day going?"
+        android:text="@string/how_s_your_day_going"
         android:textAllCaps="false"
         android:layout_gravity="center"
         app:layout_constraintTop_toBottomOf="@id/dragonPic"/>
@@ -133,7 +134,7 @@
             android:cropToPadding="false"
             android:scaleType="fitXY"/> -->
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -143,75 +144,121 @@
 
         <Button
             android:id="@+id/scheduleBackBtn"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:text="@string/back"
             android:textAllCaps="false"
+            android:textColor="@color/white"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             />
 
         <Button
             android:id="@+id/todayDateTV"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:text="Today's Date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/today_s_date"
             android:textSize="16sp"
             android:textAllCaps="false"
             android:padding="6dp"
+            android:textColor="@color/white"
             style="@style/Widget.MaterialComponents.Button.TextButton" />
 
         <Button
             android:id="@+id/scheduleNextBtn"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:text="@string/next"
             android:textAllCaps="false"
+            android:textColor="@color/white"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             />
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
    <!--     <ListView
             android:id="@+id/priorities"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/> -->
 
-        <TextView
-            android:id="@+id/daysGoalsTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Goals and To Dos"
-            android:textSize="16sp"
-            android:textAllCaps="false"
-            android:padding="6dp"
-            style="@style/Widget.MaterialComponents.Button.TextButton" />
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/daysGoalsRV"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            />
+            android:layout_margin="10dp"
+            app:cardCornerRadius="5dp"
+            app:cardBackgroundColor="#0a7213">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/daysGoalsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_baseline_task_alt_24"
+                android:drawablePadding="4dp"
+                android:text="@string/goals_and_to_dos"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:padding="6dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/daysGoalsRV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="5dp"
+    app:cardBackgroundColor="#0a7213">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/routinesTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Events and Routines"
+            android:drawableStart="@drawable/baseline_checklist_24"
+            android:drawablePadding="4dp"
+            android:text="@string/events_and_routines"
             android:textSize="16sp"
             android:textAllCaps="false"
             android:padding="6dp"
+            android:textColor="@color/white"
             style="@style/Widget.MaterialComponents.Button.TextButton"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/RoutinesRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
+            android:layout_margin="3dp"
             />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+
+
 
       <!--  <ImageView
             android:layout_width="match_parent"
