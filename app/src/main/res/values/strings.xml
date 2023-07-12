@@ -28,4 +28,9 @@
     <string name="events_and_routines">Events and Routines</string>
     <string name="add_routine">Add Routine</string>
     <string name="add_new_category">Add new category</string>
+    <string name="a_beautiful_scene">a beautiful scene</string>
+    <string name="a_fun_character">a fun character</string>
+    <string name="music">music</string>
+    <string name="scene_location">scene location</string>
+    <string name="beautiful_natural_scene">beautiful natural scene</string>
 </resources>

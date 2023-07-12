@@ -17,14 +17,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="10dp"
-            android:background="@color/nightsky"/>
+            android:background="@color/night_sky"/>
 
         <ImageView
             android:id="@+id/dragonPic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:background="@color/nightsky"
+            android:background="@color/night_sky"
             android:cropToPadding="false"
             android:scaleType="fitXY"
             android:src="@drawable/mountainscenerect"

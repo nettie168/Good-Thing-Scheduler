@@ -14,12 +14,20 @@
         tools:replace="android:allowBackup"
         tools:targetApi="31">
         <activity
+            android:name=".SceneLocationActivity"
+            android:exported="false"
+            android:parentActivityName=".SchedulerActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SceneLocationActivity" />
+        </activity>
+        <activity
             android:name=".Challenges.SubChallengesActivity"
             android:exported="false"
             android:parentActivityName=".ChallengesActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".Challenges.SubChallengesActivity" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Challenges.SubChallengesActivity" />
         </activity>
         <activity
             android:name=".ChallengesActivity"

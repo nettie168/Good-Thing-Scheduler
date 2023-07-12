@@ -9,8 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="dragon1">#7579e7</color>
     <color name="dragonDark">#6352a9</color>
-    <color name="skyblue">#70ccfd</color>
-    <color name="nightsky">#2f004d</color>
+    <color name="sky_blue">#70ccfd</color>
+    <color name="night_sky">#2f004d</color>
     <color name="grassGreen">#085c0f</color>
     <color name="lightGrassGreen">#0a7213</color>
 

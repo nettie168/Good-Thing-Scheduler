@@ -52,7 +52,7 @@
                 android:adjustViewBounds="true"
                 android:cropToPadding="false"
                 android:scaleType="fitXY"
-                android:background="@color/skyblue"
+                android:background="@color/sky_blue"
                 android:src="@drawable/mountainscenerect"
                 app:layout_constraintTop_toTopOf="parent" />
 

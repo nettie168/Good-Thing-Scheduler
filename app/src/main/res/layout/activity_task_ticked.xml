@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/skyblue"
+    android:background="@color/sky_blue"
     tools:context=".scheduleHabits.TaskTickedActivity">
 
     <nl.dionsegijn.konfetti.xml.KonfettiView
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@drawable/ic_baseline_electric_bolt_24"
-            app:tint="@color/skyblue" />
+            app:tint="@color/sky_blue" />
 
     </LinearLayout>
 

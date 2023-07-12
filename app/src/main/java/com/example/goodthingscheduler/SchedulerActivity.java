@@ -216,6 +216,9 @@ public class SchedulerActivity extends AppCompatActivity {
 
         //work-in-progress
         setReflections();
+
+        ImageButton sceneLocaterBtn = findViewById(R.id.locateBtn);
+        sceneLocaterBtn.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), SceneLocationActivity.class)));
     }
 
     private void setCategoryUtils(){
@@ -290,6 +293,7 @@ public class SchedulerActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void setReflections(){
         Button reflectionBtn = findViewById(R.id.reflectionBtn);
