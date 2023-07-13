@@ -5,43 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/grassGreen"
     tools:context=".SceneLocationActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/dragonPic"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:background="@color/sky_blue"
-            android:cropToPadding="false"
-            android:scaleType="fitXY"
-            android:src="@drawable/mountainscenerect"
-            android:contentDescription="@string/a_beautiful_scene"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:cardCornerRadius="0dp"
+            android:elevation="0dp"
+            app:layout_constraintTop_toTopOf="parent">
 
-   <!--     <ImageView
-            android:id="@+id/dragonChar"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            app:layout_constraintVertical_weight="1"
-            android:src="@drawable/wave_item"
-            android:contentDescription="@string/a_fun_character"
-            app:layout_constraintBottom_toBottomOf="@id/dragonPic"
-            app:layout_constraintEnd_toEndOf="@id/dragonPic"
-            app:layout_constraintStart_toStartOf="@id/dragonPic"
-            app:layout_constraintTop_toTopOf="@id/dragonPic"
-            android:layout_marginVertical="5dp"
-            /> -->
+            <ImageView
+                android:id="@+id/sceneBackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:cropToPadding="false"
+                android:scaleType="fitXY"
+                android:src="?attr/sceneBackgroundImage"
+                android:contentDescription="@string/a_beautiful_scene"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!--     <ImageView
+                 android:id="@+id/dragonChar"
+                 android:layout_width="wrap_content"
+                 android:layout_height="0dp"
+                 app:layout_constraintVertical_weight="1"
+                 android:src="@drawable/wave_item"
+                 android:contentDescription="@string/a_fun_character"
+                 app:layout_constraintBottom_toBottomOf="@id/dragonPic"
+                 app:layout_constraintEnd_toEndOf="@id/dragonPic"
+                 app:layout_constraintStart_toStartOf="@id/dragonPic"
+                 app:layout_constraintTop_toTopOf="@id/dragonPic"
+                 android:layout_marginVertical="5dp"
+                 /> -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/sceneBackgroundColourCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="5dp"
@@ -68,10 +76,8 @@
             android:id="@+id/musicBtn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Frogs and Birds"
+            android:text="@string/frogs_and_birds"
             style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:backgroundTint="@color/lightGrassGreen"
-            android:textColor="@color/white"
             android:contentDescription="@string/music"/>
 
         </LinearLayout>
@@ -80,6 +86,87 @@
     </androidx.cardview.widget.CardView>
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="@string/where_would_you_like_to_go"
+        android:layout_margin="10dp"/>
 
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/mountainSelBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_baseline_hiking_24"
+            android:layout_margin="5dp"
+            android:onClick="onSceneThemeChangeClick"
+            android:contentDescription="@string/grassy_mountains"
+            android:background="@color/lightGrassGreen"/>
+
+        <ImageButton
+            android:id="@+id/underwaterSelBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_baseline_surfing_24"
+            android:background="@color/sky_blue"
+            android:onClick="onSceneThemeChangeClick"
+            android:contentDescription="@string/under_the_sea"
+            android:layout_margin="5dp"/>
+
+        <ImageButton
+            android:id="@+id/snowMountainsSelBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_baseline_downhill_skiing_24"
+            android:background="@color/white"
+            android:contentDescription="@string/snowy_mountains"
+            android:layout_margin="5dp"/>
+
+        <ImageButton
+            android:id="@+id/safariSelBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_baseline_emoji_nature_24"
+            android:background="#ffa500"
+            android:contentDescription="@string/safari"
+            android:layout_margin="5dp"/>
+
+    </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_baseline_add_24"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="this is a button"
+        android:layout_gravity="center"/>
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu"/>
 
 </LinearLayout>

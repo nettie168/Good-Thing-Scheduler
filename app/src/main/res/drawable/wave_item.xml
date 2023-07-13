@@ -3,7 +3,7 @@
 
     <item
         android:drawable="@drawable/dragon0"
-        android:duration="200" />
+        android:duration="500" />
     <item
         android:drawable="@drawable/wave1"
         android:duration="200" />
@@ -16,6 +16,6 @@
 
     <item
         android:drawable="@drawable/dragon0"
-        android:duration="200" />
+        android:duration="250" />
 
 </animation-list>

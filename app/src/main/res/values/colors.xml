@@ -10,8 +10,12 @@
     <color name="dragon1">#7579e7</color>
     <color name="dragonDark">#6352a9</color>
     <color name="sky_blue">#70ccfd</color>
-    <color name="night_sky">#2f004d</color>
+    <color name="night_sky">#22003f</color> <!-- #2f004d -->
     <color name="grassGreen">#085c0f</color>
     <color name="lightGrassGreen">#0a7213</color>
+    <color name="darkGrassGreen">#042a08</color> <!-- #06470d -->
+    <color name="waterBlue">#5ba1ff</color>
+    <color name="waterTeal">#21abcd</color>
+    <color name="lightsnow">#e9f2ff</color>
 
 </resources>

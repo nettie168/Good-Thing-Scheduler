@@ -5,12 +5,61 @@
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/dragonDark</item>
         <item name="colorOnPrimary">@color/black</item>
+        <item name="sceneBackgroundImage">@drawable/mountainscenerect</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <attr name="sceneBackgroundImage" format="reference"/>
+
+
+    <!-- Purple Mountains with Green Grass, Blue Sky -->
+    <style name="MountainGreen" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/darkGrassGreen</item>
+        <item name="sceneBackgroundImage">@drawable/green_mountains_night</item>
+
+        <item name="colorPrimary">@color/dragonDark</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/dragonDark</item> <!--colour of secondary eg. FAB -->
+        <item name="colorOnSecondary">@color/white</item> <!--colour of things on top of secondary eg. FAB icon -->
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" >@color/night_sky</item>
+    </style>
+
+    <style name="Underwater" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:background">#16003c</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="sceneBackgroundImage">@drawable/mountains_water_night</item>
+
+        <item name="colorPrimary">@color/sky_blue</item>
+        <item name="colorOnPrimary">@color/night_sky</item>
+        <item name="colorSecondary">@color/dragon1</item>
+
+        <item name="colorPrimaryVariant">@color/night_sky</item>
+        <item name="android:statusBarColor" >@color/night_sky</item>
+    </style>
+
+    <style name="SnowyMountain" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:background">#8783c7</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="sceneBackgroundImage">@drawable/snowy_mountain_night</item>
+
+        <item name="colorPrimary">@color/night_sky</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="colorSecondary">@color/night_sky</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+
+        <item name="colorPrimaryVariant">@color/night_sky</item>
+        <item name="android:statusBarColor" >@color/night_sky</item>
     </style>
 </resources>
