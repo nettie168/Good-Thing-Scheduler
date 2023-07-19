@@ -14,13 +14,12 @@ import com.example.goodthingscheduler.Calendar.CalendarUtils;
 import com.example.goodthingscheduler.R;
 import com.example.goodthingscheduler.scheduleHabits.HabitDBHandler;
 import com.example.goodthingscheduler.scheduleHabits.HabitModel;
+import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class AddRoutineActivity extends AppCompatActivity {
-
-    EditText thingET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +84,9 @@ public class AddRoutineActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.routinesToAddRV);
 
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
+        int mNoOfColumns = CategoriesUtil.calculateNoOfColumns(getApplicationContext(),140);
+
+        GridLayoutManager layoutManager = new GridLayoutManager(this, mNoOfColumns); //3
        // LinearLayout layoutManager = new LinearLayout(this);
         AddRoutineAdapter addRoutineAdapter = new AddRoutineAdapter(routineList, this);
         recyclerView.setLayoutManager(layoutManager);

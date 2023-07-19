@@ -20,6 +20,7 @@ import com.example.goodthingscheduler.R;
 import com.example.goodthingscheduler.scheduleHabits.HabitModel;
 import com.example.goodthingscheduler.scheduleHabits.RoutineListDBHandler;
 import com.example.goodthingscheduler.scheduleHabits.RoutineModel;
+import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -421,7 +422,10 @@ public class AddHabitsActivity extends AppCompatActivity {
         AddHabitsAdapter habitAdapter = new AddHabitsAdapter(habitsList, this);
 
         recyclerView.setAdapter(habitAdapter);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
+
+        int mNoOfColumns = CategoriesUtil.calculateNoOfColumns(getApplicationContext(),140);
+
+        GridLayoutManager layoutManager = new GridLayoutManager(this, mNoOfColumns); //4
         recyclerView.setLayoutManager(layoutManager);
     }
 
@@ -450,6 +454,7 @@ public class AddHabitsActivity extends AppCompatActivity {
 
         SelectButtonsAdapter selectButtonsAdapter = new SelectButtonsAdapter(daysOfWeekArray,this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        //GridLayoutManager layoutManager = new GridLayoutManager(this, 7);
         daysOfWeekRV.setAdapter(selectButtonsAdapter);
         daysOfWeekRV.setLayoutManager(layoutManager);
 

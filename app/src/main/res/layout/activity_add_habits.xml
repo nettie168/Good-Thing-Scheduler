@@ -9,9 +9,9 @@
 
         <Button
             android:id="@+id/saveHabitsBtn"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Start Routine"
+            android:text="@string/start_routine"
             android:textAllCaps="false"
             android:layout_marginHorizontal="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -44,14 +44,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="Start Time: "/>
+                android:text="@string/start_time"/>
 
             <TextView
                 android:id="@+id/routineStartTimeTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="9am"/>
+                android:text="@string/_9am"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -88,6 +88,7 @@
             android:id="@+id/dayOfWeekRV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:scrollbarAlwaysDrawHorizontalTrack="true"
             android:scrollbars="horizontal"
             />
@@ -98,7 +99,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:gravity="center"
-        android:text="Which habits would you like for this routine?"/>
+        android:text="@string/which_habits_would_you_like_for_this_routine"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/addHabitRV"

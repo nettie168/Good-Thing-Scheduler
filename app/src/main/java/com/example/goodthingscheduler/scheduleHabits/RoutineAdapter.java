@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.goodthingscheduler.R;
 import com.example.goodthingscheduler.scheduleAddRoutineHabits.AddHabitsActivity;
+import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -53,10 +54,10 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHold
         dailyHabitsDBHandler = new DailyHabitsDBHandler(context);
         ArrayList<HabitModel> dailyHabitsDBArray = dailyHabitsDBHandler.listHabits(routine.getRoutine());
 
-        holder.routineCard.setCardBackgroundColor(Color.parseColor("#085c0f"));
-        holder.startTimeTV.setTextColor(Color.WHITE);
-        holder.routineText.setTextColor(Color.WHITE);
-        holder.routineTally.setTextColor(Color.WHITE);
+     //   holder.routineCard.setCardBackgroundColor(Color.parseColor("#085c0f"));
+       // holder.startTimeTV.setTextColor(Color.WHITE);
+        //holder.routineText.setTextColor(Color.WHITE);
+        //holder.routineTally.setTextColor(Color.WHITE);
 
 
         holder.startTimeTV.setText(LocalTime.of(routine.getStartHour(),routine.getStartMinute()).toString());
@@ -137,7 +138,9 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHold
         });
 
 
-        GridLayoutManager layoutManager = new GridLayoutManager(holder.habitRecyclerView.getContext(),4);
+        int mNoOfColumns = CategoriesUtil.calculateNoOfColumns(context,140);
+
+        GridLayoutManager layoutManager = new GridLayoutManager(holder.habitRecyclerView.getContext(),mNoOfColumns); //4
     //    LinearLayoutManager layoutManager = new LinearLayoutManager(holder.habitRecyclerView.getContext(), RecyclerView.VERTICAL, false);
 
         layoutManager.setInitialPrefetchItemCount(routine.getHabitArrayList().size());

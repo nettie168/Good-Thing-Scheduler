@@ -56,6 +56,10 @@ public class CalendarActivity extends AppCompatActivity {
             CalendarUtils.selectedDate = LocalDate.now();
          }
 
+        if(CategoriesUtil.filteredCategories.isEmpty()){
+            CategoriesUtil.filteredCategories.add("All Good Things (To Do)");
+        }
+
         ///ConstraintLayout calendarLayout = findViewById(R.id.calendarLayout);
 
      /*   calendarLayout.setOnTouchListener(new OnSwipeTouchListener(CalendarActivity.this){

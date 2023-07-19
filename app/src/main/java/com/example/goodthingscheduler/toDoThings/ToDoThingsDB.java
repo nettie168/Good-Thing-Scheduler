@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.goodthingscheduler.Calendar.CalendarUtils;
+import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -241,6 +242,50 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
             return storeAllThingsInAllState;
     }
 
+    public ArrayList<ToDoThingModel> listToDoInDayCatFilter(LocalDate date) {
+        String sql = "select * from "+ TABLE_NAME;
+
+        //creates a database for reading our database
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<ToDoThingModel> storeTasks = new ArrayList<>();
+        Cursor cursor = db.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
+                String dateToStart = cursor.getString(8);
+                String dateToEnd = cursor.getString(9);
+                String goodThing = cursor.getString(2);
+                String category = cursor.getString(1);
+
+                if(dateToStart!=null && dateToEnd != null) {
+                    if (!dateToStart.equals("date not set") && !dateToEnd.equals("date not set")) {
+                        if (date.isEqual(CalendarUtils.toLocalDate(dateToStart)) || date.isAfter(CalendarUtils.toLocalDate(dateToStart))) {
+                            if (date.isEqual(CalendarUtils.toLocalDate(dateToEnd)) || date.isBefore(CalendarUtils.toLocalDate(dateToEnd))) {
+                                if(CategoriesUtil.filteredCategories.contains(category) | CategoriesUtil.categorySelected.equals("All Good Things (To Do)")){
+                                    int id = Integer.parseInt(cursor.getString(0));
+                                    //String goodThing = cursor.getString(2);
+                                    String inspiredBy = cursor.getString(3);
+                                    int logoId = Integer.parseInt(cursor.getString(4));
+                                    String colour = cursor.getString(5);
+                                    String state = cursor.getString(6);
+                                    String dateAdded = cursor.getString(7);
+                                    String datesDone = cursor.getString(10);
+                                    storeTasks.add(new ToDoThingModel(id, category, goodThing, inspiredBy, logoId, colour, state, dateAdded, dateToStart, dateToEnd, datesDone));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            while (cursor.moveToNext());
+        }
+        cursor.close();
+       /* for(int i =0; i<storeTasks.size();i++){
+            String thing = storeTasks.get(i).getGoodThing();
+            String dateStart = storeTasks.get(i).getDateToStart();
+        }*/
+        return storeTasks;
+    }
+
     public ArrayList<ToDoThingModel> listToDoInDay(LocalDate date) {
         String sql = "select * from "+ TABLE_NAME;
 
@@ -253,21 +298,21 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
                 String dateToStart = cursor.getString(8);
                 String dateToEnd = cursor.getString(9);
                 String goodThing = cursor.getString(2);
+                String category = cursor.getString(1);
 
                 if(dateToStart!=null && dateToEnd != null) {
                     if (!dateToStart.equals("date not set") && !dateToEnd.equals("date not set")) {
                         if (date.isEqual(CalendarUtils.toLocalDate(dateToStart)) || date.isAfter(CalendarUtils.toLocalDate(dateToStart))) {
                             if (date.isEqual(CalendarUtils.toLocalDate(dateToEnd)) || date.isBefore(CalendarUtils.toLocalDate(dateToEnd))) {
-                                int id = Integer.parseInt(cursor.getString(0));
-                                String category = cursor.getString(1);
-                                //String goodThing = cursor.getString(2);
-                                String inspiredBy = cursor.getString(3);
-                                int logoId = Integer.parseInt(cursor.getString(4));
-                                String colour = cursor.getString(5);
-                                String state = cursor.getString(6);
-                                String dateAdded = cursor.getString(7);
-                                String datesDone = cursor.getString(10);
-                                storeTasks.add(new ToDoThingModel(id, category, goodThing, inspiredBy, logoId, colour, state, dateAdded, dateToStart, dateToEnd, datesDone));
+                                    int id = Integer.parseInt(cursor.getString(0));
+                                    //String goodThing = cursor.getString(2);
+                                    String inspiredBy = cursor.getString(3);
+                                    int logoId = Integer.parseInt(cursor.getString(4));
+                                    String colour = cursor.getString(5);
+                                    String state = cursor.getString(6);
+                                    String dateAdded = cursor.getString(7);
+                                    String datesDone = cursor.getString(10);
+                                    storeTasks.add(new ToDoThingModel(id, category, goodThing, inspiredBy, logoId, colour, state, dateAdded, dateToStart, dateToEnd, datesDone));
                             }
                         }
                     }

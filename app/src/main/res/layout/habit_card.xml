@@ -61,7 +61,6 @@
             android:text="Habit Example 3 Elephants Wide"
             android:gravity="center"
             android:layout_margin="5dp"
-            android:textColor="@color/design_default_color_secondary"
             android:textSize="14sp"/>
 
 

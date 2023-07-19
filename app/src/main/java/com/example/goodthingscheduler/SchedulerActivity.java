@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
 import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -183,6 +184,7 @@ public class SchedulerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+      //  ThemeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_main);
 
         //set Action Bar, turns colour to skyblue/#70ccfd, removes title and elevation
@@ -366,9 +368,13 @@ public class SchedulerActivity extends AppCompatActivity {
 
         ArrayList<ToDoThingModel> daysTodos = toDoThingsDB.listToDoInDay(CalendarUtils.selectedDate);
 
+        int mNoOfColumns = CategoriesUtil.calculateNoOfColumns(getApplicationContext(),400);
+
         ToDoThingAdapter toDoThingAdapter = new ToDoThingAdapter(daysTodos, this);
         daysGoalsRecyclerView.setAdapter(toDoThingAdapter);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+
+        //LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, mNoOfColumns);
         daysGoalsRecyclerView.setLayoutManager(layoutManager);
 
     }

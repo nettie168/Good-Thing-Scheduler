@@ -1,5 +1,6 @@
 package com.example.goodthingscheduler;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
@@ -8,7 +9,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import java.util.Objects;
 
@@ -16,6 +16,9 @@ public class SceneLocationActivity extends AppCompatActivity {
 
     Boolean playing;
     MediaPlayer frogsMP;
+    MediaPlayer oceanMP;
+    MediaPlayer forestMP;
+    MediaPlayer motivateMP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,21 @@ public class SceneLocationActivity extends AppCompatActivity {
         findViewById(R.id.snowMountainsSelBtn).setOnClickListener(this::onSceneThemeChangeClick);
 
         //sceneBackground = findViewById(R.id.sceneBackground);
+
+/*        int currentNightMode = Configuration.UI_MODE_NIGHT_MASK;
+
+    //    int currentNightMode = getContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        switch (currentNightMode) {
+            case Configuration.UI_MODE_NIGHT_NO:
+                // Night mode is not active on device
+                findViewById(R.id.goodThingTextView).setBackgroundColor(Color.WHITE);
+                break;
+            case Configuration.UI_MODE_NIGHT_YES:
+                // Night mode is active on device
+                findViewById(R.id.goodThingTextView).setBackgroundColor(Color.BLACK);
+                break;
+        }*/
+
         setSoundScapeMusic();
     }
 
@@ -67,21 +85,40 @@ public class SceneLocationActivity extends AppCompatActivity {
         frogsMP = MediaPlayer.create(this, R.raw.nikitralalafrogsandbirds);
         playing = false;
 
-        playFrogsBtn.setOnClickListener(view -> {
-            if(playing){
-                frogsMP.stop();
-                frogsMP = MediaPlayer.create(this, R.raw.nikitralalafrogsandbirds);
-                //frogsMP.release();
-                playing = false;
-                playFrogsBtn.setBackgroundResource(R.drawable.baseline_play_arrow_24);
-            }else{
-                // play!
-                frogsMP.start();
-                playing = true;
-                //playFrogsBtn.setBackgroundTint(Color.parseColor("#70ccfd"));
-                playFrogsBtn.setBackgroundResource(R.drawable.baseline_stop_24); //view.gone
-            }
-        });
+        ImageButton playOceanBtn = findViewById(R.id.playOceanBtn);
+        oceanMP = MediaPlayer.create(this, R.raw.calmoceanwaves);
+
+        ImageButton motivateBtn = findViewById(R.id.playMotivateBtn);
+        motivateMP = MediaPlayer.create(this, R.raw.buddy);
+
+        ImageButton playForestBtn = findViewById(R.id.playForestBtn);
+        forestMP = MediaPlayer.create(this, R.raw.mixkit_spring_forest_with_woodpeckers_1217);
+
+        playFrogsBtn.setOnClickListener(view -> setMediaPlayer(frogsMP, playFrogsBtn));
+        playOceanBtn.setOnClickListener(view -> setMediaPlayer(oceanMP, playOceanBtn));
+        playForestBtn.setOnClickListener(view -> setMediaPlayer(forestMP, playForestBtn));
+        motivateBtn.setOnClickListener(view -> setMediaPlayer(motivateMP, motivateBtn));
+
     }
+
+    private void setMediaPlayer(MediaPlayer mediaPlayer, ImageButton imageButton) {
+      //  Boolean isPlaying = false;
+        if (playing) {
+            //stop sound playing
+            mediaPlayer.pause();
+            playing = false;
+            imageButton.setBackgroundResource(R.drawable.baseline_play_arrow_24);
+        } else {
+            // play! (and loop)
+            mediaPlayer.start();
+            mediaPlayer.setLooping(true);
+            playing = true;
+            imageButton.setBackgroundResource(R.drawable.baseline_stop_24);
+        }
+    }
+
+
+
+
 
 }

@@ -33,4 +33,18 @@
     <string name="music">music</string>
     <string name="scene_location">scene location</string>
     <string name="beautiful_natural_scene">beautiful natural scene</string>
+    <string name="frogs_and_birds">Frogs and Birds</string>
+    <string name="where_would_you_like_to_go">Where would you like to go?</string>
+    <string name="grassy_mountains">grassy mountains</string>
+    <string name="under_the_sea">under the sea</string>
+    <string name="snowy_mountains">snowy mountains</string>
+    <string name="safari">safari</string>
+    <string name="start_routine">Start Routine</string>
+    <string name="start_time">Start Time:</string>
+    <string name="which_habits_would_you_like_for_this_routine">Which habits would you like for this routine?</string>
+    <string name="_9am">9am</string>
+    <string name="cancel">Cancel</string>
+    <string name="date_not_set">date not set</string>
+    <string name="date_to_end">Date To End:</string>
+    <string name="save">save</string>
 </resources>

@@ -68,7 +68,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
                 holder.dayImageView.setVisibility(View.GONE);
 
         toDoThingsDB = new ToDoThingsDB(context.getApplicationContext());
-        ArrayList<ToDoThingModel> toDoInDay = toDoThingsDB.listToDoInDay(date);
+        ArrayList<ToDoThingModel> toDoInDay = toDoThingsDB.listToDoInDayCatFilter(date); //toDoThingsDB.listToDoInDay(date);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(holder.eventsInDayRV.getContext(), LinearLayoutManager.VERTICAL,false);
         layoutManager.setInitialPrefetchItemCount(toDoInDay.size());

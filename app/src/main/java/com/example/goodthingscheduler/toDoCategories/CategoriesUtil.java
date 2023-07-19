@@ -15,6 +15,8 @@ public class CategoriesUtil {
     public static int goodThingId;
     public static ArrayList<GoodCategoryModel> categoryList = new ArrayList<>();
 
+    public static ArrayList<String> filteredCategories = new ArrayList<>();
+
     public static int calculateNoOfColumns(Context context, float columnWidthDp) { // For example columnWidthdp=180
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         float screenWidthDp = displayMetrics.widthPixels / displayMetrics.density;

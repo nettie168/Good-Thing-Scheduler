@@ -56,9 +56,9 @@ public class XPGoalActivity extends AppCompatActivity {
         //orders the list of xp by date
         Comparator<XPCountModel> comparator = new CalendarUtils.XPDateComparator();
         XPThisMonth.sort(comparator);
-        for(int i = 0; i < XPThisMonth.size(); i++){
-            Log.i("LineChart XPThisMonth",XPThisMonth.get(i).getDate()+" XP: "+XPThisMonth.get(i).getXp());
-        }
+      //  for(int i = 0; i < XPThisMonth.size(); i++){
+        //    Log.i("LineChart XPThisMonth",XPThisMonth.get(i).getDate()+" XP: "+XPThisMonth.get(i).getXp());
+       // }
 
         //list of dates in this month
         ArrayList<LocalDate> daysInXPMonthArray = CalendarUtils.daysInXPMonthArray(LocalDate.now());
@@ -101,21 +101,21 @@ public class XPGoalActivity extends AppCompatActivity {
         int j = 0;
         for (int i = 0; i < LocalDate.now().getDayOfMonth()+1; i++){
             //while(j < XPThisMonth.size()){
-                Log.i("XP top", "j = "+j +" i is "+i);
+               // Log.i("XP top", "j = "+j +" i is "+i);
                 int xpDate;
                 if(!XPThisMonth.isEmpty()){ //is this needed? (also check if i==0 or i-1 is needed)
                     xpDate = CalendarUtils.toLocalDate(XPThisMonth.get(j).getDate()).getDayOfMonth();
                 }else{
                     xpDate = -10;
                 }
-                Log.i("XP top, xp is","date: "+XPThisMonth.get(j).getDate()+" XP: "+XPThisMonth.get(j).getXp());
+              //  Log.i("XP top, xp is","date: "+XPThisMonth.get(j).getDate()+" XP: "+XPThisMonth.get(j).getXp());
                 if(i-1==xpDate-1){
                     if(i==0){
                         xpDataArrayList.add(XPThisMonth.get(j));
                         xpData2.add(XPThisMonth.get(j).getXp());
                         j = j+1;
-                        Log.i("XP i==xpDate, i==0", "j = "+j +" i is"+i);
-                        Log.i("XP i==xpDate, i==0","date: "+XPThisMonth.get(j).getDate()+" XP: "+XPThisMonth.get(j).getXp());
+                       // Log.i("XP i==xpDate, i==0", "j = "+j +" i is"+i);
+                       // Log.i("XP i==xpDate, i==0","date: "+XPThisMonth.get(j).getDate()+" XP: "+XPThisMonth.get(j).getXp());
                     }else{
                         int lastTotalXP = xpDataArrayList.get(i-1).getXp();
                         int newTotalXP = lastTotalXP + XPThisMonth.get(j).getXp();
@@ -123,7 +123,7 @@ public class XPGoalActivity extends AppCompatActivity {
                         xpDataArrayList.add(new XPCountModel(i,XPThisMonth.get(j).getDate(),newTotalXP));
                         xpData2.add(newTotalXP);
                         j = j+1;
-                        Log.i("XP i==xpDate", "j = "+j +" i is "+i);
+                      //  Log.i("XP i==xpDate", "j = "+j +" i is "+i);
                       //  Log.i("XP i==XpDate","date: "+XPThisMonth.get(j).getDate()+" XP: "+XPThisMonth.get(j).getXp());
                         // Log.i("XP i==0", "j= "+j +" i is"+i);
                        // Log.i("XP i==0","date: "+XPThisMonth.get(j).getDate()+" XP: "+XPThisMonth.get(j).getXp());
@@ -132,22 +132,22 @@ public class XPGoalActivity extends AppCompatActivity {
                     if(i==0){
                         xpDataArrayList.add(new XPCountModel(i,XPThisMonth.get(j).getDate(),0));
                         xpData2.add(0);
-                        Log.i("XP i=/xpDate, i==0", "j = "+j +" i is "+i);
-                        Log.i("XP i=/XpDate, i==0","date: "+xpDataArrayList.get(j).getDate()+" XP: "+xpDataArrayList.get(j).getXp());
+                      //  Log.i("XP i=/xpDate, i==0", "j = "+j +" i is "+i);
+                        //Log.i("XP i=/XpDate, i==0","date: "+xpDataArrayList.get(j).getDate()+" XP: "+xpDataArrayList.get(j).getXp());
                     }else{
                         int lastTotalXP = xpDataArrayList.get(i-1).getXp();
                         xpDataArrayList.add(new XPCountModel(i,XPThisMonth.get(j).getDate(),lastTotalXP));
                         xpData2.add(lastTotalXP);
-                        Log.i("XP i=/xpDate", "j = "+j +" i is "+i);
-                        Log.i("XP i=/XpDate","date: "+xpDataArrayList.get(j).getDate()+" XP: "+xpDataArrayList.get(j).getXp());
+                      //  Log.i("XP i=/xpDate", "j = "+j +" i is "+i);
+                        //Log.i("XP i=/XpDate","date: "+xpDataArrayList.get(j).getDate()+" XP: "+xpDataArrayList.get(j).getXp());
                     }
               }
           //  }
         }
 
-        for(int i = 0; i < xpData2.size(); i++){
-            Log.i("LineChart XPData2", i+": "+ xpData2.get(i));
-        }
+   //     for(int i = 0; i < xpData2.size(); i++){
+     //       Log.i("LineChart XPData2", i+": "+ xpData2.get(i));
+       // }
 
 
         //find Line Chart View
@@ -168,8 +168,13 @@ public class XPGoalActivity extends AppCompatActivity {
         //Default Code
         //String[] axisData = {"1", "2", "3", "4", "5", "6", "7", "8", "9","10", "11", "12", "13", "14"};
 
-        int[] yAxisData = {100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400,
-        1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000};
+     //   int[] yAxisData = {100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400,
+       // 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000};
+
+        int[] yAxisData = {50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700,
+                750, 800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350, 1400, 1450, 1500};
+
+
         //int[] yAxisData2 = {50, 100, 200, 250, 400, 400, 400, 700, 850, 900, 900, 1100, 1200, 1400};
       //  int[] yAxisData2 = {50, 100, 200, 250, 400};
        // Integer[] yAxisData2 = xpDayDBHandler.TotalXPInMonth(daysInXPMonthArray);

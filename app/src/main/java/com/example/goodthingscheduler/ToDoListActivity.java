@@ -2,6 +2,7 @@ package com.example.goodthingscheduler;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -146,8 +147,11 @@ public class ToDoListActivity extends AppCompatActivity {
             thingsInState = toDoThingsDB.listGoodThingsInStateInCatDB(CategoriesUtil.categorySelected, stateList);
         }
 
+        int mNoOfColumns = CategoriesUtil.calculateNoOfColumns(getApplicationContext(),400);
+
         ToDoStateAdapter goodThingsAdapter = new ToDoStateAdapter(thingsInState, this);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        //LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, mNoOfColumns);
         goodThingsRV.setLayoutManager(layoutManager);
         goodThingsRV.setAdapter(goodThingsAdapter);
     }

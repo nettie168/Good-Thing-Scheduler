@@ -7,11 +7,11 @@
         <item name="colorOnPrimary">@color/black</item>
         <item name="sceneBackgroundImage">@drawable/mountainscenerect</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondary">@color/night_sky</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
+      <!--  <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item> -->
         <!-- Customize your theme here. -->
     </style>
 

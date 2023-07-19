@@ -334,7 +334,9 @@ public class AddNewCategoryActivity extends AppCompatActivity {
         //if action was from categoryActivity also finish (recreate activity)
         for(int i = 0; i < CategoriesUtil.categoryList.size(); i ++){
             //Log.i("confirm categories","i is "+i+", id is "+CategoriesUtil.categoryList.get(i).getId()+" "+CategoriesUtil.categoryList.get(i).getCategoryName()+", img: "+CategoriesUtil.categoryList.get(i).getImgId()+", logo:  "+CategoriesUtil.categoryList.get(i).getLogoId());
-            goodCategoriesDB.addGoodCategory(new GoodCategoryModel(CategoriesUtil.categoryList.get(i).getId(), CategoriesUtil.categoryList.get(i).getCategoryName(), CategoriesUtil.categoryList.get(i).getImgId(), CategoriesUtil.categoryList.get(i).getLogoId()));
+            if(!goodCategoriesDB.listCatsDB().contains(CategoriesUtil.categoryList.get(i).getCategoryName())){
+                goodCategoriesDB.addGoodCategory(new GoodCategoryModel(CategoriesUtil.categoryList.get(i).getId(), CategoriesUtil.categoryList.get(i).getCategoryName(), CategoriesUtil.categoryList.get(i).getImgId(), CategoriesUtil.categoryList.get(i).getLogoId()));
+            }
             CategoriesUtil.categorySelected = CategoriesUtil.categoryList.get(i).getCategoryName();
         }
         finish();
