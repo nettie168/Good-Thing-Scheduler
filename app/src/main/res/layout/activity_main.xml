@@ -113,7 +113,7 @@
         app:layout_constraintBottom_toBottomOf="@id/dragonPic"
         app:layout_constraintStart_toStartOf="@id/dragonPic"
         android:layout_margin="5dp"
-        android:src="@drawable/baseline_location_on_24"
+        android:src="@drawable/ic_baseline_spa_24"
         android:alpha="0.6" />
 
     <Button
@@ -226,6 +226,27 @@
                 android:layout_margin="3dp"
                 />
 
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/noToDoCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="1dp"
+                    app:cardCornerRadius="0dp"
+                    android:layout_margin="2dp"
+                    app:cardBackgroundColor="@color/grassGreen">
+
+                    <TextView
+                        android:id="@+id/noToDoTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginVertical="15dp"
+                        android:text="No Goals or To-Dos"
+                        android:textSize="16sp"/>
+
+                </androidx.cardview.widget.CardView>
+
+
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -252,7 +273,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="4dp"
-            android:text="@string/events_and_routines"
+            android:text="Routines"
             android:textSize="16sp"
             android:textAllCaps="false"
             android:padding="6dp"

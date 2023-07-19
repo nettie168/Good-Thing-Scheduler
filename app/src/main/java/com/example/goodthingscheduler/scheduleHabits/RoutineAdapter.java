@@ -50,119 +50,107 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHold
         //}
         RoutineModel routine = routineList.get(position);
         routineListDBHandler = new RoutineListDBHandler(context);
-
         dailyHabitsDBHandler = new DailyHabitsDBHandler(context);
-        ArrayList<HabitModel> dailyHabitsDBArray = dailyHabitsDBHandler.listHabits(routine.getRoutine());
 
-     //   holder.routineCard.setCardBackgroundColor(Color.parseColor("#085c0f"));
-       // holder.startTimeTV.setTextColor(Color.WHITE);
-        //holder.routineText.setTextColor(Color.WHITE);
-        //holder.routineTally.setTextColor(Color.WHITE);
-
-
-        holder.startTimeTV.setText(LocalTime.of(routine.getStartHour(),routine.getStartMinute()).toString());
-        holder.routineText.setText(routine.getRoutine());
-
-        int habitsComplete = 0;
-        for(int i =0; i < routine.getHabitArrayList().size(); i++){
-            int habitStatus = dailyHabitsDBArray.get(i).getStatus();
-            if(habitStatus > 0){
-                habitsComplete += 1;
-            }
-        }
-
-        String routineTallyString = habitsComplete+"/"+routine.getHabitArrayList().size();
-        holder.routineTally.setText(routineTallyString);
-
-
-        //Log.i("All params for "+routine.getRoutine(),routine.getId()+" "+routine.getStartHour()+" "+routine.getStartMinute()+" "+routine.getEndHour()+" "+routine.getEndMinute()+" "+routine.getDaysOfWeek()+" "+routine.getOpenClosed());
-
-        if(routine.getOpenClosed()==1){
-            holder.habitRecyclerView.setVisibility(View.VISIBLE);
-         //   Log.i("if 1 openCl ", String.valueOf(routine.getOpenClosed()));
-        }else{
+        if(routine.getRoutine().equals("No Routines")){
+            holder.routineText.setText(routine.getRoutine());
+            holder.startTimeTV.setVisibility(View.GONE);
+            holder.moreBtn.setVisibility(View.GONE);
+            holder.routineTally.setVisibility(View.INVISIBLE);
+            holder.hideShowBtn.setVisibility(View.INVISIBLE);
             holder.habitRecyclerView.setVisibility(View.GONE);
-         //   Log.i("if 0 openCl ", String.valueOf(routine.getOpenClosed()));
+
+        }else {
+
+            ArrayList<HabitModel> dailyHabitsDBArray = dailyHabitsDBHandler.listHabits(routine.getRoutine());
+
+            //   holder.routineCard.setCardBackgroundColor(Color.parseColor("#085c0f"));
+            // holder.startTimeTV.setTextColor(Color.WHITE);
+            //holder.routineText.setTextColor(Color.WHITE);
+            //holder.routineTally.setTextColor(Color.WHITE);
+
+            holder.startTimeTV.setText(LocalTime.of(routine.getStartHour(), routine.getStartMinute()).toString());
+            holder.routineText.setText(routine.getRoutine());
+
+            int habitsComplete = 0;
+            if (!routine.getHabitArrayList().isEmpty() ) {
+                for (int i = 0; i < routine.getHabitArrayList().size(); i++) {
+                    int habitStatus = dailyHabitsDBArray.get(i).getStatus();
+                    if (habitStatus > 0) {
+                        habitsComplete += 1;
+                    }
+                }
+            }
+
+
+            String routineTallyString = habitsComplete + "/" + routine.getHabitArrayList().size();
+            holder.routineTally.setText(routineTallyString);
+
+            if (routine.getOpenClosed() == 1) {
+                holder.habitRecyclerView.setVisibility(View.VISIBLE);
+            } else {
+                holder.habitRecyclerView.setVisibility(View.GONE);
+            }
+
+            holder.routineText.setOnClickListener(view -> {
+                if (routine.getOpenClosed() == 1) {
+                    holder.habitRecyclerView.setVisibility(View.GONE);
+                    holder.hideShowBtn.setImageResource(android.R.drawable.arrow_down_float);
+                    routine.setOpenClosed(0);
+                    routineListDBHandler.updateOpenClosed(new RoutineModel(routine.getId(), 0));
+                } else {
+                    holder.habitRecyclerView.setVisibility(View.VISIBLE);
+                    holder.hideShowBtn.setImageResource(android.R.drawable.arrow_up_float);
+                    routine.setOpenClosed(1);
+                    routineListDBHandler.updateOpenClosed(new RoutineModel(routine.getId(), 1));
+                }
+            });
+
+            holder.hideShowBtn.setOnClickListener(view -> {
+                if (routine.getOpenClosed() == 1) {
+                    holder.habitRecyclerView.setVisibility(View.GONE);
+                    holder.hideShowBtn.setImageResource(android.R.drawable.arrow_down_float);
+                    routine.setOpenClosed(0);
+                    //Log.i("adapter routine is", "id is "+String.valueOf(routine.getId())+" opencl is"+routine.getOpenClosed());
+                    routineListDBHandler.updateOpenClosed(new RoutineModel(routine.getId(), 0));
+                    //  isShowing=false;
+                } else {
+                    holder.habitRecyclerView.setVisibility(View.VISIBLE);
+                    holder.hideShowBtn.setImageResource(android.R.drawable.arrow_up_float);
+                    routine.setOpenClosed(1);
+                    routineListDBHandler.updateOpenClosed(new RoutineModel(routine.getId(), 1));
+                    //Log.i("adapter routine is", "id is "+String.valueOf(routine.getId()));
+                    //  isShowing=true;
+                }
+            });
+
+
+            int mNoOfColumns = CategoriesUtil.calculateNoOfColumns(context, 120); //140
+
+            GridLayoutManager layoutManager = new GridLayoutManager(holder.habitRecyclerView.getContext(), mNoOfColumns); //4
+            //    LinearLayoutManager layoutManager = new LinearLayoutManager(holder.habitRecyclerView.getContext(), RecyclerView.VERTICAL, false);
+
+            layoutManager.setInitialPrefetchItemCount(routine.getHabitArrayList().size());
+            HabitAdapter habitAdapter = new HabitAdapter(routine.getHabitArrayList(), dailyHabitsDBArray, context.getApplicationContext());
+            holder.habitRecyclerView.setLayoutManager(layoutManager);
+            holder.habitRecyclerView.setAdapter(habitAdapter);
+
+            holder.moreBtn.setOnClickListener(view -> {
+                RoutineUtils.routineSel = routine.getRoutine();
+                RoutineUtils.routineHabitList = routine.getHabitArrayList();
+                RoutineUtils.routineSelStartHour = routine.getStartHour();
+                RoutineUtils.routineSelStartMinute = routine.getStartMinute();
+                RoutineUtils.routineSelId = routine.getId();
+
+                ArrayList<String> splitDaysString = new ArrayList<>(Arrays.asList(routine.getDaysOfWeek().split(",")));
+                //Log.i("split Days",splitDaysString.toString());
+                RoutineUtils.daysOfWeekSelected = splitDaysString;
+                //   for(int i = 0; i < RoutineUtils.daysOfWeekSelected.size(); i++){
+                //    Log.i("routine adapter, day of week","i: "+i+","+RoutineUtils.daysOfWeekSelected.get(i));
+                // }
+                context.startActivity(new Intent(context, AddHabitsActivity.class));
+            });
         }
-        //isShowing=true;
-
-     /*   holder.routineText.setOnClickListener(view -> {
-            if(routine.getOpenClosed()==1){
-                holder.habitRecyclerView.setVisibility(View.GONE);
-                holder.hideShowBtn.setImageResource(android.R.drawable.arrow_down_float);
-                routineListDBHandler.updateOpenClosed(new RoutineModel(routine.getId(),0));
-                Toast.makeText(context, "openClosed is "+routine.getOpenClosed(), Toast.LENGTH_SHORT).show();
-                //isShowing=false;
-            }else{
-                holder.habitRecyclerView.setVisibility(View.VISIBLE);
-                holder.hideShowBtn.setImageResource(android.R.drawable.arrow_up_float);
-                routineListDBHandler.updateOpenClosed(new RoutineModel(routine.getId(),1));
-                //isShowing=true;
-            }
-        });*/
-
-        holder.routineText.setOnClickListener(view -> {
-            if(routine.getOpenClosed()==1){
-                holder.habitRecyclerView.setVisibility(View.GONE);
-                holder.hideShowBtn.setImageResource(android.R.drawable.arrow_down_float);
-                routine.setOpenClosed(0);
-                //Log.i("adapter routine is", "id is "+String.valueOf(routine.getId())+" opencl is"+routine.getOpenClosed());
-                routineListDBHandler.updateOpenClosed(new RoutineModel(routine.getId(),0));
-              //  isShowing=false;
-            }else{
-                holder.habitRecyclerView.setVisibility(View.VISIBLE);
-                holder.hideShowBtn.setImageResource(android.R.drawable.arrow_up_float);
-                routine.setOpenClosed(1);
-                routineListDBHandler.updateOpenClosed(new RoutineModel(routine.getId(),1));
-                //Log.i("adapter routine is", "id is "+String.valueOf(routine.getId()));
-              //  isShowing=true;
-            }
-        });
-
-        holder.hideShowBtn.setOnClickListener(view -> {
-            if(routine.getOpenClosed()==1){
-                holder.habitRecyclerView.setVisibility(View.GONE);
-                holder.hideShowBtn.setImageResource(android.R.drawable.arrow_down_float);
-                routine.setOpenClosed(0);
-                //Log.i("adapter routine is", "id is "+String.valueOf(routine.getId())+" opencl is"+routine.getOpenClosed());
-                routineListDBHandler.updateOpenClosed(new RoutineModel(routine.getId(),0));
-                //  isShowing=false;
-            }else{
-                holder.habitRecyclerView.setVisibility(View.VISIBLE);
-                holder.hideShowBtn.setImageResource(android.R.drawable.arrow_up_float);
-                routine.setOpenClosed(1);
-                routineListDBHandler.updateOpenClosed(new RoutineModel(routine.getId(),1));
-                //Log.i("adapter routine is", "id is "+String.valueOf(routine.getId()));
-                //  isShowing=true;
-            }
-        });
-
-
-        int mNoOfColumns = CategoriesUtil.calculateNoOfColumns(context,140);
-
-        GridLayoutManager layoutManager = new GridLayoutManager(holder.habitRecyclerView.getContext(),mNoOfColumns); //4
-    //    LinearLayoutManager layoutManager = new LinearLayoutManager(holder.habitRecyclerView.getContext(), RecyclerView.VERTICAL, false);
-
-        layoutManager.setInitialPrefetchItemCount(routine.getHabitArrayList().size());
-        HabitAdapter habitAdapter = new HabitAdapter(routine.getHabitArrayList(), dailyHabitsDBArray, context.getApplicationContext());
-        holder.habitRecyclerView.setLayoutManager(layoutManager);
-        holder.habitRecyclerView.setAdapter(habitAdapter);
-
-        holder.moreBtn.setOnClickListener(view -> {
-            RoutineUtils.routineSel = routine.getRoutine();
-            RoutineUtils.routineHabitList = routine.getHabitArrayList();
-            RoutineUtils.routineSelStartHour = routine.getStartHour();
-            RoutineUtils.routineSelStartMinute = routine.getStartMinute();
-            RoutineUtils.routineSelId = routine.getId();
-
-            ArrayList<String> splitDaysString = new ArrayList<>(Arrays.asList(routine.getDaysOfWeek().split(",")));
-            //Log.i("split Days",splitDaysString.toString());
-            RoutineUtils.daysOfWeekSelected = splitDaysString;
-         //   for(int i = 0; i < RoutineUtils.daysOfWeekSelected.size(); i++){
-            //    Log.i("routine adapter, day of week","i: "+i+","+RoutineUtils.daysOfWeekSelected.get(i));
-           // }
-            context.startActivity(new Intent(context, AddHabitsActivity.class));
-        });
     }
 
     public int getItemCount(){

@@ -299,8 +299,10 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
                 String dateToEnd = cursor.getString(9);
                 String goodThing = cursor.getString(2);
                 String category = cursor.getString(1);
+                String state = cursor.getString(6);
 
-                if(dateToStart!=null && dateToEnd != null) {
+
+                if(dateToStart!=null && dateToEnd != null &! state.equals("Happy it exists")) {
                     if (!dateToStart.equals("date not set") && !dateToEnd.equals("date not set")) {
                         if (date.isEqual(CalendarUtils.toLocalDate(dateToStart)) || date.isAfter(CalendarUtils.toLocalDate(dateToStart))) {
                             if (date.isEqual(CalendarUtils.toLocalDate(dateToEnd)) || date.isBefore(CalendarUtils.toLocalDate(dateToEnd))) {
@@ -309,7 +311,6 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
                                     String inspiredBy = cursor.getString(3);
                                     int logoId = Integer.parseInt(cursor.getString(4));
                                     String colour = cursor.getString(5);
-                                    String state = cursor.getString(6);
                                     String dateAdded = cursor.getString(7);
                                     String datesDone = cursor.getString(10);
                                     storeTasks.add(new ToDoThingModel(id, category, goodThing, inspiredBy, logoId, colour, state, dateAdded, dateToStart, dateToEnd, datesDone));

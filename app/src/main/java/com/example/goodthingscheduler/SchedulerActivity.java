@@ -2,6 +2,7 @@ package com.example.goodthingscheduler;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.view.MenuItemCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -24,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.goodthingscheduler.XPCount.XPCountModel;
 import com.example.goodthingscheduler.XPCount.XPDayDBHandler;
@@ -49,6 +51,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -358,6 +361,8 @@ public class SchedulerActivity extends AppCompatActivity {
 
     private void setDaysGoalsRecyclerView(){
         RecyclerView daysGoalsRecyclerView = findViewById(R.id.daysGoalsRV);
+        TextView noToDoTV = findViewById(R.id.noToDoTV);
+        CardView noToDoCard = findViewById(R.id.noToDoCard);
 
         //Add one-off to do to DB including 1. download my app 2. Add 1 routine 3. Add 1 challenge
         if(toDoThingsDB.isEmpty()){
@@ -368,14 +373,29 @@ public class SchedulerActivity extends AppCompatActivity {
 
         ArrayList<ToDoThingModel> daysTodos = toDoThingsDB.listToDoInDay(CalendarUtils.selectedDate);
 
-        int mNoOfColumns = CategoriesUtil.calculateNoOfColumns(getApplicationContext(),400);
+        if(daysTodos.isEmpty()){
+           /* ArrayList<ToDoThingModel> emptyList = new ArrayList<>();
+            ToDoThingModel toDoThingModel = new ToDoThingModel(0,"No Cat","No To-Dos Today","Happy it exists","date");
+            emptyList.add(toDoThingModel);
+
+            ToDoThingAdapter toDoThingAdapter = new ToDoThingAdapter(emptyList, this);
+            daysGoalsRecyclerView.setAdapter(toDoThingAdapter);*/
+            noToDoTV.setVisibility(View.VISIBLE);
+            noToDoCard.setVisibility(View.VISIBLE);
+        }else{
+            noToDoTV.setVisibility(View.GONE);
+            noToDoCard.setVisibility(View.GONE);
+        }
 
         ToDoThingAdapter toDoThingAdapter = new ToDoThingAdapter(daysTodos, this);
         daysGoalsRecyclerView.setAdapter(toDoThingAdapter);
 
+        int mNoOfColumns = CategoriesUtil.calculateNoOfColumns(getApplicationContext(),400);
+
         //LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         GridLayoutManager layoutManager = new GridLayoutManager(this, mNoOfColumns);
         daysGoalsRecyclerView.setLayoutManager(layoutManager);
+
 
     }
 
@@ -405,9 +425,17 @@ public class SchedulerActivity extends AppCompatActivity {
                     }
                 }
             }
+            RoutineAdapter routineAdapter = new RoutineAdapter(habitListDBHandler.listHabitsInRoutinesInDay(routinesInDay), this);
+            routineRecyclerView.setAdapter(routineAdapter);
+        }else{
+            ArrayList<RoutineModel> emptyList = new ArrayList<>();
+            ArrayList<HabitModel> emptyHabitList = new ArrayList<>();
+            RoutineModel routineModel = new RoutineModel("No Routines", emptyHabitList);
+            emptyList.add(routineModel);
+
+            RoutineAdapter routineAdapter = new RoutineAdapter(emptyList, this);
+            routineRecyclerView.setAdapter(routineAdapter);
         }
-        RoutineAdapter routineAdapter = new RoutineAdapter(habitListDBHandler.listHabitsInRoutinesInDay(routinesInDay), this);
-        routineRecyclerView.setAdapter(routineAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         routineRecyclerView.setLayoutManager(layoutManager);
     }
