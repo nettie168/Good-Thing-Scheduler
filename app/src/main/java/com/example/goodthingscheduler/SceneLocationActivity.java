@@ -3,13 +3,19 @@ package com.example.goodthingscheduler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
 
 public class SceneLocationActivity extends AppCompatActivity {
@@ -31,9 +37,10 @@ public class SceneLocationActivity extends AppCompatActivity {
         //setCustomizedThemes(this,getThemeColor(this));
         //themeUtils.onActivityCreateSetTheme(this);
 
-        findViewById(R.id.mountainSelBtn).setOnClickListener(this::onSceneThemeChangeClick);
+        /*findViewById(R.id.mountainSelBtn).setOnClickListener(this::onSceneThemeChangeClick);
         findViewById(R.id.underwaterSelBtn).setOnClickListener(this::onSceneThemeChangeClick);
         findViewById(R.id.snowMountainsSelBtn).setOnClickListener(this::onSceneThemeChangeClick);
+        */
 
         //sceneBackground = findViewById(R.id.sceneBackground);
 
@@ -52,9 +59,15 @@ public class SceneLocationActivity extends AppCompatActivity {
         }*/
 
         setSoundScapeMusic();
+        setReflections();
     }
 
-    public void onSceneThemeChangeClick(View v){
+    /*public void onSceneThemeChangeClick(View v){
+        findViewById(R.id.mountainSelBtn).setOnClickListener(this::onSceneThemeChangeClick);
+        findViewById(R.id.underwaterSelBtn).setOnClickListener(this::onSceneThemeChangeClick);
+        findViewById(R.id.snowMountainsSelBtn).setOnClickListener(this::onSceneThemeChangeClick);
+
+
         switch (v.getId()){
             case R.id.mountainSelBtn:
                 ThemeUtils.changeToTheme(this, ThemeUtils.THEME_MOUNTAIN_GREEN);
@@ -78,6 +91,20 @@ public class SceneLocationActivity extends AppCompatActivity {
             //    sceneBackground.setImageResource(R.drawable.mountain_water_scene_sky);
                 break;
         }
+    }*/
+
+    private void setReflections(){
+        Button reflectionBtn = findViewById(R.id.reflectionBtn);
+        reflectionBtn.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), ReflectionActivity.class)));
+
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("com.example.notes", Context.MODE_PRIVATE);
+        HashSet<String> set = (HashSet<String>) sharedPreferences.getStringSet("notes", null);
+
+       /* if (set == null) {
+            notes.add("Example note");
+        } else {
+            notes = new ArrayList(set);
+        }*/
     }
 
     private void setSoundScapeMusic() {

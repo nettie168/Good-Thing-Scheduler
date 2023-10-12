@@ -39,7 +39,7 @@ public class RoutineModel {
     }
 
     public RoutineModel(int id, String routine, int startHour, int startMinute, int endHour, int endMinute, String daysOfWeek, int openClosed) {
-        this.id=id;
+        this.id = id;
         this.routine = routine;
         this.startHour = startHour;
         this.startMinute = startMinute;

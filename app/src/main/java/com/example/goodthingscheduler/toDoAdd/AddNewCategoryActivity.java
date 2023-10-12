@@ -125,6 +125,8 @@ public class AddNewCategoryActivity extends AppCompatActivity {
         homeList.add(new GoodCategoryModel(0,"Healthy Finances", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
         homeList.add(new GoodCategoryModel(0,"Food shopping", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
         homeList.add(new GoodCategoryModel(0,"Self-Care", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
+        homeList.add(new GoodCategoryModel(0,"Important but not Urgent", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
+
 
         ArrayList<GoodCategoryModel> workList = new ArrayList<>();
         workList.add(new GoodCategoryModel(0,"Goals", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
@@ -212,6 +214,8 @@ public class AddNewCategoryActivity extends AppCompatActivity {
         sportsList.add(new GoodCategoryModel(2, "Sports","Outdoor/Wild Swimming", R.drawable.swimmingwide160dpi, R.drawable.ic_baseline_water_24));
         sportsList.add(new GoodCategoryModel(2, "Running", R.drawable.naturewide160dpi, R.drawable.ic_baseline_directions_run_24));
         sportsList.add(new GoodCategoryModel(2, "Rowing", R.drawable.naturewide160dpi, R.drawable.ic_baseline_rowing_24));
+        sportsList.add(new GoodCategoryModel(2, "Roller-Skating", R.drawable.naturewide160dpi, R.drawable.ic_baseline_ice_skating_24));
+
 
         //Ball Sports
         sportsList.add(new GoodCategoryModel(2, "Tennis", R.drawable.naturewide160dpi, R.drawable.ic_baseline_sports_tennis_24));

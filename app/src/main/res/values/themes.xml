@@ -17,6 +17,7 @@
     <!--    <item name="android:statusBarColor" tools:targetApi="l">#b8baf3</item> -->
 
         <!-- Customize your theme here. -->
+
     </style>
 
     <attr name="sceneBackgroundImage" format="reference"/>

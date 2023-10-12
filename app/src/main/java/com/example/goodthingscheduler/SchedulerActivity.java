@@ -72,16 +72,21 @@ public class SchedulerActivity extends AppCompatActivity {
     // 2. Get static Utils for day XP, and update on recreate
     // 3. a) Put in more correct icons b) tidy up "rooms" c) have onboarding with choose character d) have side menu to change character (or click on "world")
 
+    //init UI views & booleans
     private AnimationDrawable jumpingAnimation;
     Button dateView;
     Boolean isAllFabsVisible;
     Boolean isWaving;
 
     public Button xpCountBtn;
-    //public static int xpCount;
+
+
 
     static ArrayList<String> notes = new ArrayList<>();
     static ArrayAdapter arrayAdapter;
+
+
+    //init Databases
 
     public RoutineListDBHandler routineListDBHandler;
     public HabitListDBHandler habitListDBHandler;
@@ -92,19 +97,19 @@ public class SchedulerActivity extends AppCompatActivity {
 
     @Override
     public void onRestart() {
-        //When BACK BUTTON is pressed, the activity on the stack is restarted
-        //Do what you want on the refresh procedure here
+        //When BACK BUTTON is pressed (or a new sub-activity finishes),
+        // the activity on the stack is restarted
+        //the refresh procedure is here
         super.onRestart();
         //re-set today's XP to XP of day in DB
         XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
 
         //re-set XP menu button to today's XP
         xpCountBtn.setText(String.valueOf(XPUtils.dayXP.getXp()));
-        Log.i("Schedule Activity on Restart","Xp is "+XPUtils.dayXP.getXp());
+        //Log.i("Schedule Activity on Restart","Xp is "+XPUtils.dayXP.getXp());
 
-        //refresh goals/to-dos
+        //refresh goals/to-dos, routines&habits
         setDaysGoalsRecyclerView();
-        //refresh routines&habits
         setRoutineRecyclerView();
         //re-set Categories and Calendar
         setCategoryUtils();
@@ -179,9 +184,9 @@ public class SchedulerActivity extends AppCompatActivity {
         setXPUtils();
     }*/
 
-    public void invalidateOptionsMenu() {
+   // public void invalidateOptionsMenu() {
 
-    }
+    //}
 
 
     @Override
@@ -196,19 +201,19 @@ public class SchedulerActivity extends AppCompatActivity {
         Objects.requireNonNull(bar).setElevation(0);
         bar.setTitle("");
 
-        //init DBS
-        //init XP DB
+        //set Databases (DBs)
+        goodCategoriesDB = new GoodCategoriesDB(this);
         xpDayDBHandler = new XPDayDBHandler(this);
         habitListDBHandler = new HabitListDBHandler(this);
         dailyHabitsDBHandler = new DailyHabitsDBHandler(this);
         routineListDBHandler = new RoutineListDBHandler(this);
         toDoThingsDB = new ToDoThingsDB(this);
 
-        //set Values
+        //set Calendar Values (eg. the day and category selected)
         setCalendarUtils();
         setCategoryUtils();
 
-        //setViews
+        //set UI Views
         setDateSelector();
         setCharacter();
         setDaysGoalsRecyclerView();
@@ -220,14 +225,13 @@ public class SchedulerActivity extends AppCompatActivity {
         setFabButtons();
 
         //work-in-progress
-        setReflections();
+        //setReflections();
 
         ImageButton sceneLocaterBtn = findViewById(R.id.locateBtn);
         sceneLocaterBtn.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), SceneLocationActivity.class)));
     }
 
     private void setCategoryUtils(){
-        goodCategoriesDB = new GoodCategoriesDB(this);
 
         //if no categories in DB, adds one
         if(goodCategoriesDB.listAllGoodCatsDB().isEmpty()){
@@ -264,7 +268,8 @@ public class SchedulerActivity extends AppCompatActivity {
     //        XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
       //  }
 
-        //if there's no DB entry for that date
+        //if there's no DB entry for selected date
+        //sets XP for selected date
         if(XPUtils.dayXP.getDate().equals("no xp for date")){
             //add new XP day with that date, xp=0;
             xpDayDBHandler.addDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(),0));
@@ -284,6 +289,7 @@ public class SchedulerActivity extends AppCompatActivity {
     }
 
     private void setCharacter(){
+        //sets waving dragon character
         ImageView jumpImage = findViewById(R.id.dragonChar);
         jumpImage.setImageResource(R.drawable.wave_item);
         jumpingAnimation = (AnimationDrawable) jumpImage.getDrawable();
@@ -396,7 +402,6 @@ public class SchedulerActivity extends AppCompatActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this, mNoOfColumns);
         daysGoalsRecyclerView.setLayoutManager(layoutManager);
 
-
     }
 
     private void setRoutineRecyclerView(){
@@ -411,12 +416,11 @@ public class SchedulerActivity extends AppCompatActivity {
 
         if(!routinesInDay.isEmpty()) { //and date is within 2 weeks of now (else - do "look back" - for later)
             for(int i = 0; i < routinesInDay.size(); i++) {
-                //Log.i("schedule Act", "i is: " + i + ", routines in day size:" + routinesInDay.size());
-                //if (dailyHabitsDBHandler.listHabits(routinesInDay.get(i).getRoutine()).isEmpty()) {
                 String routine = routinesInDay.get(i).getRoutine();
                 ArrayList<RoutineModel> list = new ArrayList<>();
                 list.add(new RoutineModel(routine));
-                //if dailyHabitsList and habitsList for a routine are not the same size, then check if habits match, add missing habits
+                //if dailyHabitsList and habitsList for a routine are not the same size,
+                // then check if habits match, add missing habits
                   if(dailyHabitsDBHandler.listHabits(routine).size()!=habitListDBHandler.listHabitsInRoutinesInDay(list).get(0).getHabitArrayList().size()){
                     ArrayList<HabitModel> habitsArray = habitListDBHandler.listHabitsInRoutinesInDay(routinesInDay).get(i).getHabitArrayList();
                     for (int j = 0; j < habitsArray.size(); j++) {
@@ -559,12 +563,12 @@ public class SchedulerActivity extends AppCompatActivity {
                 case R.id.calendar:
                     finish();
                     startActivity(new Intent(getApplicationContext(),CalendarActivity.class));
-                    overridePendingTransition(0,0);
+                    //overridePendingTransition(0,0);
                     return true;
                 case R.id.goodThings:
                     finish();
                     startActivity(new Intent(getApplicationContext(),ToDoListActivity.class));
-                    overridePendingTransition(0,0);
+                    //overridePendingTransition(0,0);
                     return true;
                 case R.id.schedule:
                     return true;
