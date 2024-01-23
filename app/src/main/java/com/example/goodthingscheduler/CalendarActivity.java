@@ -23,26 +23,10 @@ import java.util.Objects;
 
 public class CalendarActivity extends AppCompatActivity {
 
-//    XPDayDBHandler xpDayDBHandler = new XPDayDBHandler(this);
- /*   @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-
-        MenuItem item = menu.findItem(R.id.xp_item);
-        MenuItemCompat.setActionView(item, R.layout.xp_action_bar_button);
-        SchedulerActivity.xpCountBtn = (Button)MenuItemCompat.getActionView(item);
-
-        SchedulerActivity.xpCount = xpDayDBHandler.DayXP().get(0).getXp();
-        SchedulerActivity.xpCountBtn.setText(String.valueOf(SchedulerActivity.xpCount));
-
-        return super.onCreateOptionsMenu(menu);
-    }*/
-
     @Override
     public void onRestart() {
         super.onRestart();
         setViews();//When BACK BUTTON is pressed, the activity on the stack is restarted
-        //Do what you want on the refresh procedure here
     }
 
     @Override
@@ -80,17 +64,9 @@ public class CalendarActivity extends AppCompatActivity {
         setBottomNavMenu();
         previousMonthAction();
         nextMonthAction();
-        //setXPCount(0);
     }
 
- //   @Override
-  //  public boolean onCreateOptionsMenu(Menu menu ) {
-//
-  //      getMenuInflater().inflate(R.menu.main, menu);
-    //    return super.onCreateOptionsMenu(menu);
-   // }
 
-   // @SuppressLint("ClickableViewAccessibility")
     private void setViews() {
         RecyclerView calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
         TextView monthYearText = findViewById(R.id.monthYearTV);

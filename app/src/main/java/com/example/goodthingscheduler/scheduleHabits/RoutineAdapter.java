@@ -125,7 +125,7 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHold
             });
 
 
-            int mNoOfColumns = CategoriesUtil.calculateNoOfColumns(context, 120); //140
+            int mNoOfColumns = CategoriesUtil.calculateNoOfColumns(context, 100); //120 //140
 
             GridLayoutManager layoutManager = new GridLayoutManager(holder.habitRecyclerView.getContext(), mNoOfColumns); //4
             //    LinearLayoutManager layoutManager = new LinearLayoutManager(holder.habitRecyclerView.getContext(), RecyclerView.VERTICAL, false);

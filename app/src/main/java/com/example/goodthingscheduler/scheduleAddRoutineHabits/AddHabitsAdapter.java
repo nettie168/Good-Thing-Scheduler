@@ -28,7 +28,7 @@ public class AddHabitsAdapter extends RecyclerView.Adapter<AddHabitsAdapter.View
 
     private final ArrayList<HabitModel> habitArrayList;
     private final Context context;
-    private HabitDBHandler habitDBHandler;
+    private final HabitDBHandler habitDBHandler;
     private HabitListDBHandler habitListDBHandler;
 
     public AddHabitsAdapter(ArrayList<HabitModel> habitArrayList, Context context) {

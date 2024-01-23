@@ -96,192 +96,192 @@ public class AddNewCategoryActivity extends AppCompatActivity {
         //Aim to try out all bases (do one thing for a month from each, have a free/or very cheap idea for each), get points & badges, for depth(doing same thing consistently) & some breadth
         ArrayList<GoodCategoryModel> categoryList = new ArrayList<>();
         //Most Popular
-        categoryList.add(new GoodCategoryModel(0, "Books", R.drawable.bookswide160dpi, R.drawable.ic_baseline_auto_stories_24));
-        categoryList.add(new GoodCategoryModel(1, "Films and tv", R.drawable.bookswide160dpi, R.drawable.ic_baseline_local_movies_24));
-        categoryList.add(new GoodCategoryModel(2, "Gardening and House Plants", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        categoryList.add(new GoodCategoryModel(2, "Photography", R.drawable.naturewide160dpi, R.drawable.ic_baseline_add_a_photo_24));
-        //categoryList.add(new GoodCategoryModel(2, "Tasty food", R.drawable.naturewide160dpi, R.drawable.ic_baseline_ramen_dining_24));
-        categoryList.add(new GoodCategoryModel(2, "Healthy Mealtime", R.drawable.naturewide160dpi, R.drawable.ic_baseline_ramen_dining_24));
-        categoryList.add(new GoodCategoryModel(3, "Baking", R.drawable.naturewide160dpi, R.drawable.ic_baseline_bakery_dining_24));
-        categoryList.add(new GoodCategoryModel(2, "Drawing", R.drawable.bookswide160dpi, R.drawable.ic_baseline_draw_24));
-       // categoryList.add(new GoodCategoryModel(2, "Time in nature", R.drawable.naturewide160dpi, R.drawable.ic_baseline_emoji_nature_24));
-      //  categoryList.add(new GoodCategoryModel(2, "Animals", R.drawable.naturewide160dpi, R.drawable.ic_baseline_pets_24));
-      //  categoryList.add(new GoodCategoryModel(2, "Quotes", R.drawable.bookswide160dpi, R.drawable.ic_baseline_format_quote_24));
-       // categoryList.add(new GoodCategoryModel(2, "Fitness", R.drawable.bookswide160dpi, R.drawable.ic_baseline_format_quote_24));
+        categoryList.add(new GoodCategoryModel(0, "Books", R.drawable.snowy_mountain, R.drawable.ic_baseline_auto_stories_24));
+        categoryList.add(new GoodCategoryModel(1, "Films and tv", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_movies_24));
+        categoryList.add(new GoodCategoryModel(2, "Gardening and House Plants", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        categoryList.add(new GoodCategoryModel(2, "Photography", R.drawable.snowy_mountain, R.drawable.ic_baseline_add_a_photo_24));
+        //categoryList.add(new GoodCategoryModel(2, "Tasty food", R.drawable.snowy_mountain, R.drawable.ic_baseline_ramen_dining_24));
+        categoryList.add(new GoodCategoryModel(2, "Healthy Mealtime", R.drawable.snowy_mountain, R.drawable.ic_baseline_ramen_dining_24));
+        categoryList.add(new GoodCategoryModel(3, "Baking", R.drawable.snowy_mountain, R.drawable.ic_baseline_bakery_dining_24));
+        categoryList.add(new GoodCategoryModel(2, "Drawing", R.drawable.snowy_mountain, R.drawable.ic_baseline_draw_24));
+       // categoryList.add(new GoodCategoryModel(2, "Time in nature", R.drawable.snowy_mountain, R.drawable.ic_baseline_emoji_nature_24));
+      //  categoryList.add(new GoodCategoryModel(2, "Animals", R.drawable.snowy_mountain, R.drawable.ic_baseline_pets_24));
+      //  categoryList.add(new GoodCategoryModel(2, "Quotes", R.drawable.snowy_mountain, R.drawable.ic_baseline_format_quote_24));
+       // categoryList.add(new GoodCategoryModel(2, "Fitness", R.drawable.snowy_mountain, R.drawable.ic_baseline_format_quote_24));
 
-        categoryList.add(new GoodCategoryModel(2, "Language learning", R.drawable.bookswide160dpi, R.drawable.ic_baseline_language_24));
-        categoryList.add(new GoodCategoryModel(2, "Practice Music", R.drawable.bookswide160dpi, R.drawable.ic_baseline_music_note_24));
-        categoryList.add(new GoodCategoryModel(2, "Listen to Music", R.drawable.bookswide160dpi, R.drawable.ic_baseline_music_note_24));
-        categoryList.add(new GoodCategoryModel(2, "Visit New Places", R.drawable.naturewide160dpi, R.drawable.ic_baseline_attractions_24));
-        categoryList.add(new GoodCategoryModel(2, "Painting", R.drawable.bookswide160dpi, R.drawable.ic_baseline_brush_24));
-        categoryList.add(new GoodCategoryModel(2, "Arts & Crafts", R.drawable.bookswide160dpi, R.drawable.ic_baseline_brush_24));
+        categoryList.add(new GoodCategoryModel(2, "Language learning", R.drawable.snowy_mountain, R.drawable.ic_baseline_language_24));
+        categoryList.add(new GoodCategoryModel(2, "Practice Music", R.drawable.snowy_mountain, R.drawable.ic_baseline_music_note_24));
+        categoryList.add(new GoodCategoryModel(2, "Listen to Music", R.drawable.snowy_mountain, R.drawable.ic_baseline_music_note_24));
+        categoryList.add(new GoodCategoryModel(2, "Visit New Places", R.drawable.snowy_mountain, R.drawable.ic_baseline_attractions_24));
+        categoryList.add(new GoodCategoryModel(2, "Painting", R.drawable.snowy_mountain, R.drawable.ic_baseline_brush_24));
+        categoryList.add(new GoodCategoryModel(2, "Arts & Crafts", R.drawable.snowy_mountain, R.drawable.ic_baseline_brush_24));
 
 
         ArrayList<GoodCategoryModel> homeList = new ArrayList<>();
-        homeList.add(new GoodCategoryModel(0,"Tidy Spaces", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        homeList.add(new GoodCategoryModel(0,"Tidy Kitchen", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        homeList.add(new GoodCategoryModel(0,"Clean Bathroom", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        homeList.add(new GoodCategoryModel(0,"Laundry", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        homeList.add(new GoodCategoryModel(0,"Healthy Finances", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        homeList.add(new GoodCategoryModel(0,"Food shopping", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        homeList.add(new GoodCategoryModel(0,"Self-Care", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        homeList.add(new GoodCategoryModel(0,"Important but not Urgent", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
+        homeList.add(new GoodCategoryModel(0,"Tidy Spaces", R.drawable.snowy_mountain,R.drawable.ic_baseline_wb_sunny_24));
+        homeList.add(new GoodCategoryModel(0,"Tidy Kitchen", R.drawable.snowy_mountain,R.drawable.ic_baseline_wb_sunny_24));
+        homeList.add(new GoodCategoryModel(0,"Clean Bathroom", R.drawable.snowy_mountain,R.drawable.ic_baseline_wb_sunny_24));
+        homeList.add(new GoodCategoryModel(0,"Laundry", R.drawable.snowy_mountain,R.drawable.ic_baseline_wb_sunny_24));
+        homeList.add(new GoodCategoryModel(0,"Healthy Finances", R.drawable.snowy_mountain,R.drawable.ic_baseline_wb_sunny_24));
+        homeList.add(new GoodCategoryModel(0,"Food shopping", R.drawable.snowy_mountain,R.drawable.ic_baseline_wb_sunny_24));
+        homeList.add(new GoodCategoryModel(0,"Self-Care", R.drawable.snowy_mountain,R.drawable.ic_baseline_wb_sunny_24));
+        homeList.add(new GoodCategoryModel(0,"Important but not Urgent", R.drawable.snowy_mountain,R.drawable.ic_baseline_wb_sunny_24));
 
 
         ArrayList<GoodCategoryModel> workList = new ArrayList<>();
-        workList.add(new GoodCategoryModel(0,"Goals", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        workList.add(new GoodCategoryModel(0,"Meetings", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        workList.add(new GoodCategoryModel(0,"Work Life Balance", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
-        workList.add(new GoodCategoryModel(0,"Finances", R.drawable.bookswide160dpi,R.drawable.ic_baseline_wb_sunny_24));
+        workList.add(new GoodCategoryModel(0,"Goals", R.drawable.snowy_mountain,R.drawable.ic_baseline_wb_sunny_24));
+        workList.add(new GoodCategoryModel(0,"Meetings", R.drawable.snowy_mountain,R.drawable.ic_baseline_wb_sunny_24));
+        workList.add(new GoodCategoryModel(0,"Work Life Balance", R.drawable.snowy_mountain,R.drawable.ic_baseline_wb_sunny_24));
+        workList.add(new GoodCategoryModel(0,"Finances", R.drawable.snowy_mountain,R.drawable.ic_baseline_wb_sunny_24));
 
 
         //Games & Puzzles (Brain Training)
         ArrayList<GoodCategoryModel> GamesList = new ArrayList<>();
 
-        GamesList.add(new GoodCategoryModel(2, "Games", "Board Games", R.drawable.bookswide160dpi, R.drawable.ic_baseline_extension_24));
-        GamesList.add(new GoodCategoryModel(2, "Games", "Card Games", R.drawable.bookswide160dpi, R.drawable.ic_baseline_extension_24));
-        GamesList.add(new GoodCategoryModel(2, "Games","Video Games", R.drawable.bookswide160dpi, R.drawable.ic_baseline_sports_esports_24));
-        GamesList.add(new GoodCategoryModel(2, "Games","Chess", R.drawable.bookswide160dpi, R.drawable.ic_baseline_extension_24));
-        GamesList.add(new GoodCategoryModel(2, "Games","Puzzles (sudoku, crossword, wordle, jigsaw)", R.drawable.bookswide160dpi, R.drawable.ic_baseline_extension_24));
-        GamesList.add(new GoodCategoryModel(2, "Games","Jigsaw Puzzles", R.drawable.bookswide160dpi, R.drawable.ic_baseline_extension_24));
+        GamesList.add(new GoodCategoryModel(2, "Games", "Board Games", R.drawable.snowy_mountain, R.drawable.ic_baseline_extension_24));
+        GamesList.add(new GoodCategoryModel(2, "Games", "Card Games", R.drawable.snowy_mountain, R.drawable.ic_baseline_extension_24));
+        GamesList.add(new GoodCategoryModel(2, "Games","Video Games", R.drawable.snowy_mountain, R.drawable.ic_baseline_sports_esports_24));
+        GamesList.add(new GoodCategoryModel(2, "Games","Chess", R.drawable.snowy_mountain, R.drawable.ic_baseline_extension_24));
+        GamesList.add(new GoodCategoryModel(2, "Games","Puzzles (sudoku, crossword, wordle, jigsaw)", R.drawable.snowy_mountain, R.drawable.ic_baseline_extension_24));
+        GamesList.add(new GoodCategoryModel(2, "Games","Jigsaw Puzzles", R.drawable.snowy_mountain, R.drawable.ic_baseline_extension_24));
 
         ////Fitness
         //Dance
         ArrayList<GoodCategoryModel> DanceList = new ArrayList<>();
 
-        //categoryList.add(new GoodCategoryModel(2, "Dancing Dances", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        DanceList.add(new GoodCategoryModel(2, "Dances","Ballet", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        DanceList.add(new GoodCategoryModel(2, "Dances","Street", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        DanceList.add(new GoodCategoryModel(2, "Dances","Contemporary", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        DanceList.add(new GoodCategoryModel(2, "Dances", "Ballroom Dancing", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        DanceList.add(new GoodCategoryModel(2, "Dances","Salsa", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        DanceList.add(new GoodCategoryModel(2, "Break Dancing", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        DanceList.add(new GoodCategoryModel(2, "Hip Hop", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        DanceList.add(new GoodCategoryModel(2, "Jazz", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        DanceList.add(new GoodCategoryModel(2, "Tap", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        DanceList.add(new GoodCategoryModel(2, "Swing", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        DanceList.add(new GoodCategoryModel(2, "Modern", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        DanceList.add(new GoodCategoryModel(2, "Tik Tok Dancing", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
+        //categoryList.add(new GoodCategoryModel(2, "Dancing Dances", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        DanceList.add(new GoodCategoryModel(2, "Dances","Ballet", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        DanceList.add(new GoodCategoryModel(2, "Dances","Street", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        DanceList.add(new GoodCategoryModel(2, "Dances","Contemporary", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        DanceList.add(new GoodCategoryModel(2, "Dances", "Ballroom Dancing", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        DanceList.add(new GoodCategoryModel(2, "Dances","Salsa", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        DanceList.add(new GoodCategoryModel(2, "Break Dancing", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        DanceList.add(new GoodCategoryModel(2, "Hip Hop", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        DanceList.add(new GoodCategoryModel(2, "Jazz", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        DanceList.add(new GoodCategoryModel(2, "Tap", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        DanceList.add(new GoodCategoryModel(2, "Swing", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        DanceList.add(new GoodCategoryModel(2, "Modern", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        DanceList.add(new GoodCategoryModel(2, "Tik Tok Dancing", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
 
         //Folk Dance
-        DanceList.add(new GoodCategoryModel(2, "Raqs Sharki/Belly Dancing", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        DanceList.add(new GoodCategoryModel(2, "Kathak (Bollywood dancing)", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        DanceList.add(new GoodCategoryModel(2, "Irish", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        DanceList.add(new GoodCategoryModel(2, "Folk (Akademi?)", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        DanceList.add(new GoodCategoryModel(2, "Ceilidh", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        DanceList.add(new GoodCategoryModel(2, "Bhangra", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        DanceList.add(new GoodCategoryModel(2, "Flamenco", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        DanceList.add(new GoodCategoryModel(2, "Morris Dancing", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
+        DanceList.add(new GoodCategoryModel(2, "Raqs Sharki/Belly Dancing", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        DanceList.add(new GoodCategoryModel(2, "Kathak (Bollywood dancing)", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        DanceList.add(new GoodCategoryModel(2, "Irish", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        DanceList.add(new GoodCategoryModel(2, "Folk (Akademi?)", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        DanceList.add(new GoodCategoryModel(2, "Ceilidh", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        DanceList.add(new GoodCategoryModel(2, "Bhangra", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        DanceList.add(new GoodCategoryModel(2, "Flamenco", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        DanceList.add(new GoodCategoryModel(2, "Morris Dancing", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
 
         //Creations (To Do)
         ArrayList<GoodCategoryModel> CreationsList = new ArrayList<>();
-        CreationsList.add(new GoodCategoryModel(2, "Web development", R.drawable.bookswide160dpi, R.drawable.ic_baseline_code_24));
-        CreationsList.add(new GoodCategoryModel(2, "App development", R.drawable.bookswide160dpi, R.drawable.ic_baseline_code_24));
-        CreationsList.add(new GoodCategoryModel(2, "D&D", R.drawable.bookswide160dpi, R.drawable.baseline_adb_24));
-        CreationsList.add(new GoodCategoryModel(2, "Music", R.drawable.bookswide160dpi, R.drawable.ic_baseline_music_note_24));
-        CreationsList.add(new GoodCategoryModel(2, "Drawings", R.drawable.bookswide160dpi, R.drawable.ic_baseline_draw_24));
-        CreationsList.add(new GoodCategoryModel(2, "Paintings", R.drawable.bookswide160dpi, R.drawable.ic_baseline_brush_24));
-        CreationsList.add(new GoodCategoryModel(2, "Photography", R.drawable.naturewide160dpi, R.drawable.ic_baseline_add_a_photo_24));
-        CreationsList.add(new GoodCategoryModel(2, "Film Making", R.drawable.bookswide160dpi, R.drawable.ic_baseline_add_a_photo_24));
-        CreationsList.add(new GoodCategoryModel(2, "Dress Making", R.drawable.bookswide160dpi, R.drawable.ic_baseline_add_a_photo_24));
-        CreationsList.add(new GoodCategoryModel(2, "Knitting & Crochet", R.drawable.bookswide160dpi, R.drawable.ic_baseline_add_a_photo_24));
-        CreationsList.add(new GoodCategoryModel(2, "Cosplaying", R.drawable.bookswide160dpi, R.drawable.ic_baseline_add_a_photo_24));
+        CreationsList.add(new GoodCategoryModel(2, "Web development", R.drawable.snowy_mountain, R.drawable.ic_baseline_code_24));
+        CreationsList.add(new GoodCategoryModel(2, "App development", R.drawable.snowy_mountain, R.drawable.ic_baseline_code_24));
+        CreationsList.add(new GoodCategoryModel(2, "D&D", R.drawable.snowy_mountain, R.drawable.baseline_adb_24));
+        CreationsList.add(new GoodCategoryModel(2, "Music", R.drawable.snowy_mountain, R.drawable.ic_baseline_music_note_24));
+        CreationsList.add(new GoodCategoryModel(2, "Drawings", R.drawable.snowy_mountain, R.drawable.ic_baseline_draw_24));
+        CreationsList.add(new GoodCategoryModel(2, "Paintings", R.drawable.snowy_mountain, R.drawable.ic_baseline_brush_24));
+        CreationsList.add(new GoodCategoryModel(2, "Photography", R.drawable.snowy_mountain, R.drawable.ic_baseline_add_a_photo_24));
+        CreationsList.add(new GoodCategoryModel(2, "Film Making", R.drawable.snowy_mountain, R.drawable.ic_baseline_add_a_photo_24));
+        CreationsList.add(new GoodCategoryModel(2, "Dress Making", R.drawable.snowy_mountain, R.drawable.ic_baseline_add_a_photo_24));
+        CreationsList.add(new GoodCategoryModel(2, "Knitting & Crochet", R.drawable.snowy_mountain, R.drawable.ic_baseline_add_a_photo_24));
+        CreationsList.add(new GoodCategoryModel(2, "Cosplaying", R.drawable.snowy_mountain, R.drawable.ic_baseline_add_a_photo_24));
 
 
         //Music & Acting (To See)
         ArrayList<GoodCategoryModel> ArtsList = new ArrayList<>();
-        ArtsList.add(new GoodCategoryModel(2, "Theatre", R.drawable.bookswide160dpi, R.drawable.ic_baseline_theater_comedy_24));
-        ArtsList.add(new GoodCategoryModel(2, "Drag Acts", R.drawable.bookswide160dpi, R.drawable.ic_baseline_theater_comedy_24));
-        ArtsList.add(new GoodCategoryModel(2, "Comedy", R.drawable.bookswide160dpi, R.drawable.ic_baseline_theater_comedy_24));
+        ArtsList.add(new GoodCategoryModel(2, "Theatre", R.drawable.snowy_mountain, R.drawable.ic_baseline_theater_comedy_24));
+        ArtsList.add(new GoodCategoryModel(2, "Drag Acts", R.drawable.snowy_mountain, R.drawable.ic_baseline_theater_comedy_24));
+        ArtsList.add(new GoodCategoryModel(2, "Comedy", R.drawable.snowy_mountain, R.drawable.ic_baseline_theater_comedy_24));
 
         //Express Yourself
-        ArtsList.add(new GoodCategoryModel(2, "Create Theatre", R.drawable.bookswide160dpi, R.drawable.ic_baseline_theater_comedy_24));
-        ArtsList.add(new GoodCategoryModel(2, "Create Drag Acts", R.drawable.bookswide160dpi, R.drawable.ic_baseline_theater_comedy_24));
-        ArtsList.add(new GoodCategoryModel(2, "Create Comedy", R.drawable.bookswide160dpi, R.drawable.ic_baseline_theater_comedy_24));
-     //   ArtsList.add(new GoodCategoryModel(2, "Perform Musicals", R.drawable.bookswide160dpi, R.drawable.ic_baseline_theater_comedy_24));
-      //  ArtsList.add(new GoodCategoryModel(2, "Brain Dump", R.drawable.bookswide160dpi, R.drawable.ic_baseline_theater_comedy_24));
-      //  ArtsList.add(new GoodCategoryModel(2, "Expressive Painting", R.drawable.bookswide160dpi, R.drawable.ic_baseline_theater_comedy_24));
-      //  ArtsList.add(new GoodCategoryModel(2, "Expressive Storytelling", R.drawable.bookswide160dpi, R.drawable.ic_baseline_theater_comedy_24));
-      //  ArtsList.add(new GoodCategoryModel(2, "Expressive Drawings", R.drawable.bookswide160dpi, R.drawable.ic_baseline_theater_comedy_24));
+        ArtsList.add(new GoodCategoryModel(2, "Create Theatre", R.drawable.snowy_mountain, R.drawable.ic_baseline_theater_comedy_24));
+        ArtsList.add(new GoodCategoryModel(2, "Create Drag Acts", R.drawable.snowy_mountain, R.drawable.ic_baseline_theater_comedy_24));
+        ArtsList.add(new GoodCategoryModel(2, "Create Comedy", R.drawable.snowy_mountain, R.drawable.ic_baseline_theater_comedy_24));
+     //   ArtsList.add(new GoodCategoryModel(2, "Perform Musicals", R.drawable.snowy_mountain, R.drawable.ic_baseline_theater_comedy_24));
+      //  ArtsList.add(new GoodCategoryModel(2, "Brain Dump", R.drawable.snowy_mountain, R.drawable.ic_baseline_theater_comedy_24));
+      //  ArtsList.add(new GoodCategoryModel(2, "Expressive Painting", R.drawable.snowy_mountain, R.drawable.ic_baseline_theater_comedy_24));
+      //  ArtsList.add(new GoodCategoryModel(2, "Expressive Storytelling", R.drawable.snowy_mountain, R.drawable.ic_baseline_theater_comedy_24));
+      //  ArtsList.add(new GoodCategoryModel(2, "Expressive Drawings", R.drawable.snowy_mountain, R.drawable.ic_baseline_theater_comedy_24));
 
 
         //Sports
         ArrayList<GoodCategoryModel> sportsList = new ArrayList<>();
-        sportsList.add(new GoodCategoryModel(2, "Sports","Climbing", R.drawable.climbingwide160dpi, R.drawable.ic_baseline_local_florist_24));
-        sportsList.add(new GoodCategoryModel(2, "Sports","Cycling", R.drawable.naturewide160dpi, R.drawable.ic_baseline_pedal_bike_24));
-        sportsList.add(new GoodCategoryModel(2, "Sports","Mountain Biking", R.drawable.naturewide160dpi, R.drawable.ic_baseline_pedal_bike_24)); //2 wheel & 4 wheel
-        sportsList.add(new GoodCategoryModel(2, "Sports","Swimming", R.drawable.swimmingwide160dpi, R.drawable.ic_baseline_water_24));
-        sportsList.add(new GoodCategoryModel(2, "Sports","Outdoor/Wild Swimming", R.drawable.swimmingwide160dpi, R.drawable.ic_baseline_water_24));
-        sportsList.add(new GoodCategoryModel(2, "Running", R.drawable.naturewide160dpi, R.drawable.ic_baseline_directions_run_24));
-        sportsList.add(new GoodCategoryModel(2, "Rowing", R.drawable.naturewide160dpi, R.drawable.ic_baseline_rowing_24));
-        sportsList.add(new GoodCategoryModel(2, "Roller-Skating", R.drawable.naturewide160dpi, R.drawable.ic_baseline_ice_skating_24));
+        sportsList.add(new GoodCategoryModel(2, "Sports","Climbing", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        sportsList.add(new GoodCategoryModel(2, "Sports","Cycling", R.drawable.snowy_mountain, R.drawable.ic_baseline_pedal_bike_24));
+        sportsList.add(new GoodCategoryModel(2, "Sports","Mountain Biking", R.drawable.snowy_mountain, R.drawable.ic_baseline_pedal_bike_24)); //2 wheel & 4 wheel
+        sportsList.add(new GoodCategoryModel(2, "Sports","Swimming", R.drawable.snowy_mountain, R.drawable.ic_baseline_water_24));
+        sportsList.add(new GoodCategoryModel(2, "Sports","Outdoor/Wild Swimming", R.drawable.snowy_mountain, R.drawable.ic_baseline_water_24));
+        sportsList.add(new GoodCategoryModel(2, "Running", R.drawable.snowy_mountain, R.drawable.ic_baseline_directions_run_24));
+        sportsList.add(new GoodCategoryModel(2, "Rowing", R.drawable.snowy_mountain, R.drawable.ic_baseline_rowing_24));
+        sportsList.add(new GoodCategoryModel(2, "Roller-Skating", R.drawable.snowy_mountain, R.drawable.ic_baseline_ice_skating_24));
 
 
         //Ball Sports
-        sportsList.add(new GoodCategoryModel(2, "Tennis", R.drawable.naturewide160dpi, R.drawable.ic_baseline_sports_tennis_24));
-        sportsList.add(new GoodCategoryModel(2, "Basketball", R.drawable.naturewide160dpi, R.drawable.ic_baseline_sports_basketball_24)); //wheelchair & non
-        sportsList.add(new GoodCategoryModel(2, "Rugby", R.drawable.naturewide160dpi, R.drawable.ic_baseline_sports_rugby_24)); //wheelchair and non
-        sportsList.add(new GoodCategoryModel(2, "Football", R.drawable.naturewide160dpi, R.drawable.ic_baseline_sports_soccer_24));
-        sportsList.add(new GoodCategoryModel(2, "Badminton", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        sportsList.add(new GoodCategoryModel(2, "Table Tennis", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        sportsList.add(new GoodCategoryModel(2, "Hockey", R.drawable.naturewide160dpi, R.drawable.ic_baseline_sports_hockey_24));
+        sportsList.add(new GoodCategoryModel(2, "Tennis", R.drawable.snowy_mountain, R.drawable.ic_baseline_sports_tennis_24));
+        sportsList.add(new GoodCategoryModel(2, "Basketball", R.drawable.snowy_mountain, R.drawable.ic_baseline_sports_basketball_24)); //wheelchair & non
+        sportsList.add(new GoodCategoryModel(2, "Rugby", R.drawable.snowy_mountain, R.drawable.ic_baseline_sports_rugby_24)); //wheelchair and non
+        sportsList.add(new GoodCategoryModel(2, "Football", R.drawable.snowy_mountain, R.drawable.ic_baseline_sports_soccer_24));
+        sportsList.add(new GoodCategoryModel(2, "Badminton", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        sportsList.add(new GoodCategoryModel(2, "Table Tennis", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        sportsList.add(new GoodCategoryModel(2, "Hockey", R.drawable.snowy_mountain, R.drawable.ic_baseline_sports_hockey_24));
 
         //Martial Arts
-        sportsList.add(new GoodCategoryModel(2, "Martial Arts", R.drawable.naturewide160dpi, R.drawable.ic_baseline_sports_martial_arts_24));
+        sportsList.add(new GoodCategoryModel(2, "Martial Arts", R.drawable.snowy_mountain, R.drawable.ic_baseline_sports_martial_arts_24));
 
         //Snow Sports
-        sportsList.add(new GoodCategoryModel(2, "Skiing", R.drawable.skiingwide160dpi, R.drawable.ic_baseline_downhill_skiing_24));
-        sportsList.add(new GoodCategoryModel(2, "Ice-Skating", R.drawable.naturewide160dpi, R.drawable.ic_baseline_ice_skating_24));
-        sportsList.add(new GoodCategoryModel(2, "Snowboarding", R.drawable.skiingwide160dpi, R.drawable.ic_baseline_snowboarding_24));
+        sportsList.add(new GoodCategoryModel(2, "Skiing", R.drawable.snowy_mountain, R.drawable.ic_baseline_downhill_skiing_24));
+        sportsList.add(new GoodCategoryModel(2, "Ice-Skating", R.drawable.snowy_mountain, R.drawable.ic_baseline_ice_skating_24));
+        sportsList.add(new GoodCategoryModel(2, "Snowboarding", R.drawable.snowy_mountain, R.drawable.ic_baseline_snowboarding_24));
 
         //Water Sports
-        sportsList.add(new GoodCategoryModel(2, "Surfing", R.drawable.surfingwide160dpi, R.drawable.ic_baseline_surfing_24));
+        sportsList.add(new GoodCategoryModel(2, "Surfing", R.drawable.snowy_mountain, R.drawable.ic_baseline_surfing_24));
 
 
         ////Self-care & Well-being
         ArrayList<GoodCategoryModel> selfCareList = new ArrayList<>();
-        selfCareList.add(new GoodCategoryModel(2, "Reflections", R.drawable.naturewide160dpi, R.drawable.ic_baseline_self_improvement_24));
-        selfCareList.add(new GoodCategoryModel(2, "Meditations", R.drawable.yogawide160dpi, R.drawable.ic_baseline_self_improvement_24));
-        selfCareList.add(new GoodCategoryModel(2, "Yoga", R.drawable.yogawide160dpi, R.drawable.ic_baseline_self_improvement_24));
-        selfCareList.add(new GoodCategoryModel(2, "Time in nature", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        selfCareList.add(new GoodCategoryModel(2, "Finances", R.drawable.naturewide160dpi, R.drawable.ic_baseline_account_balance_24));
-        selfCareList.add(new GoodCategoryModel(2, "Healthy Meals", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        selfCareList.add(new GoodCategoryModel(2, "Happy Home", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
-        selfCareList.add(new GoodCategoryModel(2, "Walks and hikes", R.drawable.naturewide160dpi, R.drawable.ic_baseline_hiking_24));
+        selfCareList.add(new GoodCategoryModel(2, "Reflections", R.drawable.snowy_mountain, R.drawable.ic_baseline_self_improvement_24));
+        selfCareList.add(new GoodCategoryModel(2, "Meditations", R.drawable.snowy_mountain, R.drawable.ic_baseline_self_improvement_24));
+        selfCareList.add(new GoodCategoryModel(2, "Yoga", R.drawable.snowy_mountain, R.drawable.ic_baseline_self_improvement_24));
+        selfCareList.add(new GoodCategoryModel(2, "Time in nature", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        selfCareList.add(new GoodCategoryModel(2, "Finances", R.drawable.snowy_mountain, R.drawable.ic_baseline_account_balance_24));
+        selfCareList.add(new GoodCategoryModel(2, "Healthy Meals", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        selfCareList.add(new GoodCategoryModel(2, "Happy Home", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        selfCareList.add(new GoodCategoryModel(2, "Walks and hikes", R.drawable.snowy_mountain, R.drawable.ic_baseline_hiking_24));
 
         //Self-Development
-    /*    selfCareList.add(new GoodCategoryModel(2, "Practice Courage", R.drawable.naturewide160dpi, R.drawable.ic_baseline_hiking_24));
-        selfCareList.add(new GoodCategoryModel(2, "Practice Resilience", R.drawable.naturewide160dpi, R.drawable.ic_baseline_hiking_24));
-        selfCareList.add(new GoodCategoryModel(2, "Practice Maths", R.drawable.naturewide160dpi, R.drawable.ic_baseline_hiking_24));
-        selfCareList.add(new GoodCategoryModel(2, "Improve Reading",R.drawable.naturewide160dpi, R.drawable.ic_baseline_hiking_24));
+    /*    selfCareList.add(new GoodCategoryModel(2, "Practice Courage", R.drawable.snowy_mountain, R.drawable.ic_baseline_hiking_24));
+        selfCareList.add(new GoodCategoryModel(2, "Practice Resilience", R.drawable.snowy_mountain, R.drawable.ic_baseline_hiking_24));
+        selfCareList.add(new GoodCategoryModel(2, "Practice Maths", R.drawable.snowy_mountain, R.drawable.ic_baseline_hiking_24));
+        selfCareList.add(new GoodCategoryModel(2, "Improve Reading",R.drawable.snowy_mountain, R.drawable.ic_baseline_hiking_24));
 */
         //Community/Helping Others
         ArrayList<GoodCategoryModel> CommunityList = new ArrayList<>();
-        CommunityList.add(new GoodCategoryModel(2, "Time with Partner", R.drawable.swimmingwide160dpi, R.drawable.ic_baseline_volunteer_activism_24));
-        CommunityList.add(new GoodCategoryModel(2, "Time with Friends", R.drawable.swimmingwide160dpi, R.drawable.ic_baseline_volunteer_activism_24));
-        CommunityList.add(new GoodCategoryModel(2, "Time with Family", R.drawable.swimmingwide160dpi, R.drawable.ic_baseline_diversity_3_24));
-        CommunityList.add(new GoodCategoryModel(2, "Acts of Kindness", R.drawable.swimmingwide160dpi, R.drawable.ic_baseline_volunteer_activism_24));
-        CommunityList.add(new GoodCategoryModel(2, "Time with Loved Ones", R.drawable.swimmingwide160dpi, R.drawable.ic_baseline_volunteer_activism_24));
-        CommunityList.add(new GoodCategoryModel(2, "Time with Pets", R.drawable.swimmingwide160dpi, R.drawable.ic_baseline_volunteer_activism_24));
-        //CommunityList.add(new GoodCategoryModel(2, "Time with House Plants", R.drawable.swimmingwide160dpi, R.drawable.ic_baseline_volunteer_activism_24));
-        CommunityList.add(new GoodCategoryModel(2, "Volunteering", R.drawable.naturewide160dpi, R.drawable.ic_baseline_volunteer_activism_24));
+        CommunityList.add(new GoodCategoryModel(2, "Time with Partner", R.drawable.snowy_mountain, R.drawable.ic_baseline_volunteer_activism_24));
+        CommunityList.add(new GoodCategoryModel(2, "Time with Friends", R.drawable.snowy_mountain, R.drawable.ic_baseline_volunteer_activism_24));
+        CommunityList.add(new GoodCategoryModel(2, "Time with Family", R.drawable.snowy_mountain, R.drawable.ic_baseline_diversity_3_24));
+        CommunityList.add(new GoodCategoryModel(2, "Acts of Kindness", R.drawable.snowy_mountain, R.drawable.ic_baseline_volunteer_activism_24));
+        CommunityList.add(new GoodCategoryModel(2, "Time with Loved Ones", R.drawable.snowy_mountain, R.drawable.ic_baseline_volunteer_activism_24));
+        CommunityList.add(new GoodCategoryModel(2, "Time with Pets", R.drawable.snowy_mountain, R.drawable.ic_baseline_volunteer_activism_24));
+        //CommunityList.add(new GoodCategoryModel(2, "Time with House Plants", R.drawable.snowy_mountain, R.drawable.ic_baseline_volunteer_activism_24));
+        CommunityList.add(new GoodCategoryModel(2, "Volunteering", R.drawable.snowy_mountain, R.drawable.ic_baseline_volunteer_activism_24));
 
         ////Travel
         ArrayList<GoodCategoryModel> TravelList = new ArrayList<>();
-        TravelList.add(new GoodCategoryModel(2, "Places to visit", R.drawable.naturewide160dpi, R.drawable.ic_baseline_travel_explore_24));
-        TravelList.add(new GoodCategoryModel(2, "Places to eat", R.drawable.naturewide160dpi, R.drawable.ic_baseline_restaurant_menu_24));
-        TravelList.add(new GoodCategoryModel(2, "Places to stay", R.drawable.naturewide160dpi, R.drawable.ic_baseline_hotel_24));
-        TravelList.add(new GoodCategoryModel(2, "Hikes", R.drawable.naturewide160dpi, R.drawable.ic_baseline_hiking_24));
-        TravelList.add(new GoodCategoryModel(2, "Camping", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
+        TravelList.add(new GoodCategoryModel(2, "Places to visit", R.drawable.snowy_mountain, R.drawable.ic_baseline_travel_explore_24));
+        TravelList.add(new GoodCategoryModel(2, "Places to eat", R.drawable.snowy_mountain, R.drawable.ic_baseline_restaurant_menu_24));
+        TravelList.add(new GoodCategoryModel(2, "Places to stay", R.drawable.snowy_mountain, R.drawable.ic_baseline_hotel_24));
+        TravelList.add(new GoodCategoryModel(2, "Hikes", R.drawable.snowy_mountain, R.drawable.ic_baseline_hiking_24));
+        TravelList.add(new GoodCategoryModel(2, "Camping", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
 
-        //  categoryList.add(new GoodCategoryModel(2, "Good Things", R.drawable.naturewide160dpi, R.drawable.ic_baseline_local_florist_24));
+        //  categoryList.add(new GoodCategoryModel(2, "Good Things", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
 
       /*  ArrayList<GoodCategoryModel> SensationsList = new ArrayList<>();
-        SensationsList.add(new GoodCategoryModel(2, "Favourite Smells", R.drawable.naturewide160dpi, R.drawable.ic_baseline_travel_explore_24));
-        SensationsList.add(new GoodCategoryModel(2, "Favourite Feelings", R.drawable.naturewide160dpi, R.drawable.ic_baseline_travel_explore_24));
-        SensationsList.add(new GoodCategoryModel(2, "Favourite Tastes", R.drawable.naturewide160dpi, R.drawable.ic_baseline_travel_explore_24));
-        SensationsList.add(new GoodCategoryModel(2, "Favourite Sounds", R.drawable.naturewide160dpi, R.drawable.ic_baseline_travel_explore_24));
-        SensationsList.add(new GoodCategoryModel(2, "Favourite Sights", R.drawable.naturewide160dpi, R.drawable.ic_baseline_travel_explore_24));
+        SensationsList.add(new GoodCategoryModel(2, "Favourite Smells", R.drawable.snowy_mountain, R.drawable.ic_baseline_travel_explore_24));
+        SensationsList.add(new GoodCategoryModel(2, "Favourite Feelings", R.drawable.snowy_mountain, R.drawable.ic_baseline_travel_explore_24));
+        SensationsList.add(new GoodCategoryModel(2, "Favourite Tastes", R.drawable.snowy_mountain, R.drawable.ic_baseline_travel_explore_24));
+        SensationsList.add(new GoodCategoryModel(2, "Favourite Sounds", R.drawable.snowy_mountain, R.drawable.ic_baseline_travel_explore_24));
+        SensationsList.add(new GoodCategoryModel(2, "Favourite Sights", R.drawable.snowy_mountain, R.drawable.ic_baseline_travel_explore_24));
 */
         ArrayList<CategoryGroupsModel> groupsList = new ArrayList<>();
         groupsList.add(new CategoryGroupsModel("Popular",categoryList));

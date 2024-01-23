@@ -80,10 +80,10 @@ public class ExtendedToDosAdapter extends RecyclerView.Adapter<ExtendedToDosAdap
 
         public ViewHolder(View view){
             super(view);
-            taskText = (TextView) view.findViewById(R.id.habit);
+            taskText = view.findViewById(R.id.habit);
           //  checkBox = view.findViewById(R.id.checkbox);
-            cardView = (CardView) view.findViewById(R.id.cardView);
-            habitImg = (ImageView) view.findViewById(R.id.habitImg);
+            cardView = view.findViewById(R.id.cardView);
+            habitImg = view.findViewById(R.id.habitImg);
         }
     }
 

@@ -131,63 +131,20 @@ public class SchedulerActivity extends AppCompatActivity {
         MenuItemCompat.setActionView(item, R.layout.xp_action_bar_button);
         xpCountBtn = (Button)MenuItemCompat.getActionView(item);
 
-//        Log.i("xp in menu 1",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
         setXPUtils();
         xpCountBtn.setOnClickListener(view ->  startActivity(new Intent(getApplicationContext(), XPGoalActivity.class))
         );
-      //  Log.i("xp in menu 2",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
-
-
-        //set today's XP to XP of day in DB
-        //XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
-
-        //if no XP for that date in DB, XP set to 0
-      /*  if(Objects.equals(XPUtils.dayXP.getDate(), "no xp for date")){
-            xpDayDBHandler.addDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(),0));
-            XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
-        }*/
-
-        //set today's XP to XP of day in DB
-        //XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
-
-        //set XP menu button to today's XP
-        //xpCountBtn.setText(String.valueOf(XPUtils.dayXP.getXp())); //xpCount where is it initialised?
 
         //XP Goal Button
         MenuItem item1 = menu.findItem(R.id.xp_goal);
         MenuItemCompat.setActionView(item1, R.layout.xp_goal_action_bar_button);
         ImageButton xpGoalBtn;
         xpGoalBtn = (ImageButton) MenuItemCompat.getActionView(item1);
-        //xpGoalBtn = findViewById(R.id.xpGoalActionBarBtn);
 
         xpGoalBtn.setOnClickListener(view ->  startActivity(new Intent(getApplicationContext(), ChallengesActivity.class)));
 
         return super.onCreateOptionsMenu(menu);
     }
-
- /*   public void onResume() {
-        super.onResume();
-        //re-set today's XP to XP of day in DB
-        XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
-
-        //re-set XP menu button to today's XP
-        // xpCountBtn.setText(String.valueOf(XPUtils.dayXP.getXp()));
-        Log.i("Schedule Activity on Resume","Xp is "+XPUtils.dayXP.getXp());
-
-        //refresh goals/to-dos
-        setDaysGoalsRecyclerView();
-        //refresh routines&habits
-        setRoutineRecyclerView();
-        //re-set Categories and Calendar
-        setCategoryUtils();
-        setCalendarUtils();
-        setXPUtils();
-    }*/
-
-   // public void invalidateOptionsMenu() {
-
-    //}
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -225,17 +182,17 @@ public class SchedulerActivity extends AppCompatActivity {
         setFabButtons();
 
         //work-in-progress
-        //setReflections();
+        setReflections();
 
-        ImageButton sceneLocaterBtn = findViewById(R.id.locateBtn);
-        sceneLocaterBtn.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), SceneLocationActivity.class)));
+        //ImageButton sceneLocaterBtn = findViewById(R.id.locateBtn);
+        //sceneLocaterBtn.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), SceneLocationActivity.class)));
     }
 
     private void setCategoryUtils(){
 
         //if no categories in DB, adds one
         if(goodCategoriesDB.listAllGoodCatsDB().isEmpty()){
-            goodCategoriesDB.addGoodCategory(new GoodCategoryModel(0, "All Good Things (To Do)", R.drawable.bookswide160dpi, R.drawable.ic_baseline_favorite_24));
+            goodCategoriesDB.addGoodCategory(new GoodCategoryModel(0, "All Good Things (To Do)", R.drawable.snowy_mountain, R.drawable.ic_baseline_favorite_24));
         }
 
         //sets category utils needed for the categories in adding to-dos (in To Do Activity)
@@ -243,7 +200,7 @@ public class SchedulerActivity extends AppCompatActivity {
         CategoriesUtil.stateSelected = "To Do";
         CategoriesUtil.goodThingId = -1;
         CategoriesUtil.goodThing="";
-        CategoriesUtil.categoryImgId = R.drawable.bookswide160dpi;
+        CategoriesUtil.categoryImgId = R.drawable.snowy_mountain;
         CategoriesUtil.categoryLogoId = R.drawable.ic_baseline_favorite_24;
     }
 
@@ -260,13 +217,6 @@ public class SchedulerActivity extends AppCompatActivity {
     private void setXPUtils(){
         //set day's XP to XP from DB for selected date
         XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
-       // Log.i("xp in setXPUtils start",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
-
-        //if today's XP date isn't the same as the selected date, add new XP to DB
-//        if(XPUtils.dayXP.equals(null)){
-  //          xpDayDBHandler.addDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(),0));
-    //        XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
-      //  }
 
         //if there's no DB entry for selected date
         //sets XP for selected date
@@ -274,18 +224,10 @@ public class SchedulerActivity extends AppCompatActivity {
             //add new XP day with that date, xp=0;
             xpDayDBHandler.addDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(),0));
             XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
-            //Log.i("xp in setXPUtils if statement",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
         }
-
-     /*   if(!XPUtils.dayXP.getDate().equals(CalendarUtils.selectedDate.toString())){
-            xpDayDBHandler.addDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(),0));
-            XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
-            Log.i("xp in setXPUtils if statement",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
-        }*/
 
         //set XP menu button to today's XP
         xpCountBtn.setText(String.valueOf(XPUtils.dayXP.getXp())); //xpCount where is it initialised?
-        //Log.i("xp in setXPUtils end",XPUtils.dayXP.getDate()+" "+XPUtils.dayXP.getXp());
     }
 
     private void setCharacter(){
@@ -330,10 +272,8 @@ public class SchedulerActivity extends AppCompatActivity {
 
         dateView.setText(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
 
-      /*  if(CalendarUtils.selectedDate.equals(LocalDate.now())){
-            dateView.setBackgroundColor(Color.parseColor("#70ccfd"));
-        }*/
-            dateView.setOnClickListener(view -> {
+        dateView.setOnClickListener(view -> {
+
             //getting the instance of the calendar
             final Calendar c = Calendar.getInstance();
 
@@ -358,7 +298,6 @@ public class SchedulerActivity extends AppCompatActivity {
                         Log.i("date",date);
                         CalendarUtils.selectedDate = LocalDate.parse(date);
                         recreate();
-                        //dateView.setText(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
                     },
                     year, month, day);
             datePickerDialog.show();
@@ -380,12 +319,6 @@ public class SchedulerActivity extends AppCompatActivity {
         ArrayList<ToDoThingModel> daysTodos = toDoThingsDB.listToDoInDay(CalendarUtils.selectedDate);
 
         if(daysTodos.isEmpty()){
-           /* ArrayList<ToDoThingModel> emptyList = new ArrayList<>();
-            ToDoThingModel toDoThingModel = new ToDoThingModel(0,"No Cat","No To-Dos Today","Happy it exists","date");
-            emptyList.add(toDoThingModel);
-
-            ToDoThingAdapter toDoThingAdapter = new ToDoThingAdapter(emptyList, this);
-            daysGoalsRecyclerView.setAdapter(toDoThingAdapter);*/
             noToDoTV.setVisibility(View.VISIBLE);
             noToDoCard.setVisibility(View.VISIBLE);
         }else{
@@ -409,7 +342,6 @@ public class SchedulerActivity extends AppCompatActivity {
 
         //List Routines in Day from RoutinesDB (can probably use listRoutinesInDay)
         ArrayList<RoutineModel> routinesInDay = routineListDBHandler.listRoutinesInDay();
-        //Log.i("schedule Act","routines in day size: "+routinesInDay.size());
         //Create routine array sorted by time
         Comparator <RoutineModel> comparator = new TimeComparator();
         routinesInDay.sort( comparator );

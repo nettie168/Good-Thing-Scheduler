@@ -145,7 +145,4 @@ public class SceneLocationActivity extends AppCompatActivity {
     }
 
 
-
-
-
 }

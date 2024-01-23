@@ -201,11 +201,7 @@ public class HabitListDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor mCursor = db.rawQuery("select * from "+ TABLE_NAME, null);
 
-        if(mCursor.moveToFirst()){
-            return false;
-        }else{
-            return true;
-        }
+        return !mCursor.moveToFirst();
     }
 
 }

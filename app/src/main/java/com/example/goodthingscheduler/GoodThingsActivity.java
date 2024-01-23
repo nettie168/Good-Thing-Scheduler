@@ -22,19 +22,12 @@ import java.util.HashSet;
 
 public class GoodThingsActivity extends AppCompatActivity {
 
- //   static ArrayList<String> notes = new ArrayList<>();
-   // static ArrayAdapter arrayAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_good_things);
-     //   Objects.requireNonNull(getSupportActionBar()).setTitle("My App");
 
         setBottomNavMenu();
-
-       // initViews();
-     //   setAddNoteFAB();
 
         ListView listView = findViewById(R.id.listView);
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("com.example.notes", Context.MODE_PRIVATE);

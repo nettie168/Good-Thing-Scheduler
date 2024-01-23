@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:adjustViewBounds="true"
-        android:src="@drawable/swimmingwide160dpi" />
+        android:src="@drawable/snowy_mountain_night" />
 
     <TextView
         android:id="@+id/categoryTextViewRV"

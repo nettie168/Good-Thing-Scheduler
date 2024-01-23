@@ -48,7 +48,6 @@ public class ToDoListActivity extends AppCompatActivity {
         setGoodTitleView();
         setGoodThingsRecyclerView();
         //When BACK BUTTON is pressed, the activity on the stack is restarted
-        //Do what you want on the refresh procedure here
     }
 
     @Override
@@ -101,7 +100,7 @@ public class ToDoListActivity extends AppCompatActivity {
         };
 
         ArrayList<GoodCategoryModel> categoryList = goodCategoriesDB.listAllGoodCatsDB();
-        categoryList.add(new GoodCategoryModel(0, "add category", R.drawable.naturewide160dpibag, R.drawable.ic_baseline_add_24));
+        categoryList.add(new GoodCategoryModel(0, "add category", R.drawable.snowy_mountain, R.drawable.ic_baseline_add_24));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         //layoutManager.setReverseLayout(true);
@@ -126,19 +125,8 @@ public class ToDoListActivity extends AppCompatActivity {
         }
 
         if(thingsInState.isEmpty()){
-            //ArrayList<ToDoThingModel> isEmptyList = new ArrayList<>();
             String helloMessage = "Add "+CategoriesUtil.categorySelected+" good thing or to do";
-            //isEmptyList.add(new ToDoThingModel(0,"all",helloMessage,"Hello",""));
             toDoThingsDB.addGoodThing(new ToDoThingModel(0, CategoriesUtil.categorySelected,helloMessage,"",CategoriesUtil.categoryLogoId,"#FFFFFF","To Do", LocalDate.now().toString(), "date not set","date not set","date"));
-
-            /*ArrayList<ToDoStatesModel> isEmptyStateList = new ArrayList<>();
-
-            isEmptyStateList.add(new ToDoStatesModel("all","To Do",isEmptyList));
-
-            ToDoStateAdapter goodThingsAdapter = new ToDoStateAdapter(isEmptyStateList, this);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-            goodThingsRV.setLayoutManager(layoutManager);
-            goodThingsRV.setAdapter(goodThingsAdapter);*/
         }
 
         if(CategoriesUtil.categorySelected.equals("All Good Things (To Do)")){

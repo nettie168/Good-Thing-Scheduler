@@ -57,7 +57,6 @@ public class ChallengesActivity extends AppCompatActivity {
         challengeCatList.add(new HabitModel("Laugh On", R.drawable.ic_baseline_diversity_3_24));
 
 
-
         RecyclerView recyclerView = findViewById(R.id.selfcareRV);
 
         GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
