@@ -92,6 +92,7 @@ public class SchedulerActivity extends AppCompatActivity {
     public XPDayDBHandler xpDayDBHandler;
 
     private RecyclerView daysGoalsRecyclerView;
+    private View noToDoPlaceHolderLayout;
     ToDoThingAdapter toDoThingAdapter;
 
     RoutineAdapter routineAdapter;
