@@ -5,11 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.example.goodthingscheduler.Calendar.CalendarUtils;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DailyHabitsDBHandler extends SQLiteOpenHelper {
@@ -70,15 +68,12 @@ public class DailyHabitsDBHandler extends SQLiteOpenHelper {
 
         //creates a database for reading our database
         SQLiteDatabase db = this.getReadableDatabase();
-      //  ArrayList<RoutineModel> storeRoutines = new ArrayList<>();
 
         Cursor cursor = db.rawQuery(sql, null);
 
-      //  for(int i = 0; i < routineName.size(); i++){
-            ArrayList<HabitModel> habitsInRoutine = new ArrayList<>();
-          //  Log.i("isInLoop","yup");
+        ArrayList<HabitModel> habitsInRoutine = new ArrayList<>();
 
-            if (cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             do {
                 String routine = cursor.getString(1);
                 String date = cursor.getString(3);
@@ -95,16 +90,11 @@ public class DailyHabitsDBHandler extends SQLiteOpenHelper {
             }
             while (cursor.moveToNext());
         }
-        //    if(!habitsInRoutine.isEmpty()){
-          //      Log.i("routine2",habitsInRoutine.get(0).routine);
-            //    storeRoutines.add(new RoutineModel(habitsInRoutine.get(0).routine, habitsInRoutine));
-           // }
-      //  }
         cursor.close();
         return habitsInRoutine;
     }
 
-    public boolean daysDailyHabitsExist(){
+   /* public boolean daysDailyHabitsExist(){
         String sql = "select * from "+ TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
@@ -119,7 +109,7 @@ public class DailyHabitsDBHandler extends SQLiteOpenHelper {
                     String routine = cursor.getString(1);
                     String habitName = cursor.getString(2);
                     int status = Integer.parseInt(cursor.getString(4));
-                    int habitImgId = Integer.parseInt(cursor.getString(5));*/
+                    int habitImgId = Integer.parseInt(cursor.getString(5));
                     exists = true;
                     break;
                 }
@@ -128,7 +118,7 @@ public class DailyHabitsDBHandler extends SQLiteOpenHelper {
         }
         cursor.close();
         return exists;
-    }
+    }*/
 
     public void updateHabit(HabitModel habit) {
         SQLiteDatabase db = this.getWritableDatabase();

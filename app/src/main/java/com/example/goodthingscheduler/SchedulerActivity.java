@@ -93,9 +93,12 @@ public class SchedulerActivity extends AppCompatActivity {
     private ToDoThingsDB toDoThingsDB;
     public XPDayDBHandler xpDayDBHandler;
 
-    private View noToDoPlaceHolderLayout;
     private RecyclerView daysGoalsRecyclerView;
+    private View noToDoPlaceHolderLayout;
     ToDoThingAdapter toDoThingAdapter;
+
+    RoutineAdapter routineAdapter;
+
 
     @Override
     public void onRestart() {
@@ -108,12 +111,12 @@ public class SchedulerActivity extends AppCompatActivity {
 
         //re-set XP menu button to today's XP
         xpCountBtn.setText(String.valueOf(XPUtils.dayXP.getXp()));
-        //Log.i("Schedule Activity on Restart","Xp is "+XPUtils.dayXP.getXp());
 
         //refresh goals/to-dos
 
         //refresh routines&habits
-        setRoutineRecyclerView();
+        //Execute AsyncTask to update Routines and Habits from DB
+        new Database2AsyncTask(routineAdapter, routineListDBHandler, habitListDBHandler, dailyHabitsDBHandler).execute();
         //re-set Categories and Calendar
         setCategoryUtils();
         setCalendarUtils();
@@ -178,7 +181,7 @@ public class SchedulerActivity extends AppCompatActivity {
         //set Character Animation
         setCharacter();
         //set Daily Routines Recycler View
-        setRoutineRecyclerView();
+        //setRoutineRecyclerView();
 
         //set Buttons
         setBottomNavMenu();
@@ -188,7 +191,7 @@ public class SchedulerActivity extends AppCompatActivity {
         //work-in-progress
         setReflections();
 
-        //Set up Daily To Dos
+        //SET UP DAILY TO DOS//
         //Recycler View and Empty Placeholder
         daysGoalsRecyclerView = findViewById(R.id.daysGoalsRV);
         noToDoPlaceHolderLayout = findViewById(R.id.noToDoPlaceholderLayout);
@@ -207,12 +210,28 @@ public class SchedulerActivity extends AppCompatActivity {
         //Think there's a resource failing to close in DatabaseAsync
         new DatabaseAsyncTask(this, toDoThingAdapter, toDoThingsDB).execute();
 
+        //Set UP DAILY ROUTINES
+        //Recycler View and Empty Placeholder
+        RecyclerView routineRecyclerView = findViewById(R.id.RoutinesRecyclerView);
+
+        //Routines Adapter
+        routineAdapter = new RoutineAdapter(new ArrayList<>(), this);
+        routineRecyclerView.setAdapter(routineAdapter);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        routineRecyclerView.setLayoutManager(linearLayoutManager);
+
+        //Execute AsyncTask to retrieve Routines from the database
+        //And update adapter
+        new Database2AsyncTask(routineAdapter, routineListDBHandler, habitListDBHandler, dailyHabitsDBHandler).execute();
+
+
         //ImageButton sceneLocaterBtn = findViewById(R.id.locateBtn);
         //sceneLocaterBtn.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), SceneLocationActivity.class)));
     }
 
     private void setCategoryUtils(){
-
+        //To be Multithread
         //if no categories in DB, adds one
         if(goodCategoriesDB.listAllGoodCatsDB().isEmpty()){
             goodCategoriesDB.addGoodCategory(new GoodCategoryModel(0, "All Good Things (To Do)", R.drawable.snowy_mountain, R.drawable.ic_baseline_favorite_24));
@@ -378,7 +397,8 @@ public class SchedulerActivity extends AppCompatActivity {
         }
 
         private void performBackground1(){
-            //Add one-off to do to DB including 1. download my app 2. Add 1 routine 3. Add 1 challenge
+            //Add one-off to do to DB when user first downloads app
+            // including 1. download my app 2. Add 1 routine 3. Add 1 challenge
             ArrayList<ToDoThingModel> firstToDosList = new ArrayList<>();
             ToDoThingModel toDoThingModel1 = new ToDoThingModel(0, "All Good Things (To Do)", "Download Esk App", "", R.drawable.ic_baseline_favorite_24,"#FFFFFF","Done", LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString());
             ToDoThingModel toDoThingModel2 = new ToDoThingModel(0, "All Good Things (To Do)", "Add 1 To Do", "", R.drawable.ic_baseline_favorite_24,"#FFFFFF", "To Do", LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString(), "");
@@ -394,6 +414,7 @@ public class SchedulerActivity extends AppCompatActivity {
                 }
             }
 
+            //to dos for selected date
             daysTodos =  toDoThingsDB.listToDoInDay(CalendarUtils.selectedDate);
 
             if(daysTodos.isEmpty()){
@@ -404,47 +425,85 @@ public class SchedulerActivity extends AppCompatActivity {
 
     }
 
-    private void setRoutineRecyclerView(){
-        RecyclerView routineRecyclerView = findViewById(R.id.RoutinesRecyclerView);
+
+    private static class Database2AsyncTask extends AsyncTask<Void, Void, ArrayList<RoutineModel>> {
+        private final WeakReference<RoutineAdapter> adapterReference;
+        private final RoutineListDBHandler routineListDBHandler;
+        private final DailyHabitsDBHandler dailyHabitsDBHandler;
+        private final HabitListDBHandler habitListDBHandler;
+        private ArrayList<RoutineModel> routineHabitList = new ArrayList<>();
 
 
-        //List Routines in Day from RoutinesDB (can probably use listRoutinesInDay)
-        ArrayList<RoutineModel> routinesInDay = routineListDBHandler.listRoutinesInDay();
+        Database2AsyncTask(RoutineAdapter adapter, RoutineListDBHandler dbHelper, HabitListDBHandler dbHelper2, DailyHabitsDBHandler dbHelper3) {
+            adapterReference = new WeakReference<>(adapter);
+            //DB for saved routines
+            routineListDBHandler = dbHelper;
+            //DB for saved habits
+            habitListDBHandler = dbHelper2;
+            //DB for daily habit tracking
+            dailyHabitsDBHandler = dbHelper3;
+        }
 
-        //Not Main Thread
+        @Override
+        protected ArrayList<RoutineModel> doInBackground(Void... voids) {
+            // Perform database query on a background thread
+            performBackground1();
+            return routineHabitList;
+        }
 
-        //Create routine array sorted by time
-        Comparator <RoutineModel> comparator = new TimeComparator();
-        routinesInDay.sort( comparator );
+        @Override
+        protected void onPostExecute(ArrayList<RoutineModel> data) {
+            // Update the RecyclerView adapter with the retrieved data
+            RoutineAdapter adapter = adapterReference.get();
+            if (adapter != null) {
+                adapter.setData(data);
+            }
 
-        if(!routinesInDay.isEmpty()) { //and date is within 2 weeks of now (else - do "look back" - for later)
-            for(int i = 0; i < routinesInDay.size(); i++) {
-                String routine = routinesInDay.get(i).getRoutine();
-                ArrayList<RoutineModel> list = new ArrayList<>();
-                list.add(new RoutineModel(routine));
-                //if dailyHabitsList and habitsList for a routine are not the same size,
-                // then check if habits match, add missing habits
-                  if(dailyHabitsDBHandler.listHabits(routine).size()!=habitListDBHandler.listHabitsInRoutinesInDay(list).get(0).getHabitArrayList().size()){
-                    ArrayList<HabitModel> habitsArray = habitListDBHandler.listHabitsInRoutinesInDay(routinesInDay).get(i).getHabitArrayList();
-                    for (int j = 0; j < habitsArray.size(); j++) {
-                        HabitModel habitModel = habitsArray.get(j);
-                        dailyHabitsDBHandler.addHabit(new HabitModel(0, CalendarUtils.selectedDate.toString(), habitModel.getRoutine(), habitModel.getTask(), habitModel.getStatus()));
+        }
+
+        private void performBackground1(){
+            // retrieve the saved routines
+            // that include selected day's day
+            ArrayList<RoutineModel> routinesInDay = routineListDBHandler.listRoutinesInDay();
+
+            //Reorder routines ArrayList by time
+            Comparator <RoutineModel> comparator = new TimeComparator();
+            routinesInDay.sort( comparator );
+
+            //if there are routines for that day
+            if(!routinesInDay.isEmpty()) { //and date is within 2 weeks of now (else - do "look back" - for later)
+                for(int i = 0; i < routinesInDay.size(); i++) {
+                    //Create a list of all routines for today
+                    String routine = routinesInDay.get(i).getRoutine();
+                    ArrayList<RoutineModel> list = new ArrayList<>();
+                    list.add(new RoutineModel(routine));
+
+                    //a resource failed to close
+                    //find habits for this routine
+                    //if dailyHabitsList and habitsList for a routine are not the same size,
+                    // then check if habits match, add missing habits
+                    if(dailyHabitsDBHandler.listHabits(routine).size()!=habitListDBHandler.listHabitsInRoutinesInDay(list).get(0).getHabitArrayList().size()){
+                        ArrayList<HabitModel> habitsArray = habitListDBHandler.listHabitsInRoutinesInDay(routinesInDay).get(i).getHabitArrayList();
+                        for (int j = 0; j < habitsArray.size(); j++) {
+                            HabitModel habitModel = habitsArray.get(j);
+                            dailyHabitsDBHandler.addHabit(new HabitModel(0, CalendarUtils.selectedDate.toString(), habitModel.getRoutine(), habitModel.getTask(), habitModel.getStatus()));
+                        }
                     }
                 }
-            }
-            RoutineAdapter routineAdapter = new RoutineAdapter(habitListDBHandler.listHabitsInRoutinesInDay(routinesInDay), this);
-            routineRecyclerView.setAdapter(routineAdapter);
-        }else{
-            ArrayList<RoutineModel> emptyList = new ArrayList<>();
-            ArrayList<HabitModel> emptyHabitList = new ArrayList<>();
-            RoutineModel routineModel = new RoutineModel("No Routines", emptyHabitList);
-            emptyList.add(routineModel);
+                //declare routines and habits for that day
+                routineHabitList = habitListDBHandler.listHabitsInRoutinesInDay(routinesInDay);
 
-            RoutineAdapter routineAdapter = new RoutineAdapter(emptyList, this);
-            routineRecyclerView.setAdapter(routineAdapter);
+            //if no routines for today
+            }else{
+                //make routineHabit list
+                //display No Routines
+                ArrayList<HabitModel> emptyHabitList = new ArrayList<>();
+                RoutineModel routineModel = new RoutineModel("No Routines", emptyHabitList);
+                routineHabitList.add(routineModel);
+            }
         }
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        routineRecyclerView.setLayoutManager(layoutManager);
+
+
     }
 
 
@@ -547,19 +606,19 @@ public class SchedulerActivity extends AppCompatActivity {
     public void previousDay(){
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusDays(1);
         dateView.setText(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
-        setRoutineRecyclerView();
         //Execute AsyncTask to update new To Dos from DB
         new DatabaseAsyncTask(this, toDoThingAdapter, toDoThingsDB).execute();
-        setXPUtils();
+        //Execute AsyncTask to update Routines and Habits from DB
+        new Database2AsyncTask(routineAdapter, routineListDBHandler, habitListDBHandler, dailyHabitsDBHandler).execute();        setXPUtils();
     }
 
     public void nextDay(){
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusDays(1);
         dateView.setText(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
-        setRoutineRecyclerView();
         //Execute AsyncTask to update new To Dos from DB
         new DatabaseAsyncTask(this, toDoThingAdapter, toDoThingsDB).execute();
-        setXPUtils();
+        //Execute AsyncTask to update Routines and Habits from DB
+        new Database2AsyncTask(routineAdapter, routineListDBHandler, habitListDBHandler, dailyHabitsDBHandler).execute();        setXPUtils();
     }
 
 

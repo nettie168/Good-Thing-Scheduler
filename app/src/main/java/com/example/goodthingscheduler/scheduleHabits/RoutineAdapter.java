@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.goodthingscheduler.R;
 import com.example.goodthingscheduler.scheduleAddRoutineHabits.AddHabitsActivity;
 import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
+import com.example.goodthingscheduler.toDoThings.ToDoThingModel;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import java.util.Arrays;
 
 public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHolder> {
 
-    private final ArrayList<RoutineModel> routineList;
+    private ArrayList<RoutineModel> routineList;
     private final Context context;
     private RoutineListDBHandler routineListDBHandler;
     private DailyHabitsDBHandler dailyHabitsDBHandler;
@@ -155,6 +156,11 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHold
 
     public int getItemCount(){
         return routineList.size();
+    }
+
+    public void setData(ArrayList<RoutineModel> newData) {
+        routineList = newData;
+        notifyDataSetChanged(); // Notify the adapter that the data has changed
     }
 
 
