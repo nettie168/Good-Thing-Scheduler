@@ -2,7 +2,6 @@ package com.example.goodthingscheduler;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.core.view.MenuItemCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -16,6 +15,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -25,7 +25,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.goodthingscheduler.XPCount.XPCountModel;
 import com.example.goodthingscheduler.XPCount.XPDayDBHandler;
@@ -51,7 +50,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.lang.reflect.Array;
+import java.lang.ref.WeakReference;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -87,13 +86,16 @@ public class SchedulerActivity extends AppCompatActivity {
 
 
     //init Databases
-
     public RoutineListDBHandler routineListDBHandler;
     public HabitListDBHandler habitListDBHandler;
     private DailyHabitsDBHandler dailyHabitsDBHandler;
-    GoodCategoriesDB goodCategoriesDB;
-    ToDoThingsDB toDoThingsDB;
+    private GoodCategoriesDB goodCategoriesDB;
+    private ToDoThingsDB toDoThingsDB;
     public XPDayDBHandler xpDayDBHandler;
+
+    private View noToDoPlaceHolderLayout;
+    private RecyclerView daysGoalsRecyclerView;
+    ToDoThingAdapter toDoThingAdapter;
 
     @Override
     public void onRestart() {
@@ -108,8 +110,9 @@ public class SchedulerActivity extends AppCompatActivity {
         xpCountBtn.setText(String.valueOf(XPUtils.dayXP.getXp()));
         //Log.i("Schedule Activity on Restart","Xp is "+XPUtils.dayXP.getXp());
 
-        //refresh goals/to-dos, routines&habits
-        setDaysGoalsRecyclerView();
+        //refresh goals/to-dos
+
+        //refresh routines&habits
         setRoutineRecyclerView();
         //re-set Categories and Calendar
         setCategoryUtils();
@@ -158,7 +161,7 @@ public class SchedulerActivity extends AppCompatActivity {
         Objects.requireNonNull(bar).setElevation(0);
         bar.setTitle("");
 
-        //set Databases (DBs)
+        //set/initialise Databases (DBs)
         goodCategoriesDB = new GoodCategoriesDB(this);
         xpDayDBHandler = new XPDayDBHandler(this);
         habitListDBHandler = new HabitListDBHandler(this);
@@ -170,10 +173,11 @@ public class SchedulerActivity extends AppCompatActivity {
         setCalendarUtils();
         setCategoryUtils();
 
-        //set UI Views
+        //set Selector for Date
         setDateSelector();
+        //set Character Animation
         setCharacter();
-        setDaysGoalsRecyclerView();
+        //set Daily Routines Recycler View
         setRoutineRecyclerView();
 
         //set Buttons
@@ -183,6 +187,25 @@ public class SchedulerActivity extends AppCompatActivity {
 
         //work-in-progress
         setReflections();
+
+        //Set up Daily To Dos
+        //Recycler View and Empty Placeholder
+        daysGoalsRecyclerView = findViewById(R.id.daysGoalsRV);
+        noToDoPlaceHolderLayout = findViewById(R.id.noToDoPlaceholderLayout);
+
+        //To Dos Adapter
+        toDoThingAdapter = new ToDoThingAdapter(new ArrayList<>(), this);
+        daysGoalsRecyclerView.setAdapter(toDoThingAdapter);
+
+        //Create Grid of To Dos for Large Screens
+        int mNoOfColumns = CategoriesUtil.calculateNoOfColumns(getApplicationContext(),400);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, mNoOfColumns);
+        daysGoalsRecyclerView.setLayoutManager(layoutManager);
+
+        //Execute AsyncTask to retrieve To Dos from the database
+        //And update adapter
+        //Think there's a resource failing to close in DatabaseAsync
+        new DatabaseAsyncTask(this, toDoThingAdapter, toDoThingsDB).execute();
 
         //ImageButton sceneLocaterBtn = findViewById(R.id.locateBtn);
         //sceneLocaterBtn.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), SceneLocationActivity.class)));
@@ -250,6 +273,8 @@ public class SchedulerActivity extends AppCompatActivity {
 
     private void setReflections(){
         Button reflectionBtn = findViewById(R.id.reflectionBtn);
+
+        //Not Main Thread
         reflectionBtn.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), ReflectionActivity.class)));
 
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("com.example.notes", Context.MODE_PRIVATE);
@@ -274,6 +299,7 @@ public class SchedulerActivity extends AppCompatActivity {
 
         dateView.setOnClickListener(view -> {
 
+            //not Main Thread
             //getting the instance of the calendar
             final Calendar c = Calendar.getInstance();
 
@@ -304,44 +330,89 @@ public class SchedulerActivity extends AppCompatActivity {
         });
     }
 
-    private void setDaysGoalsRecyclerView(){
-        RecyclerView daysGoalsRecyclerView = findViewById(R.id.daysGoalsRV);
-        TextView noToDoTV = findViewById(R.id.noToDoTV);
-        CardView noToDoCard = findViewById(R.id.noToDoCard);
 
-        //Add one-off to do to DB including 1. download my app 2. Add 1 routine 3. Add 1 challenge
-        if(toDoThingsDB.isEmpty()){
-            toDoThingsDB.addGoodThing(new ToDoThingModel(0, "All Good Things (To Do)", "Download Esk App", "", R.drawable.ic_baseline_favorite_24,"#FFFFFF","Done", LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString()));
-            toDoThingsDB.addGoodThing(new ToDoThingModel(0, "All Good Things (To Do)", "Add 1 To Do", "", R.drawable.ic_baseline_favorite_24,"#FFFFFF", "To Do", LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString(), ""));
-            toDoThingsDB.addGoodThing(new ToDoThingModel(0, "All Good Things (To Do)", "Add 1 Routine", "", R.drawable.ic_baseline_favorite_24,"#FFFFFF", "To Do", LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString(), ""));
+    private static class DatabaseAsyncTask extends AsyncTask<Void, Void, ArrayList<ToDoThingModel>> {
+        private final WeakReference<SchedulerActivity> activityReference;
+        private final WeakReference<ToDoThingAdapter> adapterReference;
+        private final ToDoThingsDB toDoThingsDB;
+
+        Boolean daysToDosEmpty = false;
+        private ArrayList<ToDoThingModel> daysTodos;
+
+
+
+        DatabaseAsyncTask(SchedulerActivity activity, ToDoThingAdapter adapter, ToDoThingsDB dbHelper) {
+            activityReference = new WeakReference<>(activity);
+            adapterReference = new WeakReference<>(adapter);
+            toDoThingsDB = dbHelper;
         }
 
-        ArrayList<ToDoThingModel> daysTodos = toDoThingsDB.listToDoInDay(CalendarUtils.selectedDate);
-
-        if(daysTodos.isEmpty()){
-            noToDoTV.setVisibility(View.VISIBLE);
-            noToDoCard.setVisibility(View.VISIBLE);
-        }else{
-            noToDoTV.setVisibility(View.GONE);
-            noToDoCard.setVisibility(View.GONE);
+        @Override
+        protected ArrayList<ToDoThingModel> doInBackground(Void... voids) {
+            // Perform database insert on a background thread
+            performBackground1();
+            // Perform database query on a background thread
+            return daysTodos;
         }
 
-        ToDoThingAdapter toDoThingAdapter = new ToDoThingAdapter(daysTodos, this);
-        daysGoalsRecyclerView.setAdapter(toDoThingAdapter);
+        @Override
+        protected void onPostExecute(ArrayList<ToDoThingModel> data) {
+            SchedulerActivity activity = activityReference.get();
+            // Update the RecyclerView adapter with the retrieved data
+            ToDoThingAdapter adapter = adapterReference.get();
 
-        int mNoOfColumns = CategoriesUtil.calculateNoOfColumns(getApplicationContext(),400);
 
-        //LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, mNoOfColumns);
-        daysGoalsRecyclerView.setLayoutManager(layoutManager);
+            if (activity != null && adapter != null) {
+                activity.runOnUiThread(() -> {
+                    if (daysToDosEmpty) {
+                        activity.noToDoPlaceHolderLayout.setVisibility(View.VISIBLE);
+                        activity.daysGoalsRecyclerView.setVisibility(View.GONE);
+                    } else {
+                        activity.noToDoPlaceHolderLayout.setVisibility(View.GONE);
+                        activity.daysGoalsRecyclerView.setVisibility(View.VISIBLE);
+                    }
+                    adapter.setData(data);
+                });
+            }
+
+        }
+
+        private void performBackground1(){
+            //Add one-off to do to DB including 1. download my app 2. Add 1 routine 3. Add 1 challenge
+            ArrayList<ToDoThingModel> firstToDosList = new ArrayList<>();
+            ToDoThingModel toDoThingModel1 = new ToDoThingModel(0, "All Good Things (To Do)", "Download Esk App", "", R.drawable.ic_baseline_favorite_24,"#FFFFFF","Done", LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString());
+            ToDoThingModel toDoThingModel2 = new ToDoThingModel(0, "All Good Things (To Do)", "Add 1 To Do", "", R.drawable.ic_baseline_favorite_24,"#FFFFFF", "To Do", LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString(), "");
+            ToDoThingModel toDoThingModel3 = new ToDoThingModel(0, "All Good Things (To Do)", "Add 1 Routine", "", R.drawable.ic_baseline_favorite_24,"#FFFFFF", "To Do", LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString(), "");
+
+            firstToDosList.add(toDoThingModel1);
+            firstToDosList.add(toDoThingModel2);
+            firstToDosList.add(toDoThingModel3);
+
+            if(toDoThingsDB.isEmpty()){
+                for(int i =0; i < firstToDosList.size(); i++){
+                    toDoThingsDB.addGoodThing(firstToDosList.get(i));
+                }
+            }
+
+            daysTodos =  toDoThingsDB.listToDoInDay(CalendarUtils.selectedDate);
+
+            if(daysTodos.isEmpty()){
+                daysToDosEmpty = true;
+            }
+
+        }
 
     }
 
     private void setRoutineRecyclerView(){
         RecyclerView routineRecyclerView = findViewById(R.id.RoutinesRecyclerView);
 
+
         //List Routines in Day from RoutinesDB (can probably use listRoutinesInDay)
         ArrayList<RoutineModel> routinesInDay = routineListDBHandler.listRoutinesInDay();
+
+        //Not Main Thread
+
         //Create routine array sorted by time
         Comparator <RoutineModel> comparator = new TimeComparator();
         routinesInDay.sort( comparator );
@@ -376,6 +447,7 @@ public class SchedulerActivity extends AppCompatActivity {
         routineRecyclerView.setLayoutManager(layoutManager);
     }
 
+
     public static class TimeComparator implements Comparator<RoutineModel> {
         @Override
         public int compare (RoutineModel o1 , RoutineModel o2)
@@ -406,12 +478,15 @@ public class SchedulerActivity extends AppCompatActivity {
         isAllFabsVisible = false;
 
         addFab.setOnClickListener(
+                //not Main Thread
                 view -> {
+
                     if (!isAllFabsVisible) {
                         addToDo.show();
                         addRoutine.show();
                         addFab.extend();
                         isAllFabsVisible = true;
+
                     } else {
                         addToDo.hide();
                         addRoutine.hide();
@@ -421,6 +496,7 @@ public class SchedulerActivity extends AppCompatActivity {
                 });
 
         addToDo.setOnClickListener(
+                //not Main Thread
                 view -> {
                     CategoriesUtil.goodThingId=-1;
                     CategoriesUtil.goodThing="";
@@ -434,6 +510,7 @@ public class SchedulerActivity extends AppCompatActivity {
                 });
 
         addRoutine.setOnClickListener(
+                //not Main Thread
                 view -> startActivity(new Intent(getApplicationContext(), AddRoutineActivity.class)));
 
 
@@ -471,7 +548,8 @@ public class SchedulerActivity extends AppCompatActivity {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusDays(1);
         dateView.setText(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
         setRoutineRecyclerView();
-        setDaysGoalsRecyclerView();
+        //Execute AsyncTask to update new To Dos from DB
+        new DatabaseAsyncTask(this, toDoThingAdapter, toDoThingsDB).execute();
         setXPUtils();
     }
 
@@ -479,9 +557,12 @@ public class SchedulerActivity extends AppCompatActivity {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusDays(1);
         dateView.setText(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
         setRoutineRecyclerView();
-        setDaysGoalsRecyclerView();
+        //Execute AsyncTask to update new To Dos from DB
+        new DatabaseAsyncTask(this, toDoThingAdapter, toDoThingsDB).execute();
         setXPUtils();
     }
+
+
 
     public void setBottomNavMenu(){
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottomNavigationView);
@@ -527,6 +608,7 @@ public class SchedulerActivity extends AppCompatActivity {
         if(toDoThingsDB != null){
             toDoThingsDB.close();
         }
-        if(xpDayDBHandler != null) xpDayDBHandler.close();
+        if(xpDayDBHandler != null)
+            xpDayDBHandler.close();
     }
 }

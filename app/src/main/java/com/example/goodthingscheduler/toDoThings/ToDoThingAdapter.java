@@ -4,7 +4,6 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,7 @@ import java.util.ArrayList;
 
 public class ToDoThingAdapter extends RecyclerView.Adapter<ToDoThingAdapter.ViewHolder> {
 
-    private final ArrayList<ToDoThingModel> goodThingsList;
+    private ArrayList<ToDoThingModel> goodThingsList;
     private final Context context;
     private ToDoThingsDB toDoThingsDB;
     private XPDayDBHandler xpDayDBHandler;
@@ -126,6 +125,11 @@ public class ToDoThingAdapter extends RecyclerView.Adapter<ToDoThingAdapter.View
     @Override
     public int getItemCount() {
         return goodThingsList.size();
+    }
+
+    public void setData(ArrayList<ToDoThingModel> newData) {
+        goodThingsList = newData;
+        notifyDataSetChanged(); // Notify the adapter that the data has changed
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

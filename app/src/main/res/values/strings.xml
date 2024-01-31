@@ -47,4 +47,7 @@
     <string name="date_not_set">date not set</string>
     <string name="date_to_end">Date To End:</string>
     <string name="save">save</string>
+    <string name="no_goals_or_to_dos">No Goals or To-Dos</string>
+    <string name="a_happy_cheerful_dragon">a happy cheerful dragon</string>
+    <string name="routines">Routines</string>
 </resources>
