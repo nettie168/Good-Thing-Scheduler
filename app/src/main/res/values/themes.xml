@@ -11,6 +11,7 @@
         <item name="colorSecondary">@color/sky_blue</item>
         <item name="colorSecondaryVariant">@color/dragonDark</item>
         <item name="colorOnSecondary">@color/black</item>
+
         <!-- Status bar color. -->
     <!--    <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>-->
     <!--    <item name="android:statusBarColor" >@color/sky_blue</item> -->

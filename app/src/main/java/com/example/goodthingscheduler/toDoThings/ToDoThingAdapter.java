@@ -55,12 +55,13 @@ public class ToDoThingAdapter extends RecyclerView.Adapter<ToDoThingAdapter.View
         ToDoThingModel goodThing = goodThingsList.get(position);
         toDoThingsDB = new ToDoThingsDB(context.getApplicationContext());
 
-      //  holder.goodThingCard.setCardBackgroundColor(Color.WHITE);
-      //  holder.goodThingTV.setTextColor(Color.BLUE);
+        if(goodThing.getGoodThing().equals("No To Dos")){
+            holder.checkBox.setVisibility(View.GONE);
+        }else{
+            holder.goodThingTV.setText(goodThing.getGoodThing());
+        }
 
-        holder.goodThingTV.setText(goodThing.getGoodThing());
         holder.goodThingLogo.setImageResource(goodThing.getLogoId());
-
 
         if(goodThing.getState().equals("Happy it exists")){
             //holder.goodThingTV.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);

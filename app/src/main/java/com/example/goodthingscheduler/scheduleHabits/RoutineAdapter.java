@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.goodthingscheduler.R;
 import com.example.goodthingscheduler.scheduleAddRoutineHabits.AddHabitsActivity;
 import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
+import com.example.goodthingscheduler.toDoThings.ToDoThingModel;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -24,10 +26,8 @@ import java.util.Arrays;
 
 public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHolder> {
 
-    private final ArrayList<RoutineModel> routineList;
+    private ArrayList<RoutineModel> routineList;
     private final Context context;
-    private RoutineListDBHandler routineListDBHandler;
-    private DailyHabitsDBHandler dailyHabitsDBHandler;
     //public boolean isShowing;
     //more menu button to delete routine, edit eg. routine to repeat, how often, name, & reorder habits
 
@@ -49,8 +49,8 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHold
            // holder.emptyRVTV.setVisibility(View.GONE);
         //}
         RoutineModel routine = routineList.get(position);
-        routineListDBHandler = new RoutineListDBHandler(context);
-        dailyHabitsDBHandler = new DailyHabitsDBHandler(context);
+        RoutineListDBHandler routineListDBHandler = new RoutineListDBHandler(context);
+        DailyHabitsDBHandler dailyHabitsDBHandler = new DailyHabitsDBHandler(context);
 
         if(routine.getRoutine().equals("No Routines")){
             holder.routineText.setText(routine.getRoutine());
@@ -58,9 +58,14 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHold
             holder.moreBtn.setVisibility(View.GONE);
             holder.routineTally.setVisibility(View.INVISIBLE);
             holder.hideShowBtn.setVisibility(View.INVISIBLE);
-            holder.habitRecyclerView.setVisibility(View.GONE);
+            holder.habitsRVStub.setVisibility(View.GONE);
+           // holder.habitRecyclerView.setVisibility(View.GONE);
+        } else {
 
-        }else {
+            holder.startTimeTV.setVisibility(View.VISIBLE);
+            holder.moreBtn.setVisibility(View.VISIBLE);
+            holder.routineTally.setVisibility(View.VISIBLE);
+            holder.hideShowBtn.setVisibility(View.VISIBLE);
 
             ArrayList<HabitModel> dailyHabitsDBArray = dailyHabitsDBHandler.listHabits(routine.getRoutine());
 
@@ -82,53 +87,71 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHold
                 }
             }
 
-
             String routineTallyString = habitsComplete + "/" + routine.getHabitArrayList().size();
             holder.routineTally.setText(routineTallyString);
+            holder.hideShowBtn.setImageResource(android.R.drawable.arrow_down_float);
 
-            if (routine.getOpenClosed() == 1) {
-                holder.habitRecyclerView.setVisibility(View.VISIBLE);
+          /*  if (routine.getOpenClosed() == 1) {
+                //holder.habitRecyclerView.setVisibility(View.VISIBLE);
+                holder.habitsRVStub.inflate();
             } else {
-                holder.habitRecyclerView.setVisibility(View.GONE);
+                holder.habitsRVStub.setVisibility(View.GONE);
+                //holder.habitRecyclerView.setVisibility(View.GONE);
             }
 
             holder.routineText.setOnClickListener(view -> {
                 if (routine.getOpenClosed() == 1) {
-                    holder.habitRecyclerView.setVisibility(View.GONE);
+                    //holder.habitRecyclerView.setVisibility(View.GONE);
+                    holder.habitsRVStub.setVisibility(View.GONE);
                     holder.hideShowBtn.setImageResource(android.R.drawable.arrow_down_float);
                     routine.setOpenClosed(0);
                     routineListDBHandler.updateOpenClosed(new RoutineModel(routine.getId(), 0));
                 } else {
-                    holder.habitRecyclerView.setVisibility(View.VISIBLE);
+                    //holder.habitRecyclerView.setVisibility(View.VISIBLE);
+                    holder.habitsRVStub.setVisibility(View.VISIBLE);
                     holder.hideShowBtn.setImageResource(android.R.drawable.arrow_up_float);
                     routine.setOpenClosed(1);
                     routineListDBHandler.updateOpenClosed(new RoutineModel(routine.getId(), 1));
                 }
-            });
+            });*/
 
             holder.hideShowBtn.setOnClickListener(view -> {
-                if (routine.getOpenClosed() == 1) {
-                    holder.habitRecyclerView.setVisibility(View.GONE);
+               /* if (routine.getOpenClosed() == 1) {
+                    //holder.habitRecyclerView.setVisibility(View.GONE);
+
                     holder.hideShowBtn.setImageResource(android.R.drawable.arrow_down_float);
                     routine.setOpenClosed(0);
-                    //Log.i("adapter routine is", "id is "+String.valueOf(routine.getId())+" opencl is"+routine.getOpenClosed());
                     routineListDBHandler.updateOpenClosed(new RoutineModel(routine.getId(), 0));
                     //  isShowing=false;
                 } else {
-                    holder.habitRecyclerView.setVisibility(View.VISIBLE);
                     holder.hideShowBtn.setImageResource(android.R.drawable.arrow_up_float);
                     routine.setOpenClosed(1);
                     routineListDBHandler.updateOpenClosed(new RoutineModel(routine.getId(), 1));
-                    //Log.i("adapter routine is", "id is "+String.valueOf(routine.getId()));
                     //  isShowing=true;
+                }*/
+
+                if (holder.habitsRVStub.getInflatedId() == View.NO_ID) {
+                    // If ViewStub is not inflated, inflate it
+                    holder.habitsRVStub.inflate();
+                    holder.hideShowBtn.setImageResource(android.R.drawable.arrow_up_float);
+                    // You can customize the inflatedView here if needed
+                } else {
+                    // If ViewStub is already inflated, toggle its visibility
+                    //View inflatedView = view.findViewById(holder.habitsRVStub.getInflatedId());
+                    holder.hideShowBtn.setImageResource(android.R.drawable.arrow_up_float);
+                    if (holder.inflatedLayout != null) {
+                        int visibility = holder.inflatedLayout.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE;
+                        holder.inflatedLayout.setVisibility(visibility);
+                        holder.hideShowBtn.setImageResource(android.R.drawable.arrow_down_float);
+                    }
                 }
+
             });
 
 
             int mNoOfColumns = CategoriesUtil.calculateNoOfColumns(context, 100); //120 //140
 
             GridLayoutManager layoutManager = new GridLayoutManager(holder.habitRecyclerView.getContext(), mNoOfColumns); //4
-            //    LinearLayoutManager layoutManager = new LinearLayoutManager(holder.habitRecyclerView.getContext(), RecyclerView.VERTICAL, false);
 
             layoutManager.setInitialPrefetchItemCount(routine.getHabitArrayList().size());
             HabitAdapter habitAdapter = new HabitAdapter(routine.getHabitArrayList(), dailyHabitsDBArray, context.getApplicationContext());
@@ -142,12 +165,8 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHold
                 RoutineUtils.routineSelStartMinute = routine.getStartMinute();
                 RoutineUtils.routineSelId = routine.getId();
 
-                ArrayList<String> splitDaysString = new ArrayList<>(Arrays.asList(routine.getDaysOfWeek().split(",")));
-                //Log.i("split Days",splitDaysString.toString());
-                RoutineUtils.daysOfWeekSelected = splitDaysString;
-                //   for(int i = 0; i < RoutineUtils.daysOfWeekSelected.size(); i++){
-                //    Log.i("routine adapter, day of week","i: "+i+","+RoutineUtils.daysOfWeekSelected.get(i));
-                // }
+                RoutineUtils.daysOfWeekSelected = new ArrayList<>(Arrays.asList(routine.getDaysOfWeek().split(",")));
+
                 context.startActivity(new Intent(context, AddHabitsActivity.class));
             });
         }
@@ -157,25 +176,33 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHold
         return routineList.size();
     }
 
+    public void setData(ArrayList<RoutineModel> newData) {
+        routineList = newData;
+        notifyDataSetChanged(); // Notify the adapter that the data has changed
+    }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public TextView routineText;
         private final RecyclerView habitRecyclerView;
+        private final ViewStub habitsRVStub;
+        private final View inflatedLayout;
         public ImageButton hideShowBtn;
         private final TextView startTimeTV;
         private final ImageButton moreBtn;
         private final TextView routineTally;
-        private final CardView routineCard;
 
         public ViewHolder(View view){
             super(view);
             startTimeTV = view.findViewById(R.id.startTimeTV);
             routineText = view.findViewById(R.id.routineTV);
-            habitRecyclerView = view.findViewById(R.id.habitRecyclerView);
             hideShowBtn = view.findViewById(R.id.hideShowBtn);
             moreBtn = view.findViewById(R.id.moreToDo);
             routineTally = view.findViewById(R.id.routineTallyTV);
-            routineCard = view.findViewById(R.id.routineCard);
+
+            habitsRVStub = view.findViewById(R.id.habitsRVStub);
+            inflatedLayout = habitsRVStub.inflate();
+            habitRecyclerView = inflatedLayout.findViewById(R.id.habitRecyclerView);
         }
     }
 
