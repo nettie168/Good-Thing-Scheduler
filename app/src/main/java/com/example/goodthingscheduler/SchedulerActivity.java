@@ -2,7 +2,6 @@ package com.example.goodthingscheduler;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -75,7 +74,7 @@ public class SchedulerActivity extends AppCompatActivity {
     Boolean isAllFabsVisible;
     Boolean isWaving;
 
-    public Button xpCountBtn;
+    public static Button xpCountBtn;
 
 
 
@@ -92,7 +91,6 @@ public class SchedulerActivity extends AppCompatActivity {
     public XPDayDBHandler xpDayDBHandler;
 
     private RecyclerView daysGoalsRecyclerView;
-    private View noToDoPlaceHolderLayout;
     ToDoThingAdapter toDoThingAdapter;
 
     RoutineAdapter routineAdapter;
@@ -105,22 +103,18 @@ public class SchedulerActivity extends AppCompatActivity {
         //the refresh procedure is here
         super.onRestart();
         //re-set today's XP to XP of day in DB
-        XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
-
-        //re-set XP menu button to today's XP
-        xpCountBtn.setText(String.valueOf(XPUtils.dayXP.getXp()));
+        new XPUtilsTask(xpDayDBHandler).execute();
 
         //refresh goals/to-dos
 
         //refresh routines&habits
         //Execute AsyncTask to update Routines and Habits from DB
-        new Database2AsyncTask(routineAdapter, routineListDBHandler, habitListDBHandler, dailyHabitsDBHandler).execute();
+        new RoutineHabitsAsyncTask(routineAdapter, routineListDBHandler, habitListDBHandler, dailyHabitsDBHandler).execute();
         //re-set Categories and Calendar
-        setCategoryUtils();
+        //setCategoryUtils();
+        new CategoryUtilsTask(goodCategoriesDB);
         setCalendarUtils();
     }
-
-
 
     //Action Bar Menu with XP button
     // shows XP of that day (button opens activity with month XP graph)
@@ -129,21 +123,20 @@ public class SchedulerActivity extends AppCompatActivity {
 
         //inflate menu
         getMenuInflater().inflate(R.menu.main, menu);
-
-        //get XP button in menu
         MenuItem item = menu.findItem(R.id.xp_item);
-        MenuItemCompat.setActionView(item, R.layout.xp_action_bar_button);
-        xpCountBtn = (Button)MenuItemCompat.getActionView(item);
+        item.setActionView(R.layout.xp_action_bar_button);
+        xpCountBtn = item.getActionView().findViewById(R.id.xpCountActionBarBtn);
 
-        setXPUtils();
-        xpCountBtn.setOnClickListener(view ->  startActivity(new Intent(getApplicationContext(), XPGoalActivity.class))
-        );
+        xpCountBtn.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), XPGoalActivity.class)));
 
-        //XP Goal Button
+        //setXPUtils();
+        setCalendarUtils();
+        new XPUtilsTask(xpDayDBHandler).execute();
+
+        //XP Goal Button//
         MenuItem item1 = menu.findItem(R.id.xp_goal);
-        MenuItemCompat.setActionView(item1, R.layout.xp_goal_action_bar_button);
-        ImageButton xpGoalBtn;
-        xpGoalBtn = (ImageButton) MenuItemCompat.getActionView(item1);
+        item1.setActionView(R.layout.xp_goal_action_bar_button);
+        ImageButton xpGoalBtn = item1.getActionView().findViewById(R.id.xpGoalActionBarBtn);
 
         xpGoalBtn.setOnClickListener(view ->  startActivity(new Intent(getApplicationContext(), ChallengesActivity.class)));
 
@@ -157,29 +150,20 @@ public class SchedulerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //set Action Bar, turns colour to skyblue/#70ccfd, removes title and elevation
-        ActionBar bar = getSupportActionBar();
-        //Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#70ccfd"))); //"#2f004d"
-        Objects.requireNonNull(bar).setElevation(0);
-        bar.setTitle("");
+        setActionBar();
 
         //set/initialise Databases (DBs)
-        goodCategoriesDB = new GoodCategoriesDB(this);
-        xpDayDBHandler = new XPDayDBHandler(this);
-        habitListDBHandler = new HabitListDBHandler(this);
-        dailyHabitsDBHandler = new DailyHabitsDBHandler(this);
-        routineListDBHandler = new RoutineListDBHandler(this);
-        toDoThingsDB = new ToDoThingsDB(this);
+        initDB();
 
         //set Calendar Values (eg. the day and category selected)
         setCalendarUtils();
-        setCategoryUtils();
+        //add first category
+        new CategoryUtilsTask(goodCategoriesDB);
 
         //set Selector for Date
         setDateSelector();
         //set Character Animation
-        setCharacter();
-        //set Daily Routines Recycler View
-        //setRoutineRecyclerView();
+        //setCharacter();
 
         //set Buttons
         setBottomNavMenu();
@@ -187,9 +171,9 @@ public class SchedulerActivity extends AppCompatActivity {
         setFabButtons();
 
         //work-in-progress
-        setReflections();
+        //setReflections();
 
-        //SET UP DAILY TO DOS//
+        //==SET UP DAILY TO DOS==//
         //Recycler View and Empty Placeholder
         daysGoalsRecyclerView = findViewById(R.id.daysGoalsRV);
 
@@ -202,12 +186,12 @@ public class SchedulerActivity extends AppCompatActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this, mNoOfColumns);
         daysGoalsRecyclerView.setLayoutManager(layoutManager);
 
-        //Execute AsyncTask to retrieve To Dos from the database
-        //And update adapter
+        //Execute AsyncTask to retrieve To Dos from the database and update adapter
         //Think there's a resource failing to close in DatabaseAsync
-        new DatabaseAsyncTask(this, toDoThingAdapter, toDoThingsDB).execute();
+        new ToDoAsyncTask(this, toDoThingAdapter, toDoThingsDB).execute();
 
-        //Set UP DAILY ROUTINES
+
+        //==Set UP DAILY ROUTINES==//
         //Recycler View and Empty Placeholder
         RecyclerView routineRecyclerView = findViewById(R.id.RoutinesRecyclerView);
 
@@ -220,27 +204,27 @@ public class SchedulerActivity extends AppCompatActivity {
 
         //Execute AsyncTask to retrieve Routines from the database
         //And update adapter
-        new Database2AsyncTask(routineAdapter, routineListDBHandler, habitListDBHandler, dailyHabitsDBHandler).execute();
+        new RoutineHabitsAsyncTask(routineAdapter, routineListDBHandler, habitListDBHandler, dailyHabitsDBHandler).execute();
 
 
         //ImageButton sceneLocaterBtn = findViewById(R.id.locateBtn);
         //sceneLocaterBtn.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), SceneLocationActivity.class)));
     }
 
-    private void setCategoryUtils(){
-        //To be Multithread
-        //if no categories in DB, adds one
-        if(goodCategoriesDB.listAllGoodCatsDB().isEmpty()){
-            goodCategoriesDB.addGoodCategory(new GoodCategoryModel(0, "All Good Things (To Do)", R.drawable.snowy_mountain, R.drawable.ic_baseline_favorite_24));
-        }
+    private void setActionBar(){
+        ActionBar bar = getSupportActionBar();
+        //Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#70ccfd"))); //"#2f004d"
+        Objects.requireNonNull(bar).setElevation(0);
+        bar.setTitle("");
+    }
 
-        //sets category utils needed for the categories in adding to-dos (in To Do Activity)
-        CategoriesUtil.categorySelected = "All Good Things (To Do)";
-        CategoriesUtil.stateSelected = "To Do";
-        CategoriesUtil.goodThingId = -1;
-        CategoriesUtil.goodThing="";
-        CategoriesUtil.categoryImgId = R.drawable.snowy_mountain;
-        CategoriesUtil.categoryLogoId = R.drawable.ic_baseline_favorite_24;
+    private void initDB(){
+        goodCategoriesDB = new GoodCategoriesDB(this);
+        xpDayDBHandler = new XPDayDBHandler(this);
+        routineListDBHandler = new RoutineListDBHandler(this);
+        habitListDBHandler = new HabitListDBHandler(this);
+        dailyHabitsDBHandler = new DailyHabitsDBHandler(this);
+        toDoThingsDB = new ToDoThingsDB(this);
     }
 
     private void setCalendarUtils(){
@@ -251,22 +235,84 @@ public class SchedulerActivity extends AppCompatActivity {
         RoutineUtils.routineSel = "";
         RoutineUtils.daysOfWeekSelected = new ArrayList<>();
         RoutineUtils.routineHabitList = new ArrayList<>();
+
+        CategoriesUtil.categorySelected = "All Good Things (To Do)";
+        CategoriesUtil.stateSelected = "To Do";
+        CategoriesUtil.goodThingId = -1;
+        CategoriesUtil.goodThing="";
+        CategoriesUtil.categoryImgId = R.drawable.snowy_mountain;
+        CategoriesUtil.categoryLogoId = R.drawable.ic_baseline_favorite_24;
     }
 
-    private void setXPUtils(){
-        //set day's XP to XP from DB for selected date
-        XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
+    private static class CategoryUtilsTask extends AsyncTask<Void, Void, Void> {
+        private final GoodCategoriesDB goodCategoriesDB;
 
-        //if there's no DB entry for selected date
-        //sets XP for selected date
-        if(XPUtils.dayXP.getDate().equals("no xp for date")){
-            //add new XP day with that date, xp=0;
-            xpDayDBHandler.addDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(),0));
-            XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
+        CategoryUtilsTask(GoodCategoriesDB dbHelper) {
+            goodCategoriesDB = dbHelper;
         }
 
-        //set XP menu button to today's XP
-        xpCountBtn.setText(String.valueOf(XPUtils.dayXP.getXp())); //xpCount where is it initialised?
+        @Override
+        protected Void doInBackground(Void... voids) {
+            Log.i("Category Utils Background","start");
+            setCategoryUtils();
+            performBackground();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            // Handle any post-execution tasks if needed
+        }
+
+        private void setCategoryUtils(){
+            //if no categories in DB, adds one
+            Log.i("Category Utils Background","before add category");
+            if(goodCategoriesDB.listAllGoodCatsDB().isEmpty()){
+                Log.i("Category Utils Background","in add category");
+                goodCategoriesDB.addGoodCategory(new GoodCategoryModel(0, "All Good Things (To Do)", R.drawable.snowy_mountain, R.drawable.ic_baseline_favorite_24));
+            }
+        }
+
+        private void performBackground(){
+            //sets category utils needed for the categories in adding to-dos (in To Do Activities)
+            Log.i("Category Utils Background","set category");
+        }
+
+    }
+
+
+    private static class XPUtilsTask extends AsyncTask<Void, Void, Void> {
+        private final XPDayDBHandler xpDayDBHandler;
+
+        XPUtilsTask(XPDayDBHandler dbHelper) {
+            xpDayDBHandler = dbHelper;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            setXPUtils();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            // Handle any post-execution tasks if needed
+            //set XP menu button to today's XP
+            xpCountBtn.setText(String.valueOf(XPUtils.dayXP.getXp())); //xpCount where is it initialised?
+        }
+
+        private synchronized void setXPUtils() {
+            //set day's XP to XP from DB for selected date
+            XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
+
+            //if there's no DB entry for selected date
+            //sets XP for selected date
+            if(XPUtils.dayXP.getDate().equals("no xp for date")){
+                //add new XP day with that date, xp=0;
+                xpDayDBHandler.addDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(),0));
+                XPUtils.dayXP = xpDayDBHandler.todayXP(CalendarUtils.selectedDate.toString());
+            }
+        }
     }
 
     private void setCharacter(){
@@ -285,7 +331,6 @@ public class SchedulerActivity extends AppCompatActivity {
             }
         });
     }
-
 
     private void setReflections(){
         Button reflectionBtn = findViewById(R.id.reflectionBtn);
@@ -347,7 +392,7 @@ public class SchedulerActivity extends AppCompatActivity {
     }
 
 
-    private static class DatabaseAsyncTask extends AsyncTask<Void, Void, ArrayList<ToDoThingModel>> {
+    private static class ToDoAsyncTask extends AsyncTask<Void, Void, ArrayList<ToDoThingModel>> {
         private final WeakReference<SchedulerActivity> activityReference;
         private final WeakReference<ToDoThingAdapter> adapterReference;
         private final ToDoThingsDB toDoThingsDB;
@@ -357,7 +402,7 @@ public class SchedulerActivity extends AppCompatActivity {
 
 
 
-        DatabaseAsyncTask(SchedulerActivity activity, ToDoThingAdapter adapter, ToDoThingsDB dbHelper) {
+        ToDoAsyncTask(SchedulerActivity activity, ToDoThingAdapter adapter, ToDoThingsDB dbHelper) {
             activityReference = new WeakReference<>(activity);
             adapterReference = new WeakReference<>(adapter);
             toDoThingsDB = dbHelper;
@@ -427,7 +472,7 @@ public class SchedulerActivity extends AppCompatActivity {
     }
 
 
-    private static class Database2AsyncTask extends AsyncTask<Void, Void, ArrayList<RoutineModel>> {
+    private static class RoutineHabitsAsyncTask extends AsyncTask<Void, Void, ArrayList<RoutineModel>> {
         private final WeakReference<RoutineAdapter> adapterReference;
         private final RoutineListDBHandler routineListDBHandler;
         private final DailyHabitsDBHandler dailyHabitsDBHandler;
@@ -435,7 +480,7 @@ public class SchedulerActivity extends AppCompatActivity {
         private ArrayList<RoutineModel> routineHabitList = new ArrayList<>();
 
 
-        Database2AsyncTask(RoutineAdapter adapter, RoutineListDBHandler dbHelper, HabitListDBHandler dbHelper2, DailyHabitsDBHandler dbHelper3) {
+        RoutineHabitsAsyncTask(RoutineAdapter adapter, RoutineListDBHandler dbHelper, HabitListDBHandler dbHelper2, DailyHabitsDBHandler dbHelper3) {
             adapterReference = new WeakReference<>(adapter);
             //DB for saved routines
             routineListDBHandler = dbHelper;
@@ -503,8 +548,6 @@ public class SchedulerActivity extends AppCompatActivity {
                 routineHabitList.add(routineModel);
             }
         }
-
-
     }
 
 
@@ -576,13 +619,13 @@ public class SchedulerActivity extends AppCompatActivity {
 
         ScrollView scrollView = findViewById(R.id.ScheduleScrollView);
 
-        scrollView.setOnScrollChangeListener((ScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+        scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             // the delay of the extension of the FAB is set for 12 items
             if (scrollY > oldScrollY + 4 && addFab.isShown()){ // && addFab.isExtended()) {
                 //addFab.shrink();
                 addRoutine.hide();
                 addToDo.hide();
-                addFab.shrink();
+                //addFab.shrink();
                 addFab.hide();
                 isAllFabsVisible = false;
             }
@@ -608,18 +651,22 @@ public class SchedulerActivity extends AppCompatActivity {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusDays(1);
         dateView.setText(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
         //Execute AsyncTask to update new To Dos from DB
-        new DatabaseAsyncTask(this, toDoThingAdapter, toDoThingsDB).execute();
+        new ToDoAsyncTask(this, toDoThingAdapter, toDoThingsDB).execute();
         //Execute AsyncTask to update Routines and Habits from DB
-        new Database2AsyncTask(routineAdapter, routineListDBHandler, habitListDBHandler, dailyHabitsDBHandler).execute();        setXPUtils();
+        new RoutineHabitsAsyncTask(routineAdapter, routineListDBHandler, habitListDBHandler, dailyHabitsDBHandler).execute();
+        //setXPUtils();
+        new XPUtilsTask(xpDayDBHandler).execute();
     }
 
     public void nextDay(){
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusDays(1);
         dateView.setText(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
         //Execute AsyncTask to update new To Dos from DB
-        new DatabaseAsyncTask(this, toDoThingAdapter, toDoThingsDB).execute();
+        new ToDoAsyncTask(this, toDoThingAdapter, toDoThingsDB).execute();
         //Execute AsyncTask to update Routines and Habits from DB
-        new Database2AsyncTask(routineAdapter, routineListDBHandler, habitListDBHandler, dailyHabitsDBHandler).execute();        setXPUtils();
+        new RoutineHabitsAsyncTask(routineAdapter, routineListDBHandler, habitListDBHandler, dailyHabitsDBHandler).execute();
+        //setXPUtils();
+        new XPUtilsTask(xpDayDBHandler).execute();
     }
 
 
@@ -630,45 +677,42 @@ public class SchedulerActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.schedule);
 
         // Perform item selected listener
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+        bottomNavigationView.setOnItemReselectedListener(item -> {});
 
-            switch(item.getItemId()) {
-                case R.id.calendar:
-                    finish();
-                    startActivity(new Intent(getApplicationContext(),CalendarActivity.class));
-                    //overridePendingTransition(0,0);
-                    return true;
-                case R.id.goodThings:
-                    finish();
-                    startActivity(new Intent(getApplicationContext(),ToDoListActivity.class));
-                    //overridePendingTransition(0,0);
-                    return true;
-                case R.id.schedule:
-                    return true;
-            }
-            return false;
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.calendar) {
+                finish();
+                startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
+                return true;
+            } else if (itemId == R.id.goodThings) {
+                finish();
+                startActivity(new Intent(getApplicationContext(), ToDoListActivity.class));
+                return true;
+            } else return itemId == R.id.schedule;
         });
+
     }
 
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        if(habitListDBHandler != null){
-            habitListDBHandler.close();
+        if(xpDayDBHandler != null)
+            xpDayDBHandler.close();
+        if(goodCategoriesDB != null){
+            goodCategoriesDB.close();
         }
         if(routineListDBHandler != null){
             routineListDBHandler.close();
         }
+        if(habitListDBHandler != null){
+            habitListDBHandler.close();
+        }
         if(dailyHabitsDBHandler != null){
             dailyHabitsDBHandler.close();
-        }
-        if(goodCategoriesDB != null){
-            goodCategoriesDB.close();
         }
         if(toDoThingsDB != null){
             toDoThingsDB.close();
         }
-        if(xpDayDBHandler != null)
-            xpDayDBHandler.close();
     }
 }
