@@ -112,7 +112,7 @@ public class SchedulerActivity extends AppCompatActivity {
         new RoutineHabitsAsyncTask(routineAdapter, routineListDBHandler, habitListDBHandler, dailyHabitsDBHandler).execute();
         //re-set Categories and Calendar
         //setCategoryUtils();
-        new CategoryUtilsTask(goodCategoriesDB);
+        new CategoryUtilsTask(goodCategoriesDB).execute();
         setCalendarUtils();
     }
 
@@ -158,7 +158,7 @@ public class SchedulerActivity extends AppCompatActivity {
         //set Calendar Values (eg. the day and category selected)
         setCalendarUtils();
         //add first category
-        new CategoryUtilsTask(goodCategoriesDB);
+        new CategoryUtilsTask(goodCategoriesDB).execute();
 
         //set Selector for Date
         setDateSelector();
@@ -435,7 +435,6 @@ public class SchedulerActivity extends AppCompatActivity {
                     adapter.setData(data);
                 });
             }
-
         }
 
         private void performBackground1(){
@@ -466,9 +465,7 @@ public class SchedulerActivity extends AppCompatActivity {
                 noToDoList.add(noToDo);
                 daysTodos = noToDoList;
             }
-
         }
-
     }
 
 
@@ -669,8 +666,6 @@ public class SchedulerActivity extends AppCompatActivity {
         new XPUtilsTask(xpDayDBHandler).execute();
     }
 
-
-
     public void setBottomNavMenu(){
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottomNavigationView);
 
@@ -691,7 +686,6 @@ public class SchedulerActivity extends AppCompatActivity {
                 return true;
             } else return itemId == R.id.schedule;
         });
-
     }
 
     @Override

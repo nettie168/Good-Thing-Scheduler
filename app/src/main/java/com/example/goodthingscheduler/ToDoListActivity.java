@@ -10,14 +10,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.goodthingscheduler.toDoAdd.CategoryTagsAdapter;
 import com.example.goodthingscheduler.toDoAdd.ItemClickListener;
 import com.example.goodthingscheduler.toDoAdd.ToDoAddThingActivity;
-import com.example.goodthingscheduler.toDoAdd.ToDoTimesTagAdapter;
 import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
 import com.example.goodthingscheduler.toDoCategories.GoodCategoriesDB;
 import com.example.goodthingscheduler.toDoCategories.GoodCategoryModel;
@@ -32,6 +28,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class ToDoListActivity extends AppCompatActivity {
 
@@ -40,6 +41,8 @@ public class ToDoListActivity extends AppCompatActivity {
     ItemClickListener itemClickListener;
     CategorySelectorAdapter categorySelectorAdapter;
     private GoodCategoriesDB goodCategoriesDB;
+    private RecyclerView categorySelectorRV;
+    private RecyclerView goodThingsRV;
 
     @Override
     public void onRestart() {
@@ -54,15 +57,8 @@ public class ToDoListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_do_list);
-        //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.baseline_chevron_left_24);
-        //getSupportActionBar().setTitle("To Dos -"+" "+CategoriesUtil.categorySelected); //string is custom name you want
-       // getSupportActionBar().setTitle("My Good Things");
-        Objects.requireNonNull(getSupportActionBar()).setTitle("");
-        //getSupportActionBar().setBackgroundDrawable(null);
-        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#70ccfd")));
-        getSupportActionBar().setElevation(0);
-        //setBackgroundDrawable(new ColorDrawable(Color.parseColor("#70ccfd")));
+
+        setActionBar();
 
         toDoThingsDB = new ToDoThingsDB(this);
         goodCategoriesDB = new GoodCategoriesDB(this);
@@ -73,8 +69,23 @@ public class ToDoListActivity extends AppCompatActivity {
         setGoodTitleView();
         setBottomNavMenu();
         setAddThingFab();
+        goodThingsRV = findViewById(R.id.goodThingsRV);
         setGoodThingsRecyclerView();
+
+        categorySelectorRV = findViewById(R.id.categoryRVSelector);
         setCategorySelector();
+    }
+
+    private void setActionBar(){
+        //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.baseline_chevron_left_24);
+        //getSupportActionBar().setTitle("To Dos -"+" "+CategoriesUtil.categorySelected); //string is custom name you want
+        // getSupportActionBar().setTitle("My Good Things");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("");
+        //getSupportActionBar().setBackgroundDrawable(null);
+        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#70ccfd")));
+        getSupportActionBar().setElevation(0);
+        //setBackgroundDrawable(new ColorDrawable(Color.parseColor("#70ccfd")));
     }
 
     private void setGoodTitleView(){
@@ -88,20 +99,21 @@ public class ToDoListActivity extends AppCompatActivity {
     }
 
     private void setCategorySelector(){
-        RecyclerView categorySelectorRV = findViewById(R.id.categoryRVSelector);
-
-        // Initialize listener
+        // Initialize listener for categories
         itemClickListener = s -> {
-            // Notify adapter
+            //when a category button is selected update the adapter
             categorySelectorRV.post(() -> categorySelectorAdapter.notifyDataSetChanged());
+            //update Title/Img/RV to selected category
             CategoriesUtil.categorySelected = s;
             setGoodTitleView();
             setGoodThingsRecyclerView();
         };
 
+        //lists all saved categories
         ArrayList<GoodCategoryModel> categoryList = goodCategoriesDB.listAllGoodCatsDB();
         categoryList.add(new GoodCategoryModel(0, "add category", R.drawable.snowy_mountain, R.drawable.ic_baseline_add_24));
 
+        //displays all saved categories
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         //layoutManager.setReverseLayout(true);
         //layoutManager.setStackFromEnd(true);
@@ -110,18 +122,73 @@ public class ToDoListActivity extends AppCompatActivity {
         categorySelectorRV.setAdapter(categorySelectorAdapter);
     }
 
-    private void setGoodThingsRecyclerView(){
-        RecyclerView goodThingsRV = findViewById(R.id.goodThingsRV);
+  /*  private void setCategorySelector(){
+        RecyclerView categorySelectorRV = findViewById(R.id.categoryRVSelector);
 
+        // Create an ExecutorService with a fixed pool of threads
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+
+        // Submit the task to load categories
+        Future<ArrayList<GoodCategoryModel>> future = executorService.submit(new LoadCategoriesTask());
+
+        // Initialize listener
+        itemClickListener = s -> {
+            // Notify adapter
+            // Submit tasks for execution
+            executorService.submit(() -> {
+                // Notify adapter
+                categorySelectorRV.post(() -> categorySelectorAdapter.notifyDataSetChanged());
+
+                // Update UI on the main thread
+                runOnUiThread(() -> {
+                    CategoriesUtil.categorySelected = s;
+                    setGoodTitleView();
+                    setGoodThingsRecyclerView();
+                 });
+            });
+        };
+
+        // Retrieve the result when the task is complete
+        try {
+            ArrayList<GoodCategoryModel> categoryList = future.get();
+
+            // Update UI on the main thread with the loaded categories
+            runOnUiThread(() -> {
+                // Add a default category
+                categoryList.add(new GoodCategoryModel(0, "add category", R.drawable.snowy_mountain, R.drawable.ic_baseline_add_24));
+
+                // Initialize RecyclerView and Adapter
+                LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+                categorySelectorRV.setLayoutManager(layoutManager);
+                categorySelectorAdapter = new CategorySelectorAdapter(categoryList, itemClickListener, this);
+                categorySelectorRV.setAdapter(categorySelectorAdapter);
+            });
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            // Shutdown the executor to release resources
+            executorService.shutdown();
+        }*/
+
+  //  }*/
+
+  /*  private class LoadCategoriesTask implements Callable<ArrayList<GoodCategoryModel>> {
+        @Override
+        public ArrayList<GoodCategoryModel> call() {
+            // Perform potentially time-consuming operations (e.g., database query) here
+            return goodCategoriesDB.listAllGoodCatsDB();
+        }
+    }*/
+
+    private void setGoodThingsRecyclerView(){
         ArrayList<String> categoryList = toDoThingsDB.listGoodCatDB(); //seems to be working
         ArrayList<String> stateList = toDoThingsDB.listGoodStatesInCatDB(categoryList);
 
         if(CategoriesUtil.categorySelected.equals("All Good Things (To Do)")){
             thingsInState = toDoThingsDB.listAllGoodThings(stateList);
-          //  Log.i("ToDoListAct","is not all things");
         }else {
             thingsInState = toDoThingsDB.listGoodThingsInStateInCatDB(CategoriesUtil.categorySelected, stateList);
-        //    Log.i("ToDoListAct","is all things");
         }
 
         if(thingsInState.isEmpty()){
@@ -161,7 +228,6 @@ public class ToDoListActivity extends AppCompatActivity {
                 //addFab.shrink();
                 addNewGoodThing.hide();
             }
-
             // the delay of the extension of the FAB is set for 12 items
             if (scrollY < oldScrollY - 8){ // && !addFab.isExtended()) {
                 //addFab.extend();
@@ -183,23 +249,19 @@ public class ToDoListActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.goodThings);
 
         // Perform item selected listener
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+        bottomNavigationView.setOnItemReselectedListener(item -> {});
 
-            switch(item.getItemId()) {
-                case R.id.calendar:
-                    finish();
-                    startActivity(new Intent(getApplicationContext(),CalendarActivity.class));
-                    overridePendingTransition(0,0);
-                    return true;
-                case R.id.goodThings:
-                    return true;
-                case R.id.schedule:
-                    finish();
-                    startActivity(new Intent(getApplicationContext(),SchedulerActivity.class));
-                    overridePendingTransition(0,0);
-                    return true;
-            }
-            return false;
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.calendar) {
+                finish();
+                startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
+                return true;
+            } else if (itemId == R.id.schedule) {
+                finish();
+                startActivity(new Intent(getApplicationContext(),SchedulerActivity.class));
+                return true;
+            } else return itemId == R.id.goodThings;
         });
     }
 
