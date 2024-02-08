@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -25,31 +26,28 @@ import com.example.goodthingscheduler.toDoThings.ToDoThingsDB;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.lang.ref.WeakReference;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 public class ToDoListActivity extends AppCompatActivity {
 
     ToDoThingsDB toDoThingsDB;
-    ArrayList<ToDoStatesModel> thingsInState;
     ItemClickListener itemClickListener;
     CategorySelectorAdapter categorySelectorAdapter;
     private GoodCategoriesDB goodCategoriesDB;
     private RecyclerView categorySelectorRV;
-    private RecyclerView goodThingsRV;
+    private ToDoStateAdapter goodThingsAdapter;
 
     @Override
     public void onRestart() {
         super.onRestart();
         setCategorySelector();
         setGoodTitleView();
-        setGoodThingsRecyclerView();
+        //setGoodThingsRecyclerView();
+        new GoodThingsAsyncTask(goodThingsAdapter, toDoThingsDB).execute();
+
         //When BACK BUTTON is pressed, the activity on the stack is restarted
     }
 
@@ -69,8 +67,15 @@ public class ToDoListActivity extends AppCompatActivity {
         setGoodTitleView();
         setBottomNavMenu();
         setAddThingFab();
-        goodThingsRV = findViewById(R.id.goodThingsRV);
-        setGoodThingsRecyclerView();
+        RecyclerView goodThingsRV = findViewById(R.id.goodThingsRV);
+        //setGoodThingsRecyclerView();
+
+        int mNoOfColumns = CategoriesUtil.calculateNoOfColumns(getApplicationContext(),400);
+        goodThingsAdapter = new ToDoStateAdapter(new ArrayList<>(), this);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, mNoOfColumns);
+        goodThingsRV.setLayoutManager(layoutManager);
+        goodThingsRV.setAdapter(goodThingsAdapter);
+        new GoodThingsAsyncTask(goodThingsAdapter, toDoThingsDB).execute();
 
         categorySelectorRV = findViewById(R.id.categoryRVSelector);
         setCategorySelector();
@@ -106,7 +111,8 @@ public class ToDoListActivity extends AppCompatActivity {
             //update Title/Img/RV to selected category
             CategoriesUtil.categorySelected = s;
             setGoodTitleView();
-            setGoodThingsRecyclerView();
+            //setGoodThingsRecyclerView();
+            new GoodThingsAsyncTask(goodThingsAdapter, toDoThingsDB).execute();
         };
 
         //lists all saved categories
@@ -120,6 +126,38 @@ public class ToDoListActivity extends AppCompatActivity {
         categorySelectorRV.setLayoutManager(layoutManager);
         categorySelectorAdapter = new CategorySelectorAdapter(categoryList, itemClickListener, this); //, thisActivity);
         categorySelectorRV.setAdapter(categorySelectorAdapter);
+        new CategorySelectorAsyncTask(categorySelectorAdapter, goodCategoriesDB).execute();
+    }
+
+    private static class CategorySelectorAsyncTask extends AsyncTask<Void, Void, ArrayList<GoodCategoryModel>> {
+        private final WeakReference<CategorySelectorAdapter> adapterReference;
+        private final GoodCategoriesDB goodCategoriesDB;
+
+
+        CategorySelectorAsyncTask(CategorySelectorAdapter adapter, GoodCategoriesDB dbHelper) {
+            adapterReference = new WeakReference<>(adapter);
+            goodCategoriesDB = dbHelper;
+        }
+
+        @Override
+        protected ArrayList<GoodCategoryModel> doInBackground(Void... voids) {
+            // Perform database list on a background thread
+            //lists all saved categories
+            ArrayList<GoodCategoryModel> categoryList = goodCategoriesDB.listAllGoodCatsDB();
+            categoryList.add(new GoodCategoryModel(0, "add category", R.drawable.snowy_mountain, R.drawable.ic_baseline_add_24));
+            return categoryList;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<GoodCategoryModel> data) {
+            // Update the RecyclerView adapter with the retrieved data
+            CategorySelectorAdapter adapter = adapterReference.get();
+
+            if (adapter != null) {
+                adapter.setData(data);
+            }
+        }
+
     }
 
   /*  private void setCategorySelector(){
@@ -181,8 +219,10 @@ public class ToDoListActivity extends AppCompatActivity {
         }
     }*/
 
-    private void setGoodThingsRecyclerView(){
+    /*private void setGoodThingsRecyclerView(){
+        //Lists all the categories currently saved
         ArrayList<String> categoryList = toDoThingsDB.listGoodCatDB(); //seems to be working
+        //Lists the states of these categories (eg. To Do or Done)
         ArrayList<String> stateList = toDoThingsDB.listGoodStatesInCatDB(categoryList);
 
         if(CategoriesUtil.categorySelected.equals("All Good Things (To Do)")){
@@ -209,6 +249,59 @@ public class ToDoListActivity extends AppCompatActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this, mNoOfColumns);
         goodThingsRV.setLayoutManager(layoutManager);
         goodThingsRV.setAdapter(goodThingsAdapter);
+    }*/
+
+    private static class GoodThingsAsyncTask extends AsyncTask<Void, Void, ArrayList<ToDoStatesModel>> {
+        private final WeakReference<ToDoStateAdapter> adapterReference;
+        private final ToDoThingsDB toDoThingsDB;
+
+        private ArrayList<ToDoStatesModel> thingsInState;
+
+        GoodThingsAsyncTask(ToDoStateAdapter adapter, ToDoThingsDB dbHelper) {
+            adapterReference = new WeakReference<>(adapter);
+            toDoThingsDB = dbHelper;
+        }
+
+        @Override
+        protected ArrayList<ToDoStatesModel> doInBackground(Void... voids) {
+            // Perform database insert on a background thread
+            performBackground1();
+            return thingsInState;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<ToDoStatesModel> data) {
+            // Update the RecyclerView adapter with the retrieved data
+            ToDoStateAdapter adapter = adapterReference.get();
+
+            if (adapter != null) {
+                    adapter.setData(data);
+                }
+            }
+
+        private void performBackground1(){
+            //Lists all the categories currently saved
+            ArrayList<String> categoryList = toDoThingsDB.listGoodCatDB(); //seems to be working
+            //Lists the states of these categories (eg. To Do or Done)
+            ArrayList<String> stateList = toDoThingsDB.listGoodStatesInCatDB(categoryList);
+
+            if(CategoriesUtil.categorySelected.equals("All Good Things (To Do)")){
+                thingsInState = toDoThingsDB.listAllGoodThings(stateList);
+            }else {
+                thingsInState = toDoThingsDB.listGoodThingsInStateInCatDB(CategoriesUtil.categorySelected, stateList);
+            }
+
+            if(thingsInState.isEmpty()){
+                String helloMessage = "Add "+CategoriesUtil.categorySelected+" good thing or to do";
+                toDoThingsDB.addGoodThing(new ToDoThingModel(0, CategoriesUtil.categorySelected,helloMessage,"",CategoriesUtil.categoryLogoId,"#FFFFFF","To Do", LocalDate.now().toString(), "date not set","date not set","date"));
+            }
+
+            if(CategoriesUtil.categorySelected.equals("All Good Things (To Do)")){
+                thingsInState = toDoThingsDB.listAllGoodThings(stateList);
+            }else {
+                thingsInState = toDoThingsDB.listGoodThingsInStateInCatDB(CategoriesUtil.categorySelected, stateList);
+            }
+        }
     }
 
     private void setAddThingFab(){

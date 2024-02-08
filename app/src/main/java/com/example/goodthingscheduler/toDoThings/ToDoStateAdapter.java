@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class ToDoStateAdapter extends RecyclerView.Adapter<ToDoStateAdapter.ViewHolder> {
 
-    private final ArrayList<ToDoStatesModel> goodThingsStateList;
+    private ArrayList<ToDoStatesModel> goodThingsStateList;
     final private Context context;
 
     public ToDoStateAdapter(ArrayList<ToDoStatesModel> goodThingsStateList, Context context){
@@ -37,8 +37,8 @@ public class ToDoStateAdapter extends RecyclerView.Adapter<ToDoStateAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position){
         ToDoStatesModel goodThingState = goodThingsStateList.get(position);
-        holder.cardView.setCardBackgroundColor(Color.parseColor("#085c0f"));
-        holder.goodThingState.setTextColor(Color.WHITE);
+        //holder.cardView.setCardBackgroundColor(Color.parseColor("#085c0f"));
+        //holder.goodThingState.setTextColor(Color.WHITE);
         holder.goodThingState.setText(goodThingState.getState());
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(holder.goodThingsRV.getContext());
@@ -52,6 +52,11 @@ public class ToDoStateAdapter extends RecyclerView.Adapter<ToDoStateAdapter.View
     @Override
     public int getItemCount() {
         return goodThingsStateList.size();
+    }
+
+    public void setData(ArrayList<ToDoStatesModel> newData) {
+        goodThingsStateList = newData;
+        notifyDataSetChanged(); // Notify the adapter that the data has changed
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

@@ -3,14 +3,10 @@ package com.example.goodthingscheduler.toDoThings;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -20,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.goodthingscheduler.R;
 import com.example.goodthingscheduler.toDoAdd.AddNewCategoryActivity;
 import com.example.goodthingscheduler.toDoAdd.ItemClickListener;
-import com.example.goodthingscheduler.toDoAdd.ToDoAddThingActivity;
 import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
 import com.example.goodthingscheduler.toDoCategories.GoodCategoryModel;
 
@@ -30,10 +25,9 @@ public class CategorySelectorAdapter extends RecyclerView.Adapter<CategorySelect
 
   //  Activity mActivity;
 
-    final private ArrayList<GoodCategoryModel> categoryList;
+    private ArrayList<GoodCategoryModel> categoryList;
     final private ItemClickListener itemClickListener;
     final private Context context;
-    public Boolean isCatSelected;
     int selectedPosition = -1;
 
     public CategorySelectorAdapter(ArrayList<GoodCategoryModel> categoryList, ItemClickListener itemClickListener, Context context){ //, Activity mActivity){
@@ -103,6 +97,11 @@ public class CategorySelectorAdapter extends RecyclerView.Adapter<CategorySelect
     @Override
     public int getItemCount() {
         return categoryList.size();
+    }
+
+    public void setData(ArrayList<GoodCategoryModel> newData) {
+        categoryList = newData;
+        notifyDataSetChanged(); // Notify the adapter that the data has changed
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

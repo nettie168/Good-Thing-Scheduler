@@ -253,9 +253,7 @@ public class SchedulerActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            Log.i("Category Utils Background","start");
             setCategoryUtils();
-            performBackground();
             return null;
         }
 
@@ -266,16 +264,9 @@ public class SchedulerActivity extends AppCompatActivity {
 
         private void setCategoryUtils(){
             //if no categories in DB, adds one
-            Log.i("Category Utils Background","before add category");
             if(goodCategoriesDB.listAllGoodCatsDB().isEmpty()){
-                Log.i("Category Utils Background","in add category");
                 goodCategoriesDB.addGoodCategory(new GoodCategoryModel(0, "All Good Things (To Do)", R.drawable.snowy_mountain, R.drawable.ic_baseline_favorite_24));
             }
-        }
-
-        private void performBackground(){
-            //sets category utils needed for the categories in adding to-dos (in To Do Activities)
-            Log.i("Category Utils Background","set category");
         }
 
     }
@@ -501,7 +492,6 @@ public class SchedulerActivity extends AppCompatActivity {
             if (adapter != null) {
                 adapter.setData(data);
             }
-
         }
 
         private void performBackground1(){
