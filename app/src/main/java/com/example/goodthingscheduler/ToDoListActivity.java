@@ -116,15 +116,15 @@ public class ToDoListActivity extends AppCompatActivity {
         };
 
         //lists all saved categories
-        ArrayList<GoodCategoryModel> categoryList = goodCategoriesDB.listAllGoodCatsDB();
-        categoryList.add(new GoodCategoryModel(0, "add category", R.drawable.snowy_mountain, R.drawable.ic_baseline_add_24));
+        //ArrayList<GoodCategoryModel> categoryList = goodCategoriesDB.listAllGoodCatsDB();
+        //categoryList.add(new GoodCategoryModel(0, "add category", R.drawable.snowy_mountain, R.drawable.ic_baseline_add_24));
 
         //displays all saved categories
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         //layoutManager.setReverseLayout(true);
         //layoutManager.setStackFromEnd(true);
         categorySelectorRV.setLayoutManager(layoutManager);
-        categorySelectorAdapter = new CategorySelectorAdapter(categoryList, itemClickListener, this); //, thisActivity);
+        categorySelectorAdapter = new CategorySelectorAdapter(new ArrayList<>(), itemClickListener, this); //, thisActivity);
         categorySelectorRV.setAdapter(categorySelectorAdapter);
         new CategorySelectorAsyncTask(categorySelectorAdapter, goodCategoriesDB).execute();
     }
