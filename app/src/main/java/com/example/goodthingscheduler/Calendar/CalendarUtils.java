@@ -1,5 +1,7 @@
 package com.example.goodthingscheduler.Calendar;
 
+import android.util.Log;
+
 import com.example.goodthingscheduler.XPCount.XPCountModel;
 import com.example.goodthingscheduler.scheduleHabits.RoutineModel;
 
@@ -57,29 +59,17 @@ public class CalendarUtils {
         int daysInMonth = yearMonth.lengthOfMonth();
         LocalDate firstOfMonth = CalendarUtils.selectedDate.withDayOfMonth(1);
         int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
-
-       // ArrayList<String> daysInLastMonthArray = new ArrayList<>();
-     //   ArrayList<String> daysInNextMonthArray = new ArrayList<>();
-        //LocalDate firstOfLastMonth = selectedDate.minusMonths(1).withDayOfMonth(1);
+        Log.i("Calendar","day of week: "+dayOfWeek+firstOfMonth.getDayOfWeek().toString());
+//day of Week: 1 - Monday, 7 - Sunday
         int daysInLastMonth = yearMonth.minusMonths(1).lengthOfMonth();
-       // int daysInNextMonth = yearMonth.plusMonths(1).lengthOfMonth();
 
-        for(int i = 1; i<= 42; i++){ //i<=42
+        for(int i = 1  ; i<= 42; i++){ //i=1
             if(i <= dayOfWeek){
-                //daysInMonthArray.add(null);
                 daysInMonthArray.add(LocalDate.of(yearMonth.minusMonths(1).getYear(),selectedDate.minusMonths(1).getMonth(),daysInLastMonth-dayOfWeek+i));
-                // daysInMonthArray.add(LocalDate.of((daysInLastMonth-dayOfWeek+i)));
-               // daysInMonthArray.add(LocalDate.of(selectedDate.getYear(),selectedDate.minusMonths(1).getMonth(),i));
             }else if(i > daysInMonth + dayOfWeek){ // && i > 40){
-                //daysInMonthArray.add(null);
                 daysInMonthArray.add(LocalDate.of(yearMonth.plusMonths(1).getYear(),selectedDate.plusMonths(1).getMonth(),i-daysInMonth-dayOfWeek));
-            }
-          //  else if(i > daysInMonth + dayOfWeek && i >40){
-            //    daysInMonthArray.add(LocalDate.ofEpochDay(daysInNextMonth-i-1));
-            //}
-            else{
+            } else{
                 daysInMonthArray.add(LocalDate.of(selectedDate.getYear(),selectedDate.getMonth(),i-dayOfWeek));
-              //  daysInMonthArray.add(LocalDate.ofEpochDay(i - dayOfWeek));
             }
         }
 

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.lang.ref.WeakReference;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -73,20 +75,47 @@ public class CalendarActivity extends AppCompatActivity {
         FloatingActionButton addNewTask = findViewById(R.id.calendarFAB);
 
         monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
-        ArrayList<LocalDate> daysInMonth = CalendarUtils.daysInMonthArray(CalendarUtils.selectedDate);
 
-        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
+        CalendarAdapter calendarAdapter = new CalendarAdapter(new ArrayList<>(), this);
+        calendarRecyclerView.setAdapter(calendarAdapter);
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),7);
         calendarRecyclerView.setLayoutManager(layoutManager);
-        calendarRecyclerView.setAdapter(calendarAdapter);
 
         CategoriesUtil.goodThingId=-1;
         CategoriesUtil.goodThing="";
         CategoriesUtil.stateSelected="To Do";
 
+        new CalendarAsyncTask(calendarAdapter).execute();
+
         addNewTask.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), ToDoAddThingActivity.class)));
     }
+
+    private static class CalendarAsyncTask extends AsyncTask<Void, Void, ArrayList<LocalDate>> {
+        private final WeakReference<CalendarAdapter> adapterReference;
+
+        CalendarAsyncTask(CalendarAdapter adapter) {
+            adapterReference = new WeakReference<>(adapter);
+        }
+
+        @Override
+        protected ArrayList<LocalDate> doInBackground(Void... voids) {
+            // Perform database list on a background thread
+            return CalendarUtils.daysInMonthArray(CalendarUtils.selectedDate);
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<LocalDate> data) {
+            // Update the RecyclerView adapter with the retrieved data
+            CalendarAdapter adapter = adapterReference.get();
+
+            if (adapter != null) {
+                adapter.setData(data);
+            }
+        }
+    }
+
+
 
     private String monthYearFromDate(LocalDate date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM yy");
@@ -98,27 +127,20 @@ public class CalendarActivity extends AppCompatActivity {
 
         bottomNavigationView.setSelectedItemId(R.id.calendar);
 
-
         // Perform item selected listener
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+        bottomNavigationView.setOnItemReselectedListener(item -> {});
 
-         //   switch(item.getItemId()) {
-            if(item.getItemId()==R.id.schedule) {
-                //   case R.id.schedule:
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.goodThings) {
                 finish();
-                startActivity(new Intent(getApplicationContext(), SchedulerActivity.class));
-                //overridePendingTransition(0, 0);
-                //      return true;
-                //  case R.id.goodThings:
-            }else if(item.getItemId()==R.id.goodThings){
-                    finish();
-                    startActivity(new Intent(getApplicationContext(),ToDoListActivity.class));
-                   // overridePendingTransition(0,0);
-                 //   return true;
-            //    case R.id.calendar:
-              //      return true;
-            }
-            return false;
+                startActivity(new Intent(getApplicationContext(), ToDoListActivity.class));
+                return true;
+            } else if (itemId == R.id.schedule) {
+                finish();
+                startActivity(new Intent(getApplicationContext(),SchedulerActivity.class));
+                return true;
+            } else return itemId == R.id.calendar;
         });
     }
 

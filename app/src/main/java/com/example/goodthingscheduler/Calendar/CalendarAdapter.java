@@ -27,14 +27,13 @@ import java.time.YearMonth;
 import java.util.ArrayList;
 
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>{
-    private final ArrayList<LocalDate> days;
+    private ArrayList<LocalDate> days;
     private final Context context;
-    private ToDoThingsDB toDoThingsDB;
 
     public CalendarAdapter(ArrayList<LocalDate> days, Context context){
         this.days = days;
         this.context = context;
-        toDoThingsDB = new ToDoThingsDB(context);
+        ToDoThingsDB toDoThingsDB = new ToDoThingsDB(context);
     }
 
     @NonNull
@@ -55,9 +54,9 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
 
         final LocalDate date = days.get(position);
 
-        if(date.getDayOfWeek().equals(DayOfWeek.SATURDAY) || date.getDayOfWeek().equals(DayOfWeek.SUNDAY)){
+      /*  if(date.getDayOfWeek().equals(DayOfWeek.SATURDAY) || date.getDayOfWeek().equals(DayOfWeek.SUNDAY)){
             holder.dayCell.setCardBackgroundColor(Color.parseColor("#b8baf3"));
-        }
+        }*/
 
             holder.dayOfMonth.setText(String.valueOf(date.getDayOfMonth()));
 
@@ -67,7 +66,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
             }else
                 holder.dayImageView.setVisibility(View.GONE);
 
-        toDoThingsDB = new ToDoThingsDB(context.getApplicationContext());
+    /*    toDoThingsDB = new ToDoThingsDB(context.getApplicationContext());
         ArrayList<ToDoThingModel> toDoInDay = toDoThingsDB.listToDoInDayCatFilter(date); //toDoThingsDB.listToDoInDay(date);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(holder.eventsInDayRV.getContext(), LinearLayoutManager.VERTICAL,false);
@@ -75,7 +74,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
 
         CalendarEventsAdapter calendarEventsAdapter = new CalendarEventsAdapter(toDoInDay,context.getApplicationContext());
         holder.eventsInDayRV.setLayoutManager(layoutManager);
-        holder.eventsInDayRV.setAdapter(calendarEventsAdapter);
+        holder.eventsInDayRV.setAdapter(calendarEventsAdapter); */
 
 
         holder.dayCell.setOnClickListener(view -> {
@@ -90,9 +89,10 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
         int daysInMonth = yearMonth.lengthOfMonth();
 
         if (Integer.parseInt(String.valueOf(position)) < dayOfWeek || Integer.parseInt(String.valueOf(position)) > daysInMonth + dayOfWeek - 1) {
-                holder.dayOfMonth.setTextColor(Color.GRAY);
-                holder.dayCell.setAlpha((float) 0.5);
-            }
+            holder.dayOfMonth.setTextColor(Color.GRAY);
+            holder.dayCell.setAlpha((float) 0.5);
+            //holder.dayCell.setCardBackgroundColor(Color.GRAY);
+        }
     }
 
     @Override
@@ -105,11 +105,15 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
         void onItemClick(int position, LocalDate date);
     }*/
 
+    public void setData(ArrayList<LocalDate> newData) {
+        days = newData;
+        notifyDataSetChanged(); // Notify the adapter that the data has changed
+    }
+
     public static class CalendarViewHolder extends RecyclerView.ViewHolder {//implements View.OnClickListener{
 
         public final TextView dayOfMonth;
         private final CardView dayCell;
-        private final RecyclerView eventsInDayRV;
         private final ImageView dayImageView;
 
         public CalendarViewHolder(@NonNull View itemView) {
@@ -117,7 +121,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
             dayOfMonth = itemView.findViewById(R.id.cellDayText);
         //    itemView.setOnClickListener(this);
             dayCell = itemView.findViewById(R.id.calendarCellCard);
-            eventsInDayRV = itemView.findViewById(R.id.eventsDayRV);
+            RecyclerView eventsInDayRV = itemView.findViewById(R.id.eventsDayRV);
             dayImageView = itemView.findViewById(R.id.dayImageView);
         }
 
