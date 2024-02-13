@@ -22,4 +22,12 @@
         android:actionLayout="@layout/xp_goal_action_bar_button"
         app:showAsAction="ifRoom"/>
 
+    <item android:title="goodThings"
+        android:id="@+id/goodThingsItem"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:iconTint="@color/white"
+        android:iconTintMode="screen"
+        android:icon="@drawable/baseline_room_preferences_24"/>
+
 </menu>

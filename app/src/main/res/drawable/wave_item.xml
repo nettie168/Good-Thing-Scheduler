@@ -3,19 +3,23 @@
 
     <item
         android:drawable="@drawable/dragon0"
-        android:duration="500" />
+        android:duration="250" />
     <item
         android:drawable="@drawable/wave1"
-        android:duration="200" />
+        android:duration="250" />
     <item
         android:drawable="@drawable/wave2"
-        android:duration="200" />
+        android:duration="250" />
     <item
         android:drawable="@drawable/wave1"
-        android:duration="200" />
+        android:duration="250" />
 
     <item
         android:drawable="@drawable/dragon0"
         android:duration="250" />
+
+    <item
+        android:drawable="@drawable/dragon0"
+        android:duration="2500" />
 
 </animation-list>

@@ -120,7 +120,12 @@ public class ToDoListActivity extends AppCompatActivity {
         //categoryList.add(new GoodCategoryModel(0, "add category", R.drawable.snowy_mountain, R.drawable.ic_baseline_add_24));
 
         //displays all saved categories
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        //LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        int mNoOfColumns = CategoriesUtil.calculateNoOfColumns(getApplicationContext(),70); //80
+        GridLayoutManager layoutManager = new GridLayoutManager(this, mNoOfColumns);
+
+        //GridLayoutManager layoutManager = new GridLayoutManager(this, 6);
+
         //layoutManager.setReverseLayout(true);
         //layoutManager.setStackFromEnd(true);
         categorySelectorRV.setLayoutManager(layoutManager);

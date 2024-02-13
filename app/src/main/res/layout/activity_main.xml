@@ -47,7 +47,7 @@
         app:layout_constraintBottom_toTopOf="@id/addToDoFab"
         app:layout_constraintEnd_toEndOf="@id/fab"/>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/ScheduleScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -60,32 +60,51 @@
             >
 
 
-    <ImageView
-        android:id="@+id/dragonPic"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:cropToPadding="false"
-        android:scaleType="fitXY"
-        android:padding="10dp"
-        android:src="@drawable/mountainscenerect"
-        android:contentDescription="@string/beautiful_natural_scene"
-        app:layout_constraintTop_toTopOf="parent" />
+            <RelativeLayout
+                android:id="@+id/characterView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/dragonChar"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        app:layout_constraintVertical_weight="1"
-        android:src="@drawable/wave_item"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@id/dragonPic"
-        app:layout_constraintEnd_toEndOf="@id/dragonPic"
-        app:layout_constraintStart_toStartOf="@id/dragonPic"
-        app:layout_constraintTop_toTopOf="@id/dragonPic"
-        android:layout_marginBottom="5dp"
-        android:contentDescription="@string/a_happy_cheerful_dragon"
-        />
+                <ImageView
+                    android:id="@+id/categoryImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="false"
+                    android:scaleType="fitXY"
+                    android:background="@color/sky_blue"
+                    android:src="@drawable/mountainscenerect"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/dragonChar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/wave_item"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/dragonChar"
+                    android:layout_alignEnd="@id/dragonChar"
+                    android:layout_alignParentBottom="true"
+                    android:paddingBottom="107dp"
+                    android:src="@drawable/glasses160"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/dragonChar"
+                    android:layout_alignEnd="@id/dragonChar"
+                    android:layout_alignParentBottom="true"
+                    android:paddingBottom="31dp"
+                    android:src="@drawable/blackbelt160"/>
+
+            </RelativeLayout>
 
     <Button
         android:id="@+id/reflectionBtn"
@@ -94,11 +113,11 @@
         android:text="@string/how_s_your_day_going"
         android:textAllCaps="false"
         android:layout_gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/dragonPic"
+        app:layout_constraintTop_toBottomOf="@id/characterView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <Button
+            <Button
         android:id="@+id/scheduleBackBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -177,6 +196,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

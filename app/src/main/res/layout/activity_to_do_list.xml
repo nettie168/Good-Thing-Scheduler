@@ -40,7 +40,7 @@
         android:orientation="vertical">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -58,19 +58,31 @@
             <ImageView
                 android:id="@+id/dragonChar"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                app:layout_constraintVertical_weight="1"
+                android:layout_height="wrap_content"
                 android:src="@drawable/wave_item"
-                app:layout_constraintBottom_toBottomOf="@id/categoryImage"
-                app:layout_constraintEnd_toEndOf="@id/categoryImage"
-                app:layout_constraintStart_toStartOf="@id/categoryImage"
-                app:layout_constraintTop_toTopOf="@id/categoryImage"
-                android:layout_marginVertical="5dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
                 />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/dragonChar"
+                android:layout_alignEnd="@id/dragonChar"
+                android:layout_alignParentBottom="true"
+                android:paddingBottom="107dp"
+                android:src="@drawable/glasses160"/>
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/dragonChar"
+                android:layout_alignEnd="@id/dragonChar"
+                android:layout_alignParentBottom="true"
+                android:paddingBottom="31dp"
+                android:src="@drawable/blackbelt160"/>
 
+        </RelativeLayout>
 
         <!--       <androidx.constraintlayout.widget.ConstraintLayout
                    android:layout_width="match_parent"

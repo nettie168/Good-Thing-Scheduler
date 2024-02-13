@@ -2,6 +2,7 @@ package com.example.goodthingscheduler;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,7 +11,9 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -163,7 +166,7 @@ public class SchedulerActivity extends AppCompatActivity {
         //set Selector for Date
         setDateSelector();
         //set Character Animation
-        //setCharacter();
+        setCharacter();
 
         //set Buttons
         setBottomNavMenu();
@@ -213,7 +216,7 @@ public class SchedulerActivity extends AppCompatActivity {
 
     private void setActionBar(){
         ActionBar bar = getSupportActionBar();
-        //Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#70ccfd"))); //"#2f004d"
+        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#70ccfd"))); //"#2f004d"
         Objects.requireNonNull(bar).setElevation(0);
         bar.setTitle("");
     }
@@ -604,9 +607,9 @@ public class SchedulerActivity extends AppCompatActivity {
                 view -> startActivity(new Intent(getApplicationContext(), AddRoutineActivity.class)));
 
 
-        ScrollView scrollView = findViewById(R.id.ScheduleScrollView);
+        NestedScrollView scrollView = findViewById(R.id.ScheduleScrollView);
 
-        scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+        scrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             // the delay of the extension of the FAB is set for 12 items
             if (scrollY > oldScrollY + 4 && addFab.isShown()){ // && addFab.isExtended()) {
                 //addFab.shrink();

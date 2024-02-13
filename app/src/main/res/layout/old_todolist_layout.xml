@@ -69,6 +69,27 @@
                     android:layout_marginVertical="5dp"
                     />
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@id/categoryImage"
+                    app:layout_constraintEnd_toEndOf="@id/categoryImage"
+                    app:layout_constraintStart_toStartOf="@id/categoryImage"
+                    app:layout_constraintTop_toTopOf="@id/categoryImage"
+                    app:layout_constraintVertical_bias="0.2"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    android:src="@drawable/glasses"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@id/dragonChar"
+                    app:layout_constraintStart_toStartOf="@id/dragonChar"
+                    app:layout_constraintTop_toTopOf="@id/dragonChar"
+                    app:layout_constraintBottom_toBottomOf="@id/dragonChar"
+                    app:layout_constraintVertical_bias="0.65"
+                    android:src="@drawable/belt"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
