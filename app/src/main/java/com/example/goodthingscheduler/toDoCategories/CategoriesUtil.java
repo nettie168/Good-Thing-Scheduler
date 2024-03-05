@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CategoriesUtil {
     public static String categorySelected;
@@ -13,6 +14,9 @@ public class CategoriesUtil {
     public static String goodThing;
     public static String inspiredBy;
     public static int goodThingId;
+    public static int glassesSelected;
+    public static int bowSelected;
+    public static int beltSelected;
     public static ArrayList<GoodCategoryModel> categoryList = new ArrayList<>();
 
     public static ArrayList<String> filteredCategories = new ArrayList<>();

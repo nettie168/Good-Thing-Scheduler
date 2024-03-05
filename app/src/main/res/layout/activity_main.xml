@@ -87,6 +87,7 @@
                     />
 
                 <ImageView
+                    android:id="@+id/glassesView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@id/dragonChar"
@@ -96,6 +97,17 @@
                     android:src="@drawable/glasses160"/>
 
                 <ImageView
+                    android:id="@+id/bowView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/dragonChar"
+                    android:layout_alignEnd="@id/dragonChar"
+                    android:paddingTop="69dp"
+                    android:src="@drawable/bowblack"/>
+
+
+                <ImageView
+                    android:id="@+id/beltView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@id/dragonChar"
@@ -116,6 +128,16 @@
         app:layout_constraintTop_toBottomOf="@id/characterView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+            <ImageButton
+                android:id="@+id/wardrobeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="change wardrobe"
+                app:layout_constraintTop_toBottomOf="@id/characterView"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/baseline_room_preferences_24">
+            </ImageButton>
 
             <Button
         android:id="@+id/scheduleBackBtn"

@@ -117,6 +117,7 @@ public class SchedulerActivity extends AppCompatActivity {
         //setCategoryUtils();
         new CategoryUtilsTask(goodCategoriesDB).execute();
         setCalendarUtils();
+        setInspireOutfit();
     }
 
     //Action Bar Menu with XP button
@@ -167,6 +168,7 @@ public class SchedulerActivity extends AppCompatActivity {
         setDateSelector();
         //set Character Animation
         setCharacter();
+        setInspireOutfit();
 
         //set Buttons
         setBottomNavMenu();
@@ -209,7 +211,8 @@ public class SchedulerActivity extends AppCompatActivity {
         //And update adapter
         new RoutineHabitsAsyncTask(routineAdapter, routineListDBHandler, habitListDBHandler, dailyHabitsDBHandler).execute();
 
-
+        ImageButton wardrobeBtn = findViewById(R.id.wardrobeBtn);
+        wardrobeBtn.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), WardrobeActivity.class)));
         //ImageButton sceneLocaterBtn = findViewById(R.id.locateBtn);
         //sceneLocaterBtn.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), SceneLocationActivity.class)));
     }
@@ -324,6 +327,15 @@ public class SchedulerActivity extends AppCompatActivity {
                 isWaving = true;
             }
         });
+    }
+
+    private void setInspireOutfit(){
+        ImageView glassesSet = findViewById(R.id.glassesView);
+        ImageView bowSet = findViewById(R.id.bowView);
+        ImageView beltSet = findViewById(R.id.beltView);
+        glassesSet.setImageResource(CategoriesUtil.glassesSelected);
+        bowSet.setImageResource(CategoriesUtil.bowSelected);
+        beltSet.setImageResource(CategoriesUtil.beltSelected);
     }
 
     private void setReflections(){

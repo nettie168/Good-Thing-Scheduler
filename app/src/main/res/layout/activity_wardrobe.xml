@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WardrobeActivity">
+
+    <RelativeLayout
+        android:id="@+id/characterView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/categoryImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:scaleType="fitXY"
+            android:background="@color/sky_blue"
+            android:src="@drawable/snowy_mountain_night"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/dragonChar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/wave_item"
+            android:layout_centerHorizontal="true"
+            />
+
+        <ImageView
+            android:id="@+id/glassesView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/dragonChar"
+            android:layout_alignEnd="@id/dragonChar"
+            android:paddingTop="19dp"
+            android:src="@drawable/glasses160"/>
+
+        <ImageView
+            android:id="@+id/bowView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/dragonChar"
+            android:layout_alignEnd="@id/dragonChar"
+            android:paddingTop="69dp"
+            android:src="@drawable/bowblack"/>
+
+        <ImageView
+            android:id="@+id/beltView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/dragonChar"
+            android:layout_alignEnd="@id/dragonChar"
+            android:paddingTop="100dp"
+            android:src="@drawable/blackbelt160"/>
+
+    </RelativeLayout>
+
+   <!-- <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/glassesRV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/characterView"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bowsRV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/glassesRV"/> -->
+
+    <LinearLayout
+        android:id="@+id/glassesLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/characterView">
+
+        <ImageView
+            android:id="@+id/glassesblack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/glasses160"/>
+
+        <ImageView
+            android:id="@+id/glassesred"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/glassesred160"/>
+
+        <ImageView
+            android:id="@+id/glassespink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/glassespink160"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bowsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/glassesLayout">
+
+        <ImageView
+            android:id="@+id/bowblack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bowblack"/>
+
+        <ImageView
+            android:id="@+id/bowblackwhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bowblackwhite"/>
+
+        <ImageView
+            android:id="@+id/bowpinkblue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bowpinkblue"/>
+
+        <ImageView
+            android:id="@+id/bowpinkgreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bowpinkgreen"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/beltLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/bowsLayout"
+        >
+
+        <ImageView
+            android:id="@+id/beltblack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/blackbelt160"/>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

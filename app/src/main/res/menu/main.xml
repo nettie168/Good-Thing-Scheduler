@@ -22,8 +22,8 @@
         android:actionLayout="@layout/xp_goal_action_bar_button"
         app:showAsAction="ifRoom"/>
 
-    <item android:title="goodThings"
-        android:id="@+id/goodThingsItem"
+    <item android:title="wardrobe"
+        android:id="@+id/wardrobeActionBarBtn"
         android:orderInCategory="100"
         app:showAsAction="always"
         android:iconTint="@color/white"

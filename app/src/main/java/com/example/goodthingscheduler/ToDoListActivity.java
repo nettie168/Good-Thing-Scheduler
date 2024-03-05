@@ -3,7 +3,6 @@ package com.example.goodthingscheduler;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -11,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.goodthingscheduler.toDoAdd.ItemClickListener;
@@ -64,6 +64,7 @@ public class ToDoListActivity extends AppCompatActivity {
         CategoriesUtil.goodThingId = 1;
         CategoriesUtil.goodThing = "";
 
+        setInspireOutfit();
         setGoodTitleView();
         setBottomNavMenu();
         setAddThingFab();
@@ -91,6 +92,15 @@ public class ToDoListActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#70ccfd")));
         getSupportActionBar().setElevation(0);
         //setBackgroundDrawable(new ColorDrawable(Color.parseColor("#70ccfd")));
+    }
+
+    private void setInspireOutfit(){
+        ImageView glassesSet = findViewById(R.id.glassesView);
+        ImageView bowSet = findViewById(R.id.bowView);
+        ImageView beltSet = findViewById(R.id.beltView);
+        glassesSet.setImageResource(CategoriesUtil.glassesSelected);
+        bowSet.setImageResource(CategoriesUtil.bowSelected);
+        beltSet.setImageResource(CategoriesUtil.beltSelected);
     }
 
     private void setGoodTitleView(){
@@ -121,7 +131,7 @@ public class ToDoListActivity extends AppCompatActivity {
 
         //displays all saved categories
         //LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
-        int mNoOfColumns = CategoriesUtil.calculateNoOfColumns(getApplicationContext(),70); //80
+        int mNoOfColumns = CategoriesUtil.calculateNoOfColumns(getApplicationContext(),75); //70-80
         GridLayoutManager layoutManager = new GridLayoutManager(this, mNoOfColumns);
 
         //GridLayoutManager layoutManager = new GridLayoutManager(this, 6);
