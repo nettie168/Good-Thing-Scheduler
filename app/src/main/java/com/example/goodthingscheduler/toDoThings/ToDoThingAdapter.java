@@ -23,7 +23,7 @@ import com.example.goodthingscheduler.XPCount.XPUtils;
 import com.example.goodthingscheduler.scheduleHabits.RoutineUtils;
 import com.example.goodthingscheduler.scheduleHabits.TaskTickedActivity;
 import com.example.goodthingscheduler.toDoAdd.ToDoAddThingActivity;
-import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
+import com.example.goodthingscheduler.Categories.CategoriesUtil;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

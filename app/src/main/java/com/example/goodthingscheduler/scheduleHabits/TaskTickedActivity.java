@@ -6,20 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.goodthingscheduler.R;
-import com.example.goodthingscheduler.ReflectionActivity;
-import com.example.goodthingscheduler.SchedulerActivity;
-import com.example.goodthingscheduler.toDoCategories.CategoryAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,7 +23,6 @@ import nl.dionsegijn.konfetti.core.Party;
 import nl.dionsegijn.konfetti.core.PartyFactory;
 import nl.dionsegijn.konfetti.core.emitter.Emitter;
 import nl.dionsegijn.konfetti.core.emitter.EmitterConfig;
-import nl.dionsegijn.konfetti.core.models.Shape;
 import nl.dionsegijn.konfetti.core.models.Size;
 import nl.dionsegijn.konfetti.xml.KonfettiView;
 
@@ -58,11 +50,9 @@ public class TaskTickedActivity extends AppCompatActivity {
         final MediaPlayer mp = MediaPlayer.create(this, R.raw.mixkitbellachievement);
         mp.start();
 
-        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            public void onCompletion(MediaPlayer mp) {
-                mp.release();
-               // jumpingAnimation.stop();
-            }
+        mp.setOnCompletionListener(mp1 -> {
+            mp1.release();
+           // jumpingAnimation.stop();
         });
 
         final KonfettiView konfettiView = findViewById(R.id.konfettiView);

@@ -1,41 +1,26 @@
 package com.example.goodthingscheduler.scheduleAddRoutineHabits;
 
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.goodthingscheduler.R;
-import com.example.goodthingscheduler.ToDoListActivity;
 import com.example.goodthingscheduler.scheduleHabits.RoutineUtils;
-import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
-import com.example.goodthingscheduler.toDoCategories.GoodCategoriesDB;
-import com.example.goodthingscheduler.toDoCategories.GoodCategoryModel;
 
 import java.util.ArrayList;
 
 public class SelectButtonsAdapter extends RecyclerView.Adapter<SelectButtonsAdapter.ViewHolder> {
 
     private final ArrayList<String> list;
-    final private Context context;
 
     public SelectButtonsAdapter(ArrayList<String> list, Context context){
         this.list = list;
-        this.context = context;
     }
 
     @NonNull

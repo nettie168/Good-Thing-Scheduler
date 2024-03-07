@@ -1,37 +1,36 @@
 package com.example.goodthingscheduler;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 
-import com.example.goodthingscheduler.toDoAdd.ItemClickListener;
+import com.example.goodthingscheduler.XPCount.XPDayDBHandler;
 import com.example.goodthingscheduler.toDoAdd.ItemClickListenerInt;
-import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
-import com.example.goodthingscheduler.toDoCategories.GoodCategoryModel;
-
-import java.util.ArrayList;
+import com.example.goodthingscheduler.Categories.CategoriesUtil;
 
 public class WardrobeActivity extends AppCompatActivity {
 
     ImageView glassesView;
     ImageView bowView;
     ItemClickListenerInt itemClickListener;
+    XPDayDBHandler xpDayDBHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wardrobe);
 
+        xpDayDBHandler = new XPDayDBHandler(this);
+        Integer totalXp = xpDayDBHandler.TotalXP();
+
         glassesView = findViewById(R.id.glassesView);
         bowView = findViewById(R.id.bowView);
+        ImageView beltView = findViewById(R.id.beltView);
 
         glassesView.setImageResource(CategoriesUtil.glassesSelected);
         bowView.setImageResource(CategoriesUtil.bowSelected);
+        beltView.setImageResource(CategoriesUtil.beltSelected);
 
         ImageView black = findViewById(R.id.glassesblack);
         ImageView red = findViewById(R.id.glassesred);
@@ -41,16 +40,20 @@ public class WardrobeActivity extends AppCompatActivity {
         //red.setOnClickListener(view -> glassesView.setImageResource(R.drawable.glassesred160));
         //pink.setOnClickListener(view -> glassesView.setImageResource(R.drawable.glassespink160));
 
-        black.setOnClickListener(view -> {
-            glassesView.setImageResource(R.drawable.glasses160);
-            CategoriesUtil.glassesSelected = R.drawable.glasses160;
-        });
+      //  if(totalXp > 5 ){
+            black.setOnClickListener(view -> {
+                glassesView.setImageResource(R.drawable.glasses160);
+                CategoriesUtil.glassesSelected = R.drawable.glasses160;
+            });
+     //   }
 
+    //    if(totalXp > 15){
+            red.setOnClickListener(view -> {
+                glassesView.setImageResource(R.drawable.glassesred160);
+                CategoriesUtil.glassesSelected = R.drawable.glassesred160;
+            });
+      //  }
 
-        red.setOnClickListener(view -> {
-            glassesView.setImageResource(R.drawable.glassesred160);
-            CategoriesUtil.glassesSelected = R.drawable.glassesred160;
-        });
 
         pink.setOnClickListener(view -> {
             glassesView.setImageResource(R.drawable.glassespink160);

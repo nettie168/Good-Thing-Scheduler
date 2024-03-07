@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="xp"
+    <item android:title="@string/xp"
         android:id="@+id/xp_item"
         android:orderInCategory="100"
         android:actionLayout="@layout/xp_action_bar_button"
@@ -16,18 +16,18 @@
         android:iconTintMode="screen"
         android:icon="@drawable/ic_baseline_favorite_24"/> -->
 
-    <item android:title="xp goal"
+  <!--  <item android:title="xp goal"
         android:id="@+id/xp_goal"
         android:orderInCategory="100"
         android:actionLayout="@layout/xp_goal_action_bar_button"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom"/> -->
 
-    <item android:title="wardrobe"
+  <!--  <item android:title="wardrobe"
         android:id="@+id/wardrobeActionBarBtn"
         android:orderInCategory="100"
         app:showAsAction="always"
         android:iconTint="@color/white"
         android:iconTintMode="screen"
-        android:icon="@drawable/baseline_room_preferences_24"/>
+        android:icon="@drawable/baseline_room_preferences_24"/> -->
 
 </menu>

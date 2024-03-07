@@ -1,4 +1,4 @@
-package com.example.goodthingscheduler.toDoCategories;
+package com.example.goodthingscheduler.Categories;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,9 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.goodthingscheduler.GoodThings.GoodThingsListActivity;
 import com.example.goodthingscheduler.R;
-import com.example.goodthingscheduler.ToDoListActivity;
-import com.example.goodthingscheduler.toDoAdd.AddNewCategoryActivity;
 
 import java.util.ArrayList;
 
@@ -48,10 +47,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 CategoriesUtil.categoryImgId = category.getImgId();
                 CategoriesUtil.categoryLogoId = category.getLogoId();
 
-                context.startActivity(new Intent(context, ToDoListActivity.class));
-            }else{
-                context.startActivity(new Intent(context, AddNewCategoryActivity.class));
-            }
+                context.startActivity(new Intent(context, GoodThingsListActivity.class));
+            }//context.startActivity(new Intent(context, AddNewCategoryActivity.class));
+
         });
     }
 

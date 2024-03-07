@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.goodthingscheduler.R;
 import com.example.goodthingscheduler.toDoAdd.AddNewCategoryActivity;
 import com.example.goodthingscheduler.toDoAdd.ItemClickListener;
-import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
-import com.example.goodthingscheduler.toDoCategories.GoodCategoryModel;
+import com.example.goodthingscheduler.Categories.CategoriesUtil;
+import com.example.goodthingscheduler.Categories.GoodCategoryModel;
 
 import java.util.ArrayList;
 

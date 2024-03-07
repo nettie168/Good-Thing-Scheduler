@@ -135,13 +135,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/bowsLayout"
-        >
+        android:orientation="horizontal">
 
-        <ImageView
+   <!--     <ImageView
             android:id="@+id/beltblack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/blackbelt160"/>
+            android:src="@drawable/blackbelt160"/> -->
 
     </LinearLayout>
 

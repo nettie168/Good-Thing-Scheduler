@@ -1,4 +1,4 @@
-package com.example.goodthingscheduler.toDoCategories;
+package com.example.goodthingscheduler.Categories;
 
 import android.content.ContentValues;
 import android.content.Context;

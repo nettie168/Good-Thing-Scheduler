@@ -22,8 +22,8 @@ import android.widget.Toast;
 
 import com.example.goodthingscheduler.Calendar.CalendarUtils;
 import com.example.goodthingscheduler.R;
-import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
-import com.example.goodthingscheduler.toDoCategories.GoodCategoriesDB;
+import com.example.goodthingscheduler.Categories.CategoriesUtil;
+import com.example.goodthingscheduler.Categories.GoodCategoriesDB;
 import com.example.goodthingscheduler.toDoThings.ToDoThingModel;
 import com.example.goodthingscheduler.toDoThings.ToDoThingsDB;
 

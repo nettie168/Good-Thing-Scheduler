@@ -1,9 +1,6 @@
 package com.example.goodthingscheduler.toDoAdd;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +8,13 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.goodthingscheduler.R;
-import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
-import com.example.goodthingscheduler.toDoCategories.GoodCategoryModel;
+import com.example.goodthingscheduler.Categories.CategoriesUtil;
+import com.example.goodthingscheduler.Categories.GoodCategoryModel;
 
 import java.util.ArrayList;
 
@@ -29,14 +24,12 @@ public class CategoryTagsAdapter extends RecyclerView.Adapter<CategoryTagsAdapte
 
     final private ArrayList<GoodCategoryModel> categoryList;
     final private  ItemClickListener itemClickListener;
-    final private Context context;
     public Boolean isCatSelected;
     int selectedPosition = -1;
 
     public CategoryTagsAdapter(ArrayList<GoodCategoryModel> categoryList, ItemClickListener itemClickListener, Context context){ //, Activity mActivity){
         this.categoryList = categoryList;
         this.itemClickListener = itemClickListener;
-        this.context = context;
     }
 
     @NonNull
@@ -63,16 +56,13 @@ public class CategoryTagsAdapter extends RecyclerView.Adapter<CategoryTagsAdapte
         holder.categoryRadio.setChecked(position == selectedPosition);
 
         holder.categoryRadio.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        // check condition
-                        if (b) {
-                            // When checked// update selected position
-                            selectedPosition = holder.getAdapterPosition();
-                            // Call listener
-                            itemClickListener.onClick(holder.categoryText.getText().toString());
-                        }
+                (compoundButton, b) -> {
+                    // check condition
+                    if (b) {
+                        // When checked// update selected position
+                        selectedPosition = holder.getAdapterPosition();
+                        // Call listener
+                        itemClickListener.onClick(holder.categoryText.getText().toString());
                     }
                 });
 

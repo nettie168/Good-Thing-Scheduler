@@ -2,7 +2,6 @@ package com.example.goodthingscheduler.scheduleHabits;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +10,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.goodthingscheduler.R;
 import com.example.goodthingscheduler.scheduleAddRoutineHabits.AddHabitsActivity;
-import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
-import com.example.goodthingscheduler.toDoThings.ToDoThingModel;
+import com.example.goodthingscheduler.Categories.CategoriesUtil;
 
 import java.time.LocalTime;
 import java.util.ArrayList;

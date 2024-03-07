@@ -1,6 +1,6 @@
 package com.example.goodthingscheduler.toDoAdd;
 
-import com.example.goodthingscheduler.toDoCategories.GoodCategoryModel;
+import com.example.goodthingscheduler.Categories.GoodCategoryModel;
 
 import java.util.ArrayList;
 

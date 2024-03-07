@@ -20,7 +20,7 @@ import com.example.goodthingscheduler.R;
 import com.example.goodthingscheduler.scheduleHabits.HabitModel;
 import com.example.goodthingscheduler.scheduleHabits.RoutineListDBHandler;
 import com.example.goodthingscheduler.scheduleHabits.RoutineModel;
-import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
+import com.example.goodthingscheduler.Categories.CategoriesUtil;
 
 import java.time.LocalTime;
 import java.util.ArrayList;

@@ -1,10 +1,9 @@
-package com.example.goodthingscheduler.toDoCategories;
+package com.example.goodthingscheduler.Categories;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class CategoriesUtil {
     public static String categorySelected;

@@ -1,4 +1,4 @@
-package com.example.goodthingscheduler.toDoCategories;
+package com.example.goodthingscheduler.Categories;
 
 public class GoodCategoryModel {
     public int id;

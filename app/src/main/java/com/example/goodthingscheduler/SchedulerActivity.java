@@ -24,8 +24,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 
+import com.example.goodthingscheduler.GoodThings.GoodThingsCatActivity;
 import com.example.goodthingscheduler.XPCount.XPCountModel;
 import com.example.goodthingscheduler.XPCount.XPDayDBHandler;
 import com.example.goodthingscheduler.XPCount.XPUtils;
@@ -40,9 +40,9 @@ import com.example.goodthingscheduler.scheduleHabits.RoutineAdapter;
 import com.example.goodthingscheduler.scheduleHabits.RoutineListDBHandler;
 import com.example.goodthingscheduler.scheduleHabits.RoutineModel;
 import com.example.goodthingscheduler.toDoAdd.ToDoAddThingActivity;
-import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
-import com.example.goodthingscheduler.toDoCategories.GoodCategoriesDB;
-import com.example.goodthingscheduler.toDoCategories.GoodCategoryModel;
+import com.example.goodthingscheduler.Categories.CategoriesUtil;
+import com.example.goodthingscheduler.Categories.GoodCategoriesDB;
+import com.example.goodthingscheduler.Categories.GoodCategoryModel;
 import com.example.goodthingscheduler.toDoThings.ToDoThingAdapter;
 import com.example.goodthingscheduler.toDoThings.ToDoThingModel;
 import com.example.goodthingscheduler.toDoThings.ToDoThingsDB;
@@ -58,6 +58,7 @@ import java.util.Calendar;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Random;
 
 public class SchedulerActivity extends AppCompatActivity {
 
@@ -70,6 +71,12 @@ public class SchedulerActivity extends AppCompatActivity {
     //  d ii)(delete habit from certain day or all future (or all past) habits)
     // 2. Get static Utils for day XP, and update on recreate
     // 3. a) Put in more correct icons b) tidy up "rooms" c) have onboarding with choose character d) have side menu to change character (or click on "world")
+
+
+    //To start with only allow 1 routine and 3 to Dos a day (to create scarcity -> desire of wanting more,
+    // and to get person to just focus on doing one thing (which you reward heavily - when the routine is chosen, big-ish reward)
+    //After a week allow another routine
+
 
     //init UI views & booleans
     private AnimationDrawable jumpingAnimation;
@@ -138,11 +145,11 @@ public class SchedulerActivity extends AppCompatActivity {
         new XPUtilsTask(xpDayDBHandler).execute();
 
         //XP Goal Button//
-        MenuItem item1 = menu.findItem(R.id.xp_goal);
+    /*    MenuItem item1 = menu.findItem(R.id.xp_goal);
         item1.setActionView(R.layout.xp_goal_action_bar_button);
         ImageButton xpGoalBtn = item1.getActionView().findViewById(R.id.xpGoalActionBarBtn);
 
-        xpGoalBtn.setOnClickListener(view ->  startActivity(new Intent(getApplicationContext(), ChallengesActivity.class)));
+        xpGoalBtn.setOnClickListener(view ->  startActivity(new Intent(getApplicationContext(), ChallengesActivity.class))); */
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -176,7 +183,7 @@ public class SchedulerActivity extends AppCompatActivity {
         setFabButtons();
 
         //work-in-progress
-        //setReflections();
+        setReflections();
 
         //==SET UP DAILY TO DOS==//
         //Recycler View and Empty Placeholder
@@ -341,6 +348,20 @@ public class SchedulerActivity extends AppCompatActivity {
     private void setReflections(){
         Button reflectionBtn = findViewById(R.id.reflectionBtn);
 
+        ArrayList<String> promptsList = new ArrayList<>();
+        //Add name?
+       // promptsList.add("Morning! How's things?");
+       // promptsList.add("Morning! How's you?");
+        promptsList.add("How's your day going?");
+       // promptsList.add("Hello! How are you?");
+        //promptsList.add("What can you do today to make things better?");
+       // promptsList.add("Evening! How did things go?");
+       // promptsList.add("Good night, sleep well");
+
+
+
+        reflectionBtn.setText(getRandom(promptsList));
+
         //Not Main Thread
         reflectionBtn.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), ReflectionActivity.class)));
 
@@ -352,6 +373,11 @@ public class SchedulerActivity extends AppCompatActivity {
         } else {
             notes = new ArrayList(set);
         }
+    }
+
+    public static String getRandom(ArrayList<String> array) {
+        int rnd = new Random().nextInt(array.size());
+        return array.get(rnd);
     }
 
     public void setDateSelector(){
@@ -405,7 +431,6 @@ public class SchedulerActivity extends AppCompatActivity {
 
         Boolean daysToDosEmpty = false;
         private ArrayList<ToDoThingModel> daysTodos;
-
 
 
         ToDoAsyncTask(SchedulerActivity activity, ToDoThingAdapter adapter, ToDoThingsDB dbHelper) {
@@ -681,13 +706,13 @@ public class SchedulerActivity extends AppCompatActivity {
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
-            if (itemId == R.id.calendar) {
+            if (itemId == R.id.toDos) {
                 finish();
-                startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
+                startActivity(new Intent(getApplicationContext(), ToDoListActivity.class));
                 return true;
             } else if (itemId == R.id.goodThings) {
                 finish();
-                startActivity(new Intent(getApplicationContext(), ToDoListActivity.class));
+                startActivity(new Intent(getApplicationContext(), GoodThingsCatActivity.class));
                 return true;
             } else return itemId == R.id.schedule;
         });

@@ -124,6 +124,25 @@ public class XPDayDBHandler extends SQLiteOpenHelper {
         return storeStates;
     }
 
+    public Integer TotalXP(){
+        String sql = "select * from "+ TABLE_NAME;
+
+        //creates a database for reading our database
+        SQLiteDatabase db = this.getReadableDatabase();
+        int totalxp = 0;
+
+        Cursor cursor = db.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
+                int xp = Integer.parseInt(cursor.getString(2));
+                totalxp = totalxp + xp;
+            }
+            while (cursor.moveToNext()) ;
+        }
+        cursor.close();
+        return totalxp;
+    }
+
 
     public Integer[] TotalXPInMonth(ArrayList<LocalDate> daysInMonth) {
         String sql = "select * from "+ TABLE_NAME;

@@ -33,7 +33,9 @@ public class HabitEditDetailsActivity extends AppCompatActivity {
 
         habitImg.setImageResource(RoutineUtils.habitImgId);
         habitTitle.setText(RoutineUtils.habitName);
-        
+
+        //Set Habits by Time (you cannot tick off the habit past a certain time)
+
         //setMPGraph();
         //setLechoGraph();
 

@@ -1,20 +1,17 @@
 package com.example.goodthingscheduler.toDoAdd;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.goodthingscheduler.R;
-import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
-import com.example.goodthingscheduler.toDoCategories.GoodCategoriesDB;
-import com.example.goodthingscheduler.toDoCategories.GoodCategoryModel;
+import com.example.goodthingscheduler.Categories.CategoriesUtil;
+import com.example.goodthingscheduler.Categories.GoodCategoriesDB;
+import com.example.goodthingscheduler.Categories.GoodCategoryModel;
 
 import java.util.ArrayList;
 import java.util.Objects;

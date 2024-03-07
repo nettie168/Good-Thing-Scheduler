@@ -13,11 +13,12 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.goodthingscheduler.GoodThings.GoodThingsCatActivity;
 import com.example.goodthingscheduler.toDoAdd.ItemClickListener;
 import com.example.goodthingscheduler.toDoAdd.ToDoAddThingActivity;
-import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
-import com.example.goodthingscheduler.toDoCategories.GoodCategoriesDB;
-import com.example.goodthingscheduler.toDoCategories.GoodCategoryModel;
+import com.example.goodthingscheduler.Categories.CategoriesUtil;
+import com.example.goodthingscheduler.Categories.GoodCategoriesDB;
+import com.example.goodthingscheduler.Categories.GoodCategoryModel;
 import com.example.goodthingscheduler.toDoThings.CategorySelectorAdapter;
 import com.example.goodthingscheduler.toDoThings.ToDoStateAdapter;
 import com.example.goodthingscheduler.toDoThings.ToDoStatesModel;
@@ -104,11 +105,11 @@ public class ToDoListActivity extends AppCompatActivity {
     }
 
     private void setGoodTitleView(){
-     //   ImageView categoryImgView = findViewById(R.id.categoryImage);
+        ImageView categoryImgView = findViewById(R.id.categoryImage);
         TextView categoryTV = findViewById(R.id.categoryTextView);
 
         categoryTV.setText(CategoriesUtil.categorySelected);
-      //  categoryImgView.setImageResource(CategoriesUtil.categoryImgId);
+        categoryImgView.setImageResource(CategoriesUtil.categoryImgId);
       //  categoryImgView.setBackgroundColor(Color.parseColor("#70ccfd"));
         categoryTV.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, CategoriesUtil.categoryLogoId, 0);
     }
@@ -354,22 +355,22 @@ public class ToDoListActivity extends AppCompatActivity {
     public void setBottomNavMenu(){
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottomNavigationView);
 
-        bottomNavigationView.setSelectedItemId(R.id.goodThings);
+        bottomNavigationView.setSelectedItemId(R.id.toDos);
 
         // Perform item selected listener
         bottomNavigationView.setOnItemReselectedListener(item -> {});
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
-            if (itemId == R.id.calendar) {
+            if (itemId == R.id.goodThings) {
                 finish();
-                startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
+                startActivity(new Intent(getApplicationContext(), GoodThingsCatActivity.class));
                 return true;
             } else if (itemId == R.id.schedule) {
                 finish();
                 startActivity(new Intent(getApplicationContext(),SchedulerActivity.class));
                 return true;
-            } else return itemId == R.id.goodThings;
+            } else return itemId == R.id.toDos;
         });
     }
 

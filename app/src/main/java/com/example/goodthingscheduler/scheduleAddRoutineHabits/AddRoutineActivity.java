@@ -6,15 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.goodthingscheduler.scheduleHabits.RoutineUtils;
-import com.example.goodthingscheduler.Calendar.CalendarUtils;
 import com.example.goodthingscheduler.R;
-import com.example.goodthingscheduler.scheduleHabits.HabitDBHandler;
 import com.example.goodthingscheduler.scheduleHabits.HabitModel;
-import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
+import com.example.goodthingscheduler.Categories.CategoriesUtil;
 
 import java.util.ArrayList;
 import java.util.Objects;

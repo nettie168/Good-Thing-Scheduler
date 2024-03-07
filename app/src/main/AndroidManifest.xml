@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.goodthingscheduler">
+    package="com.example.goodthingscheduler" >
 
     <application
         android:allowBackup="false"
@@ -12,7 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GoodThingScheduler"
         tools:replace="android:allowBackup"
-        tools:targetApi="31">
+        tools:targetApi="31" >
+        <activity
+            android:name=".GoodThings.GoodThingsListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GoodThings.AddNewGoodCategoryActivity"
+            android:exported="false" />
         <activity
             android:name=".WardrobeActivity"
             android:exported="false" />
@@ -22,7 +28,7 @@
         <activity
             android:name=".SceneLocationActivity"
             android:exported="false"
-            android:parentActivityName=".SchedulerActivity">
+            android:parentActivityName=".SchedulerActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SceneLocationActivity" />
@@ -30,7 +36,7 @@
         <activity
             android:name=".Challenges.SubChallengesActivity"
             android:exported="false"
-            android:parentActivityName=".ChallengesActivity">
+            android:parentActivityName=".ChallengesActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Challenges.SubChallengesActivity" />
@@ -38,7 +44,7 @@
         <activity
             android:name=".ChallengesActivity"
             android:exported="false"
-            android:parentActivityName=".SchedulerActivity">
+            android:parentActivityName=".SchedulerActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ChallengesActivity" />
@@ -46,14 +52,14 @@
         <activity
             android:name=".XPTarget.XPGoalActivity"
             android:exported="false"
-            android:parentActivityName=".SchedulerActivity">
+            android:parentActivityName=".SchedulerActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".XPTarget.XPGoalActivity" />
         </activity>
         <activity
             android:name=".Splash"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -69,7 +75,7 @@
         <activity
             android:name=".toDoAdd.ToDoAddThingActivity"
             android:exported="false"
-            android:parentActivityName=".ToDoListActivity">
+            android:parentActivityName=".ToDoListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".toDoAdd.ToDoAddThingActivity" />
@@ -81,12 +87,12 @@
             android:name=".GoodThingsActivity"
             android:exported="false" />
         <activity
-            android:name=".ToDoActivity"
+            android:name=".GoodThings.GoodThingsCatActivity"
             android:exported="false" />
         <activity
             android:name=".toDoAdd.AddNewCategoryActivity"
             android:exported="false"
-            android:parentActivityName=".ToDoActivity">
+            android:parentActivityName=".GoodThings.GoodThingsCatActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".toDoAdd.AddNewCategoryActivity" />
@@ -97,7 +103,7 @@
         <activity
             android:name=".scheduleAddRoutineHabits.AddHabitsActivity"
             android:exported="false"
-            android:parentActivityName=".scheduleAddRoutineHabits.AddRoutineActivity">
+            android:parentActivityName=".scheduleAddRoutineHabits.AddRoutineActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".scheduleAddRoutineHabits.AddHabitsActivity" />
@@ -105,7 +111,7 @@
         <activity
             android:name=".scheduleAddRoutineHabits.AddRoutineActivity"
             android:exported="false"
-            android:parentActivityName=".SchedulerActivity">
+            android:parentActivityName=".SchedulerActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".scheduleAddRoutineHabits.AddRoutineActivity" />

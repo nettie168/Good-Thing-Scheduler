@@ -11,11 +11,6 @@
      weekly, monthly todos with notes to do, and reflections of what was achieved
       each one has option to be scheduled in date, week, month, season or year -->
 
-    <item
-        android:id="@+id/schedule"
-        android:title="Today"
-        android:icon="@drawable/ic_baseline_task_24"
-        />
 
     <item
         android:id="@+id/goodThings"
@@ -24,12 +19,26 @@
         /> <!-- encourages you to write good thing every day,
         and plan when to do or repeat good thing -->
 
+     <item
+         android:id="@+id/toDos"
+         android:title="To Dos"
+         android:icon="@drawable/ic_baseline_auto_stories_24"
+         />
+          <!-- all, bucket list, family, health, work, creations,
+         weekly, monthly todos with notes to do, and reflections of what was achieved
+          each one has option to be scheduled in date, week, month, season or year -->
 
     <item
+        android:id="@+id/schedule"
+        android:title="Today"
+        android:icon="@drawable/ic_baseline_task_24"
+        />
+
+ <!--   <item
         android:id="@+id/calendar"
         android:title="Calendar"
         android:icon="@drawable/ic_baseline_calendar_month_24"
-        /> <!-- Calendar with schedule (habits, tasks, events),
+        /> --> <!-- Calendar with schedule (habits, tasks, events),
         a list of default (good habits) to choose from
         can select 3 task/habits/event as priorities
         each habit/task/event has congrats and option to reflect when ticked/card pressed for info

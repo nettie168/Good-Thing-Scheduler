@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.goodthingscheduler.R;
-import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
+import com.example.goodthingscheduler.Categories.CategoriesUtil;
 
 import java.util.ArrayList;
 
@@ -52,16 +52,13 @@ public class ToDoTimesTagAdapter extends RecyclerView.Adapter<ToDoTimesTagAdapte
 
         // set listener on radio button
         holder.radioButton.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        // check condition
-                        if (b) {
-                            // When checked// update selected position
-                            selectedPosition = holder.getAdapterPosition();
-                            // Call listener
-                            itemClickListener.onClick(holder.radioButton.getText().toString());
-                        }
+                (compoundButton, b) -> {
+                    // check condition
+                    if (b) {
+                        // When checked// update selected position
+                        selectedPosition = holder.getAdapterPosition();
+                        // Call listener
+                        itemClickListener.onClick(holder.radioButton.getText().toString());
                     }
                 });
     }

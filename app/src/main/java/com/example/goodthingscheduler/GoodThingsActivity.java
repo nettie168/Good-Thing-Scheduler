@@ -27,7 +27,7 @@ public class GoodThingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_good_things);
 
-        setBottomNavMenu();
+        //setBottomNavMenu();
 
         ListView listView = findViewById(R.id.listView);
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("com.example.notes", Context.MODE_PRIVATE);
@@ -93,7 +93,7 @@ public class GoodThingsActivity extends AppCompatActivity {
         });
     }*/
 
-    public void setBottomNavMenu(){
+  /*  public void setBottomNavMenu(){
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottomNavigationView);
 
         bottomNavigationView.setSelectedItemId(R.id.goodThings);
@@ -119,5 +119,5 @@ public class GoodThingsActivity extends AppCompatActivity {
                 return false;
             }
         });
-    }
+    }*/
 }

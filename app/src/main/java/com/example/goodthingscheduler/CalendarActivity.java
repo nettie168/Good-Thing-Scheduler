@@ -13,8 +13,7 @@ import android.widget.TextView;
 import com.example.goodthingscheduler.Calendar.CalendarAdapter;
 import com.example.goodthingscheduler.Calendar.CalendarUtils;
 import com.example.goodthingscheduler.toDoAdd.ToDoAddThingActivity;
-import com.example.goodthingscheduler.toDoCategories.CategoriesUtil;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.goodthingscheduler.Categories.CategoriesUtil;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.lang.ref.WeakReference;
@@ -63,7 +62,7 @@ public class CalendarActivity extends AppCompatActivity {
 
 
         setViews();
-        setBottomNavMenu();
+        //setBottomNavMenu();
         previousMonthAction();
         nextMonthAction();
     }
@@ -122,7 +121,7 @@ public class CalendarActivity extends AppCompatActivity {
         return date.format(formatter);
     }
 
-    public void setBottomNavMenu(){
+   /* public void setBottomNavMenu(){
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottomNavigationView);
 
         bottomNavigationView.setSelectedItemId(R.id.calendar);
@@ -142,7 +141,7 @@ public class CalendarActivity extends AppCompatActivity {
                 return true;
             } else return itemId == R.id.calendar;
         });
-    }
+    }*/
 
     public void previousMonthAction(){
         ImageButton backBtn = findViewById(R.id.calendarBackBtn);
