@@ -9,6 +9,7 @@ import android.widget.RadioButton;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.goodthingscheduler.Categories.GoodCategoryModel;
 import com.example.goodthingscheduler.R;
 import com.example.goodthingscheduler.Categories.CategoriesUtil;
 
@@ -58,7 +59,9 @@ public class ToDoTimesTagAdapter extends RecyclerView.Adapter<ToDoTimesTagAdapte
                         // When checked// update selected position
                         selectedPosition = holder.getAdapterPosition();
                         // Call listener
-                        itemClickListener.onClick(holder.radioButton.getText().toString());
+                        GoodCategoryModel goodCategoryModel = new GoodCategoryModel(0, holder.radioButton.getText().toString(), CategoriesUtil.categoryImgId,CategoriesUtil.categoryLogoId);
+                        itemClickListener.onClick(goodCategoryModel);
+                        //itemClickListener.onClick(holder.radioButton.getText().toString());
                     }
                 });
     }

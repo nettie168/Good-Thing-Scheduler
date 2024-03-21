@@ -279,7 +279,10 @@ public class ToDoAddThingActivity extends AppCompatActivity {
        itemClickListener = s -> {
            // Notify adapter
            statesRadioRV.post(() -> toDoTimesTagAdapter.notifyDataSetChanged());
-           CategoriesUtil.stateSelected = s;
+           //CategoriesUtil.stateSelected = s;
+           CategoriesUtil.categorySelected = s.getCategoryName();
+           CategoriesUtil.categoryImgId = s.getImgId();
+           CategoriesUtil.categoryLogoId = s.getLogoId();
            //Log.i("State radio",CategoriesUtil.stateSelected);
        };
         // Set layout manager
@@ -308,7 +311,10 @@ public class ToDoAddThingActivity extends AppCompatActivity {
         itemClickListener = s -> {
             // Notify adapter
             goodThingsRV.post(() -> categoryTagsAdapter.notifyDataSetChanged());
-            CategoriesUtil.categorySelected = s;
+            //CategoriesUtil.categorySelected = s;
+            CategoriesUtil.categorySelected = s.getCategoryName();
+            CategoriesUtil.categoryImgId = s.getImgId();
+            CategoriesUtil.categoryLogoId = s.getLogoId();
         };
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
@@ -333,9 +339,11 @@ public class ToDoAddThingActivity extends AppCompatActivity {
             inspiredByString = "";
         }
 
+        CategoriesUtil.timeFrame = "day";
+
         if(!goodThingString.isEmpty() && CategoriesUtil.categorySelected!=null && CategoriesUtil.stateSelected!=null){
             //Log.i("good Thing","category is "+CategoriesUtil.categorySelected+", state is "+CategoriesUtil.stateSelected+", dates: "+CalendarUtils.dateToStart+" "+CalendarUtils.dateToEnd);
-            goodThingsDB.addGoodThing(new ToDoThingModel(0, CategoriesUtil.categorySelected,goodThingString,inspiredByString,CategoriesUtil.categoryLogoId, "#000000",CategoriesUtil.stateSelected,LocalDate.now().toString(),CalendarUtils.dateToStart,CalendarUtils.dateToEnd,"date"));
+            goodThingsDB.addGoodThing(new ToDoThingModel(0, CategoriesUtil.categorySelected,goodThingString,inspiredByString,CategoriesUtil.categoryLogoId, "#000000",CategoriesUtil.stateSelected,LocalDate.now().toString(),CategoriesUtil.timeFrame,CalendarUtils.dateToStart,CalendarUtils.dateToEnd,"date"));
             Toast.makeText(ToDoAddThingActivity.this, "Added "+goodThingString + " in "+ CategoriesUtil.categorySelected, Toast.LENGTH_SHORT).show();
             finish();
         }else{
@@ -353,7 +361,7 @@ public class ToDoAddThingActivity extends AppCompatActivity {
         }
 
         if(!goodThingString.isEmpty()){
-            goodThingsDB.updateGoodThing(new ToDoThingModel(CategoriesUtil.goodThingId, CategoriesUtil.categorySelected,goodThingString,inspiredByString,CategoriesUtil.categoryLogoId, "#000000",CategoriesUtil.stateSelected,"",CalendarUtils.dateToStart,CalendarUtils.dateToEnd,"date"));
+            goodThingsDB.updateGoodThing(new ToDoThingModel(CategoriesUtil.goodThingId, CategoriesUtil.categorySelected,goodThingString,inspiredByString,CategoriesUtil.categoryLogoId, "#000000",CategoriesUtil.stateSelected,"",CategoriesUtil.timeFrame,CalendarUtils.dateToStart,CalendarUtils.dateToEnd,"date"));
             Toast.makeText(ToDoAddThingActivity.this, "Updating... "+goodThingString, Toast.LENGTH_SHORT).show();
         }else{
             goodThingsDB.deleteGoodThing(new ToDoThingModel(CategoriesUtil.goodThingId, CategoriesUtil.categorySelected,goodThingString,CategoriesUtil.stateSelected,"date"));

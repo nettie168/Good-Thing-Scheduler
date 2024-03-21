@@ -18,6 +18,7 @@ import com.example.goodthingscheduler.toDoAdd.AddNewCategoryActivity;
 import com.example.goodthingscheduler.toDoAdd.ItemClickListener;
 import com.example.goodthingscheduler.Categories.CategoriesUtil;
 import com.example.goodthingscheduler.Categories.GoodCategoryModel;
+import com.google.android.material.divider.MaterialDivider;
 
 import java.util.ArrayList;
 
@@ -53,10 +54,14 @@ public class CategorySelectorAdapter extends RecyclerView.Adapter<CategorySelect
 
         if(category.getCategoryName().contains(CategoriesUtil.categorySelected)){
             selectedPosition = holder.getAdapterPosition();
-           // holder.cardView.setCardBackgroundColor(Color.MAGENTA);
+            holder.cardView.setCardBackgroundColor(Color.MAGENTA);
+            holder.catSelLine.setVisibility(View.VISIBLE);
+            //holder.categoryRadio.setBackgroundColor(Color.BLACK); //tint
         }else{
             selectedPosition = -1;
-        //    holder.cardView.setCardBackgroundColor(Color.parseColor("#085c0f"));
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#085c0f"));
+            holder.catSelLine.setVisibility(View.INVISIBLE);
+            //holder.categoryRadio.setBackgroundColor(Color.WHITE); //tint
         }
 
         holder.categoryRadio.setChecked(position == selectedPosition);
@@ -73,11 +78,15 @@ public class CategorySelectorAdapter extends RecyclerView.Adapter<CategorySelect
                             // When checked// update selected position
                             selectedPosition = holder.getAdapterPosition();
                             // Call listener
-                            itemClickListener.onClick(category.getCategoryName());
+                            //itemClickListener.onClick(category.getCategoryName());
+                            GoodCategoryModel goodCategoryModel = new GoodCategoryModel(0, category.getCategoryName(), category.getImgId(), category.getLogoId());
+                            itemClickListener.onClick(goodCategoryModel);
+
                             CategoriesUtil.categoryImgId = category.getImgId();
                             CategoriesUtil.categoryLogoId = category.getLogoId();
-                            holder.cardView.setCardBackgroundColor(Color.MAGENTA);
-                            //holder.cardView.setCardBackgroundColor(R.color.black);
+                            //holder.categoryRadio.setBackgroundColor(Color.BLUE);
+                            //holder.cardView.setCardBackgroundColor(Color.MAGENTA);
+                            //holder.cardView.setCardBackgroundColor(Color.MAGENTA);
                         }
                     }
                 });
@@ -107,11 +116,13 @@ public class CategorySelectorAdapter extends RecyclerView.Adapter<CategorySelect
     public static class ViewHolder extends RecyclerView.ViewHolder{
         final private RadioButton categoryRadio;
         final private CardView cardView;
+        final private MaterialDivider catSelLine;
 
         public ViewHolder(View view){
             super(view);
             categoryRadio = view.findViewById(R.id.categoryRadioButton);
             cardView = view.findViewById(R.id.categorySelCardView);
+            catSelLine = view.findViewById(R.id.catSelLine);
 
         }
     }

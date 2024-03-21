@@ -1,214 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:layout_editor_absoluteX="8dp"
+    tools:layout_editor_absoluteY="8dp"
     tools:context=".ToDoListActivity">
 
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu"/>
+        android:layout_height="match_parent"
+        android:elevation="8dp">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addGoodThingFab"
-        android:layout_width="wrap_content"
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bottom_nav_menu"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addGoodThingFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/add"
+            android:src="@drawable/ic_baseline_task_alt_24"
+            app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="19dp"
+            android:layout_marginEnd="16dp"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/add"
-        android:src="@drawable/ic_baseline_task_alt_24"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="19dp"
-        android:layout_marginEnd="16dp"/>
+        android:elevation="0dp"
+        android:backgroundTint="@color/transparent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/characterLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/categoryImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:background="@color/sky_blue"
+                    android:cropToPadding="false"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/mountainscenerect"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/dragonChar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/wave_item" />
+
+                <ImageView
+                    android:id="@+id/glassesView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/dragonChar"
+                    android:layout_alignEnd="@id/dragonChar"
+                    android:layout_alignParentBottom="true"
+                    android:paddingBottom="107dp"
+                    android:src="@drawable/glasses160" />
+
+                <ImageView
+                    android:id="@+id/bowView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/dragonChar"
+                    android:layout_alignEnd="@id/dragonChar"
+                    android:layout_alignParentBottom="true"
+                    android:paddingBottom="70dp"
+                    android:src="@drawable/bowblack" />
+
+                <ImageView
+                    android:id="@+id/beltView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/dragonChar"
+                    android:layout_alignEnd="@id/dragonChar"
+                    android:layout_alignParentBottom="true"
+                    android:paddingBottom="31dp"
+                    android:src="@drawable/blackbelt160" />
+
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/Catswitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/characterLayout"
+                />
+
+            <ViewStub
+                android:id="@+id/catRVStub"
+                android:layout="@layout/recyclerview_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/Catswitch"
+                android:inflatedId="@+id/inflated_layout"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/categoryTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/characterLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_gravity="center"
+                android:drawablePadding="4dp"
+                android:padding="8dp"
+                android:text="@string/category"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/ic_baseline_menu_book_24" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll" />
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/toDoListNestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="75dp"
-        android:orientation="vertical">
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
 
-
-        <RelativeLayout
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-            <ImageView
-                android:id="@+id/categoryImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:cropToPadding="false"
-                android:scaleType="fitXY"
-                android:background="@color/sky_blue"
-                android:src="@drawable/mountainscenerect"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/dragonChar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/wave_item"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                />
-
-            <ImageView
-                android:id="@+id/glassesView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@id/dragonChar"
-                android:layout_alignEnd="@id/dragonChar"
-                android:layout_alignParentBottom="true"
-                android:paddingBottom="107dp"
-                android:src="@drawable/glasses160"/>
-
-            <ImageView
-                android:id="@+id/bowView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@id/dragonChar"
-                android:layout_alignEnd="@id/dragonChar"
-                android:paddingTop="69dp"
-                android:src="@drawable/bowblack"/>
-
-            <ImageView
-                android:id="@+id/beltView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@id/dragonChar"
-                android:layout_alignEnd="@id/dragonChar"
-                android:layout_alignParentBottom="true"
-                android:paddingBottom="31dp"
-                android:src="@drawable/blackbelt160"/>
-
-        </RelativeLayout>
-
-        <!--       <androidx.constraintlayout.widget.ConstraintLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
-
-
-               <androidx.cardview.widget.CardView
-                   android:id="@+id/charBackground"
-                   android:layout_width="match_parent"
-                   android:layout_height="100dp"
-                   app:layout_constraintTop_toTopOf="parent"
-                   android:elevation="0dp"
-                   app:cardCornerRadius="0dp"
-                   android:backgroundTint="@color/skyblue"/>
-
-                   <ImageView
-                       android:id="@+id/charWall"
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:scaleType="fitEnd"
-                       android:src="@drawable/bluemountainssun"
-                       android:translationZ="50dp"
-                       app:layout_constraintBottom_toBottomOf="@id/charBackground"
-                       app:layout_constraintEnd_toEndOf="parent"
-                       app:layout_constraintStart_toStartOf="parent" />
-
-                   <ImageView
-                       android:id="@+id/characterView"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       app:layout_constraintVertical_weight="1"
-                       app:layout_constraintBottom_toBottomOf="@id/charFloor"
-                       app:layout_constraintStart_toStartOf="parent"
-                       app:layout_constraintEnd_toEndOf="parent"
-                       app:layout_constraintTop_toTopOf="@id/charBackground"
-                       android:foregroundGravity="bottom"
-                       android:translationZ="100dp"
-                       android:layout_marginVertical="20dp"
-                       android:padding="20dp"
-                       android:src="@drawable/dragon0"/>
-
-               <androidx.cardview.widget.CardView
-                   android:id="@+id/charFloor"
-                   android:layout_width="match_parent"
-                   android:layout_height="50dp"
-                   app:layout_constraintTop_toBottomOf="@id/charBackground"
-                   android:elevation="0dp"
-                   app:cardCornerRadius="0dp"
-                   android:backgroundTint="@color/grassGreen"/>
-
-                   <androidx.recyclerview.widget.RecyclerView
-                       android:id="@+id/categoryRVSelector"
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       app:layout_constraintTop_toBottomOf="@id/charFloor"
-                       android:background="@color/grassGreen"/>
-
-               </androidx.constraintlayout.widget.ConstraintLayout> -->
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/categoryRVSelector"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/categoryTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:padding="8dp"
-            android:textStyle="bold"
-            android:layout_gravity="center"
-            android:drawableStart="@drawable/ic_baseline_menu_book_24"
-            android:drawablePadding="4dp"
-            android:text="@string/category"/>
-
-
-
-        <!--  <ImageView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              app:layout_constraintEnd_toEndOf="@id/categoryTextView"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toBottomOf="@id/categoryImage"
-              android:padding="8dp"
-              android:src="@drawable/ic_baseline_menu_book_24"/> -->
-
-
-
-
-
- <!--       <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Books"/>
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Habits and Routines"/>
-
-        </LinearLayout> -->
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/goodThingsRV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

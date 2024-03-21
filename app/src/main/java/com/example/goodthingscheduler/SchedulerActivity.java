@@ -25,7 +25,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.example.goodthingscheduler.GoodThings.GoodThingsCatActivity;
 import com.example.goodthingscheduler.XPCount.XPCountModel;
 import com.example.goodthingscheduler.XPCount.XPDayDBHandler;
 import com.example.goodthingscheduler.XPCount.XPUtils;
@@ -187,7 +186,7 @@ public class SchedulerActivity extends AppCompatActivity {
 
         //==SET UP DAILY TO DOS==//
         //Recycler View and Empty Placeholder
-        daysGoalsRecyclerView = findViewById(R.id.daysGoalsRV);
+     /*   daysGoalsRecyclerView = findViewById(R.id.daysGoalsRV);
 
         //To Dos Adapter
         toDoThingAdapter = new ToDoThingAdapter(new ArrayList<>(), this);
@@ -201,7 +200,7 @@ public class SchedulerActivity extends AppCompatActivity {
         //Execute AsyncTask to retrieve To Dos from the database and update adapter
         //Think there's a resource failing to close in DatabaseAsync
         new ToDoAsyncTask(this, toDoThingAdapter, toDoThingsDB).execute();
-
+*/
 
         //==Set UP DAILY ROUTINES==//
         //Recycler View and Empty Placeholder
@@ -472,9 +471,9 @@ public class SchedulerActivity extends AppCompatActivity {
             //Add one-off to do to DB when user first downloads app
             // including 1. download my app 2. Add 1 routine 3. Add 1 challenge
             ArrayList<ToDoThingModel> firstToDosList = new ArrayList<>();
-            ToDoThingModel toDoThingModel1 = new ToDoThingModel(0, "All Good Things (To Do)", "Download Esk App", "", R.drawable.ic_baseline_favorite_24,"#FFFFFF","Done", LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString());
-            ToDoThingModel toDoThingModel2 = new ToDoThingModel(0, "All Good Things (To Do)", "Add 1 To Do", "", R.drawable.ic_baseline_favorite_24,"#FFFFFF", "To Do", LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString(), "");
-            ToDoThingModel toDoThingModel3 = new ToDoThingModel(0, "All Good Things (To Do)", "Add 1 Routine", "", R.drawable.ic_baseline_favorite_24,"#FFFFFF", "To Do", LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString(), "");
+            ToDoThingModel toDoThingModel1 = new ToDoThingModel(0, "All Good Things (To Do)", "Download Esk App", "", R.drawable.ic_baseline_favorite_24,"#FFFFFF","Done", LocalDate.now().toString(), "day",LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString());
+            ToDoThingModel toDoThingModel2 = new ToDoThingModel(0, "All Good Things (To Do)", "Add 1 To Do", "", R.drawable.ic_baseline_favorite_24,"#FFFFFF", "To Do", LocalDate.now().toString(), "day",LocalDate.now().toString(), LocalDate.now().toString(), "");
+            ToDoThingModel toDoThingModel3 = new ToDoThingModel(0, "All Good Things (To Do)", "Add 1 Routine", "", R.drawable.ic_baseline_favorite_24,"#FFFFFF", "To Do", LocalDate.now().toString(), "day",LocalDate.now().toString(), LocalDate.now().toString(), "");
 
             firstToDosList.add(toDoThingModel1);
             firstToDosList.add(toDoThingModel2);
@@ -492,7 +491,7 @@ public class SchedulerActivity extends AppCompatActivity {
             if(daysTodos.isEmpty()){
                 daysToDosEmpty = true;
                 ArrayList<ToDoThingModel> noToDoList = new ArrayList<>();
-                ToDoThingModel noToDo = new ToDoThingModel(0, "All Good Things (To Do)", "No To Dos", "", R.drawable.ic_baseline_favorite_24,"#FFFFFF","Done", LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString());
+                ToDoThingModel noToDo = new ToDoThingModel(0, "All Good Things (To Do)", "No To Dos", "", R.drawable.ic_baseline_favorite_24,"#FFFFFF","Done", LocalDate.now().toString(), "day", LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString());
                 noToDoList.add(noToDo);
                 daysTodos = noToDoList;
             }
@@ -712,7 +711,7 @@ public class SchedulerActivity extends AppCompatActivity {
                 return true;
             } else if (itemId == R.id.goodThings) {
                 finish();
-                startActivity(new Intent(getApplicationContext(), GoodThingsCatActivity.class));
+                startActivity(new Intent(getApplicationContext(), FragmentActivity.class)); //GoodThingsCatActivity
                 return true;
             } else return itemId == R.id.schedule;
         });

@@ -17,5 +17,6 @@
     <color name="waterBlue">#5ba1ff</color>
     <color name="waterTeal">#21abcd</color>
     <color name="lightsnow">#e9f2ff</color>
+    <color name="transparent">#00000000</color>
 
 </resources>

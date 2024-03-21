@@ -9,6 +9,7 @@ public class ToDoThingModel {
     public String colour;
     public String state;
     public String dateAdded;
+    public String timeFrame;
     public String dateToStart;
     public String dateToEnd;
     public String datesDone;
@@ -25,7 +26,7 @@ public class ToDoThingModel {
         this.goodThing = goodThing;
     }
 
-    public ToDoThingModel(int id, String category, String goodThing, String inspiredBy, int logoId, String colour, String state, String dateAdded, String dateToStart, String dateToEnd, String datesDone) {
+    public ToDoThingModel(int id, String category, String goodThing, String inspiredBy, int logoId, String colour, String state, String dateAdded, String timeFrame, String dateToStart, String dateToEnd, String datesDone) {
         this.id = id;
         this.category = category;
         this.goodThing = goodThing;
@@ -34,6 +35,7 @@ public class ToDoThingModel {
         this.colour = colour;
         this.state = state;
         this.dateAdded = dateAdded;
+        this.timeFrame = timeFrame;
         this.dateToStart = dateToStart;
         this.dateToEnd = dateToEnd;
         this.datesDone = datesDone;
@@ -101,6 +103,14 @@ public class ToDoThingModel {
 
     public void setDateAdded(String dateAdded) {
         this.dateAdded = dateAdded;
+    }
+
+    public String getTimeFrame() {
+        return timeFrame;
+    }
+
+    public void setTimeFrame(String timeFrame) {
+        this.timeFrame = timeFrame;
     }
 
     public String getDateToStart() {

@@ -74,7 +74,7 @@ public class ToDoThingAdapter extends RecyclerView.Adapter<ToDoThingAdapter.View
             if(goodThing.getState().equals("Done")){
                 goodThing.setState("To Do");
                 //Log.i("good thing b4 is ","good thing: "+goodThing.getGoodThing()+", id: "+goodThing.getId()+", cat: "+goodThing.getCategory()+", state: "+goodThing.getState()+", added: "+goodThing.getDateAdded()+", start: "+goodThing.getDateToStart());
-                toDoThingsDB.updateGoodThing(new ToDoThingModel(goodThing.getId(), goodThing.getCategory(), goodThing.getGoodThing(), goodThing.getInspiredBy(), CategoriesUtil.categoryLogoId, "#000000","To Do", goodThing.getDateAdded(), goodThing.getDateToStart(), goodThing.getDateToEnd(), ""));
+                toDoThingsDB.updateGoodThing(new ToDoThingModel(goodThing.getId(), goodThing.getCategory(), goodThing.getGoodThing(), goodThing.getInspiredBy(), CategoriesUtil.categoryLogoId, "#000000","To Do", goodThing.getDateAdded(), "day",goodThing.getDateToStart(), goodThing.getDateToEnd(), ""));
                 //Log.i("good thing after is ","good thing: "+goodThing.getGoodThing()+", id: "+goodThing.getId()+", cat: "+goodThing.getCategory()+", state: "+goodThing.getState()+", added: "+goodThing.getDateAdded()+", start: "+goodThing.getDateToStart());
                 XPUtils.dayXP = new XPCountModel(CalendarUtils.selectedDate.toString(),XPUtils.dayXP.getXp()-5);
                 xpDayDBHandler.updateDayXP(new XPCountModel(CalendarUtils.selectedDate.toString(), XPUtils.dayXP.getXp()));
@@ -83,7 +83,7 @@ public class ToDoThingAdapter extends RecyclerView.Adapter<ToDoThingAdapter.View
             }else{
                 goodThing.setState("Done");
                 //Log.i("good thing b4 is ","good thing: "+goodThing.getGoodThing()+", id: "+goodThing.getId()+", cat: "+goodThing.getCategory()+", state: "+goodThing.getState()+", added: "+goodThing.getDateAdded()+", start: "+goodThing.getDateToStart());
-                toDoThingsDB.updateGoodThing(new ToDoThingModel(goodThing.getId(), goodThing.getCategory(), goodThing.getGoodThing(), goodThing.getInspiredBy(), CategoriesUtil.categoryLogoId, "#000000","Done", goodThing.getDateAdded(), goodThing.getDateToStart(), goodThing.getDateToEnd(), LocalDate.now().toString()));
+                toDoThingsDB.updateGoodThing(new ToDoThingModel(goodThing.getId(), goodThing.getCategory(), goodThing.getGoodThing(), goodThing.getInspiredBy(), CategoriesUtil.categoryLogoId, "#000000","Done", goodThing.getDateAdded(), "day",goodThing.getDateToStart(), goodThing.getDateToEnd(), LocalDate.now().toString()));
                 //Log.i("good thing after is ","good thing: "+goodThing.getGoodThing()+", id: "+goodThing.getId()+", cat: "+goodThing.getCategory()+", state: "+goodThing.getState()+", added: "+goodThing.getDateAdded()+", start: "+goodThing.getDateToStart());
 
                 XPUtils.dayXP = new XPCountModel(CalendarUtils.selectedDate.toString(),XPUtils.dayXP.getXp()+5);

@@ -107,27 +107,27 @@ public class AddHabitsActivity extends AppCompatActivity {
                 habitsList.add(new HabitModel("wake up", 0, R.drawable.ic_baseline_wb_sunny_24));
                 habitsList.add(new HabitModel("wake up before alarm", 0, R.drawable.baseline_alarm_24));
                 habitsList.add(new HabitModel("get up", 0, R.drawable.ic_baseline_arrow_upward_24));
-                habitsList.add(new HabitModel("make bed", 0, R.drawable.ic_baseline_bed_24));
-                habitsList.add(new HabitModel("reflect on sleep", 0, R.drawable.ic_baseline_draw_24));
-                habitsList.add(new HabitModel("drink water", 0, R.drawable.ic_baseline_water_drop_24));
-                habitsList.add(new HabitModel("put on calming music", 0, R.drawable.ic_baseline_music_note_24));
-                habitsList.add(new HabitModel("10 min meditation", 0, R.drawable.ic_baseline_self_improvement_24));
-                habitsList.add(new HabitModel("feed pets", 0, R.drawable.ic_baseline_water_drop_24));
-                habitsList.add(new HabitModel("make breakfast", 0, R.drawable.ic_baseline_water_drop_24));
-                habitsList.add(new HabitModel("eat breakfast", 0, R.drawable.ic_baseline_water_drop_24));
-                habitsList.add(new HabitModel("swap coffee for water", 0, R.drawable.ic_baseline_water_drop_24));
-                habitsList.add(new HabitModel("swap coffee for tea", 0, R.drawable.ic_baseline_water_drop_24));
-                habitsList.add(new HabitModel("eat 1 fruit", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("eat 1 veg", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("eat handful of nuts", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("stretch or yoga", 0, R.drawable.ic_baseline_self_improvement_24));
-                habitsList.add(new HabitModel("fold night clothes", 0, R.drawable.ic_baseline_checkroom_24));
-                habitsList.add(new HabitModel("put night clothes on bed", 0, R.drawable.ic_baseline_bed_24));
-                habitsList.add(new HabitModel("play motivating music", 0, R.drawable.ic_baseline_music_note_24));
+                habitsList.add(new HabitModel("make bed", 0, R.drawable.ic_baseline_bed_24));  //bedroom of dreams
+                habitsList.add(new HabitModel("reflect on sleep", 0, R.drawable.ic_baseline_draw_24)); //reflections
+                habitsList.add(new HabitModel("drink water", 0, R.drawable.ic_baseline_water_drop_24)); //health
+                habitsList.add(new HabitModel("put on calming music", 0, R.drawable.ic_baseline_music_note_24)); //music
+                habitsList.add(new HabitModel("10 min meditation", 0, R.drawable.ic_baseline_self_improvement_24));  //meditation
+                habitsList.add(new HabitModel("feed pets", 0, R.drawable.ic_baseline_water_drop_24)); //pets
+                habitsList.add(new HabitModel("make breakfast", 0, R.drawable.ic_baseline_water_drop_24)); //tasty food
+                habitsList.add(new HabitModel("eat breakfast", 0, R.drawable.ic_baseline_water_drop_24)); //tasty food
+                habitsList.add(new HabitModel("swap coffee for water", 0, R.drawable.ic_baseline_water_drop_24)); //health
+                habitsList.add(new HabitModel("swap coffee for tea", 0, R.drawable.ic_baseline_water_drop_24));  //health
+                habitsList.add(new HabitModel("eat 1 fruit", 0, R.drawable.ic_baseline_checkroom_24));  //health, tasty food
+                habitsList.add(new HabitModel("eat 1 veg", 0, R.drawable.ic_baseline_checkroom_24));  //health, tasty food
+                habitsList.add(new HabitModel("eat handful of nuts", 0, R.drawable.ic_baseline_checkroom_24)); //health
+                habitsList.add(new HabitModel("stretch or yoga", 0, R.drawable.ic_baseline_self_improvement_24));  //fitness, healthy body
+                habitsList.add(new HabitModel("fold night clothes", 0, R.drawable.ic_baseline_checkroom_24)); //bedroom of dreams
+                habitsList.add(new HabitModel("put night clothes on bed", 0, R.drawable.ic_baseline_bed_24));  //bedroom of dreams
+                habitsList.add(new HabitModel("play motivating music", 0, R.drawable.ic_baseline_music_note_24));  //music
 
                 break;
             case "Exercise":
-                habitsList.add(new HabitModel("wear sports clothes", 0, R.drawable.ic_baseline_electric_bolt_24));
+                habitsList.add(new HabitModel("wear sports clothes", 0, R.drawable.ic_baseline_electric_bolt_24));  //fitness, healthy body
                 habitsList.add(new HabitModel("go for a walk", 0, R.drawable.ic_baseline_electric_bolt_24));
                 habitsList.add(new HabitModel("plank for 10-30s", 0, R.drawable.ic_baseline_electric_bolt_24));
                 habitsList.add(new HabitModel("10 press ups", 0, R.drawable.ic_baseline_electric_bolt_24));
@@ -139,7 +139,7 @@ public class AddHabitsActivity extends AppCompatActivity {
 
                 break;
          case "Self-care":
-                habitsList.add(new HabitModel("brush hair", 0, R.drawable.ic_baseline_electric_bolt_24));
+                habitsList.add(new HabitModel("brush hair", 0, R.drawable.ic_baseline_electric_bolt_24));  //look good, feel great
                 habitsList.add(new HabitModel("shower", 0, R.drawable.ic_baseline_shower_24));
                 habitsList.add(new HabitModel("wash face", 0, R.drawable.ic_baseline_shower_24));
                 habitsList.add(new HabitModel("wash hair", 0, R.drawable.ic_baseline_shower_24));

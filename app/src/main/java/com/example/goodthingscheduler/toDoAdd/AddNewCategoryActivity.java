@@ -93,9 +93,9 @@ public class AddNewCategoryActivity extends AppCompatActivity {
         //Aim to try out all bases (do one thing for a month from each, have a free/or very cheap idea for each), get points & badges, for depth(doing same thing consistently) & some breadth
         ArrayList<GoodCategoryModel> categoryList = new ArrayList<>();
         //Most Popular
-        categoryList.add(new GoodCategoryModel(0, "Books", R.drawable.snowy_mountain, R.drawable.ic_baseline_auto_stories_24));
+        categoryList.add(new GoodCategoryModel(0, "Books", R.drawable.books, R.drawable.ic_baseline_auto_stories_24));
         categoryList.add(new GoodCategoryModel(1, "Films and tv", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_movies_24));
-        categoryList.add(new GoodCategoryModel(2, "Gardening and House Plants", R.drawable.snowy_mountain, R.drawable.ic_baseline_local_florist_24));
+        categoryList.add(new GoodCategoryModel(2, "Gardening and House Plants", R.drawable.houseplants, R.drawable.ic_baseline_local_florist_24));
         categoryList.add(new GoodCategoryModel(2, "Photography", R.drawable.snowy_mountain, R.drawable.ic_baseline_add_a_photo_24));
         //categoryList.add(new GoodCategoryModel(2, "Tasty food", R.drawable.snowy_mountain, R.drawable.ic_baseline_ramen_dining_24));
         categoryList.add(new GoodCategoryModel(2, "Healthy Mealtime", R.drawable.snowy_mountain, R.drawable.ic_baseline_ramen_dining_24));

@@ -62,7 +62,10 @@ public class CategoryTagsAdapter extends RecyclerView.Adapter<CategoryTagsAdapte
                         // When checked// update selected position
                         selectedPosition = holder.getAdapterPosition();
                         // Call listener
-                        itemClickListener.onClick(holder.categoryText.getText().toString());
+                        GoodCategoryModel goodCategoryModel = new GoodCategoryModel(0, holder.categoryText.getText().toString(), category.getImgId(), category.getLogoId());
+                        //itemClickListener.onClick(holder.categoryText.getText().toString());
+                        itemClickListener.onClick(goodCategoryModel);
+
                     }
                 });
 

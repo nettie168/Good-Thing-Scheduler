@@ -26,8 +26,9 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
 
     private static final String STATE = "state";
     private static final String DATE_ADDED = "dateAdded";
-    private static final String DATE_TO_START = "dateToStart";
-    private static final String DATE_TO_END = "dateToEnd";
+    private static final String TIME_FRAME = "timeFrame";
+    private static final String WHEN_TO_START = "dateToStart";
+    private static final String WHEN_TO_END = "dateToEnd";
     private static final String DATES_DONE = "datesDone";
 
 
@@ -46,8 +47,9 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
                 + COLOUR + " TEXT, "
                 + STATE + " TEXT, "
                 + DATE_ADDED + " TEXT, "
-                + DATE_TO_START + " TEXT, "
-                + DATE_TO_END + " TEXT, "
+                + TIME_FRAME + " TEXT, "
+                + WHEN_TO_START + " TEXT, "
+                + WHEN_TO_END + " TEXT, "
                 + DATES_DONE + " TEXT)";
         sqLiteDatabase.execSQL(query);
     }
@@ -70,8 +72,9 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
         values.put(COLOUR, goodThingModel.getColour());
         values.put(STATE, goodThingModel.getState());
         values.put(DATE_ADDED, goodThingModel.getDateAdded());
-        values.put(DATE_TO_START, goodThingModel.getDateToStart());
-        values.put(DATE_TO_END, goodThingModel.getDateToEnd());
+        values.put(TIME_FRAME, goodThingModel.getTimeFrame());
+        values.put(WHEN_TO_START, goodThingModel.getDateToStart());
+        values.put(WHEN_TO_END, goodThingModel.getDateToEnd());
         values.put(DATES_DONE,goodThingModel.getDatesDone());
 
       //  db.insert(TABLE_NAME,null,values);
@@ -90,8 +93,9 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
         values.put(COLOUR, goodThingModel.getColour());
         values.put(STATE, goodThingModel.getState());
         //values.put(DATE_ADDED, goodThingModel.getDateAdded());
-        values.put(DATE_TO_START, goodThingModel.getDateToStart());
-        values.put(DATE_TO_END, goodThingModel.getDateToEnd());
+        values.put(TIME_FRAME, goodThingModel.getTimeFrame());
+        values.put(WHEN_TO_START, goodThingModel.getDateToStart());
+        values.put(WHEN_TO_END, goodThingModel.getDateToEnd());
         values.put(DATES_DONE,goodThingModel.getDatesDone());
 
         db.update(TABLE_NAME, values, ID_COL + " = ?", new String[]{String.valueOf(goodThingModel.getId())});
@@ -184,11 +188,12 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
                         int logoId = Integer.parseInt(cursor.getString(4));
                         String colour = cursor.getString(5);
                         String dateAdded = cursor.getString(7);
-                        String dateToStart = cursor.getString(8);
-                        String dateToEnd = cursor.getString(9);
-                        String datesDone = cursor.getString(10);
+                        String timeFrame = cursor.getString(8);
+                        String dateToStart = cursor.getString(9);
+                        String dateToEnd = cursor.getString(10);
+                        String datesDone = cursor.getString(11);
 
-                        storeThingsInState.add(new ToDoThingModel(id, category, goodThing, inspiredBy, logoId, colour, state, dateAdded, dateToStart, dateToEnd, datesDone));
+                        storeThingsInState.add(new ToDoThingModel(id, category, goodThing, inspiredBy, logoId, colour, state, dateAdded, timeFrame, dateToStart, dateToEnd, datesDone));
                     }
                 }
                 while (cursor.moveToNext());
@@ -225,10 +230,11 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
                         int logoId = Integer.parseInt(cursor.getString(4));
                         String colour = cursor.getString(5);
                         String dateAdded = cursor.getString(7);
-                        String dateToStart = cursor.getString(8);
-                        String dateToEnd = cursor.getString(9);
-                        String datesDone = cursor.getString(10);
-                        storeThingsInState.add(new ToDoThingModel(id, category, goodThing, inspiredBy, logoId, colour, state, dateAdded, dateToStart, dateToEnd, datesDone));
+                        String timeFrame = cursor.getString(8);
+                        String dateToStart = cursor.getString(9);
+                        String dateToEnd = cursor.getString(10);
+                        String datesDone = cursor.getString(11);
+                        storeThingsInState.add(new ToDoThingModel(id, category, goodThing, inspiredBy, logoId, colour, state, dateAdded, timeFrame, dateToStart, dateToEnd, datesDone));
                     }
                 }
                 while (cursor.moveToNext());
@@ -250,8 +256,8 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
             do {
-                String dateToStart = cursor.getString(8);
-                String dateToEnd = cursor.getString(9);
+                String dateToStart = cursor.getString(9);
+                String dateToEnd = cursor.getString(10);
                 String goodThing = cursor.getString(2);
                 String category = cursor.getString(1);
 
@@ -267,8 +273,9 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
                                     String colour = cursor.getString(5);
                                     String state = cursor.getString(6);
                                     String dateAdded = cursor.getString(7);
-                                    String datesDone = cursor.getString(10);
-                                    storeTasks.add(new ToDoThingModel(id, category, goodThing, inspiredBy, logoId, colour, state, dateAdded, dateToStart, dateToEnd, datesDone));
+                                    String timeFrame = cursor.getString(8);
+                                    String datesDone = cursor.getString(11);
+                                    storeTasks.add(new ToDoThingModel(id, category, goodThing, inspiredBy, logoId, colour, state, dateAdded, timeFrame, dateToStart, dateToEnd, datesDone));
                                 }
                             }
                         }
@@ -294,12 +301,11 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
             do {
-                String dateToStart = cursor.getString(8);
-                String dateToEnd = cursor.getString(9);
+                String dateToStart = cursor.getString(9);
+                String dateToEnd = cursor.getString(10);
                 String goodThing = cursor.getString(2);
                 String category = cursor.getString(1);
                 String state = cursor.getString(6);
-
 
                 if(dateToStart!=null && dateToEnd != null &! state.equals("Happy it exists")) {
                     if (!dateToStart.equals("date not set") && !dateToEnd.equals("date not set")) {
@@ -311,8 +317,9 @@ public class ToDoThingsDB extends SQLiteOpenHelper {
                                     int logoId = Integer.parseInt(cursor.getString(4));
                                     String colour = cursor.getString(5);
                                     String dateAdded = cursor.getString(7);
-                                    String datesDone = cursor.getString(10);
-                                    storeTasks.add(new ToDoThingModel(id, category, goodThing, inspiredBy, logoId, colour, state, dateAdded, dateToStart, dateToEnd, datesDone));
+                                    String timeFrame = cursor.getString(8);
+                                    String datesDone = cursor.getString(11);
+                                    storeTasks.add(new ToDoThingModel(id, category, goodThing, inspiredBy, logoId, colour, state, dateAdded, timeFrame, dateToStart, dateToEnd, datesDone));
                             }
                         }
                     }

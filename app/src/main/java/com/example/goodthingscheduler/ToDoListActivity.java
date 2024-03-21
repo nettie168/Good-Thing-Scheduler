@@ -1,15 +1,20 @@
 package com.example.goodthingscheduler;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,15 +25,14 @@ import com.example.goodthingscheduler.Categories.CategoriesUtil;
 import com.example.goodthingscheduler.Categories.GoodCategoriesDB;
 import com.example.goodthingscheduler.Categories.GoodCategoryModel;
 import com.example.goodthingscheduler.toDoThings.CategorySelectorAdapter;
-import com.example.goodthingscheduler.toDoThings.ToDoStateAdapter;
-import com.example.goodthingscheduler.toDoThings.ToDoStatesModel;
-import com.example.goodthingscheduler.toDoThings.ToDoThingModel;
+import com.example.goodthingscheduler.toDoThings.FragmentDay;
+import com.example.goodthingscheduler.toDoThings.MyPagerAdapter;
 import com.example.goodthingscheduler.toDoThings.ToDoThingsDB;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 
 import java.lang.ref.WeakReference;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -39,7 +43,12 @@ public class ToDoListActivity extends AppCompatActivity {
     CategorySelectorAdapter categorySelectorAdapter;
     private GoodCategoriesDB goodCategoriesDB;
     private RecyclerView categorySelectorRV;
-    private ToDoStateAdapter goodThingsAdapter;
+    ViewStub catViewStub;
+
+    View inflatedLayout;
+    MyPagerAdapter pagerAdapter;
+    TabLayout tabLayout;
+    ViewPager viewPager;
 
     @Override
     public void onRestart() {
@@ -47,7 +56,7 @@ public class ToDoListActivity extends AppCompatActivity {
         setCategorySelector();
         setGoodTitleView();
         //setGoodThingsRecyclerView();
-        new GoodThingsAsyncTask(goodThingsAdapter, toDoThingsDB).execute();
+        //new GoodThingsAsyncTask(goodThingsAdapter, toDoThingsDB).execute();
 
         //When BACK BUTTON is pressed, the activity on the stack is restarted
     }
@@ -69,30 +78,35 @@ public class ToDoListActivity extends AppCompatActivity {
         setGoodTitleView();
         setBottomNavMenu();
         setAddThingFab();
-        RecyclerView goodThingsRV = findViewById(R.id.goodThingsRV);
-        //setGoodThingsRecyclerView();
+
+        /*RecyclerView goodThingsRV = findViewById(R.id.goodThingsRV);
 
         int mNoOfColumns = CategoriesUtil.calculateNoOfColumns(getApplicationContext(),400);
         goodThingsAdapter = new ToDoStateAdapter(new ArrayList<>(), this);
         GridLayoutManager layoutManager = new GridLayoutManager(this, mNoOfColumns);
         goodThingsRV.setLayoutManager(layoutManager);
         goodThingsRV.setAdapter(goodThingsAdapter);
-        new GoodThingsAsyncTask(goodThingsAdapter, toDoThingsDB).execute();
+        new GoodThingsAsyncTask(goodThingsAdapter, toDoThingsDB).execute(); */
 
-        categorySelectorRV = findViewById(R.id.categoryRVSelector);
+        //categorySelectorRV = findViewById(R.id.categoryRVSelector);
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
+
+        pagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+
+        setCategoryStub();
+        inflatedLayout = catViewStub.inflate();
+        categorySelectorRV = inflatedLayout.findViewById(R.id.habitRecyclerView);
+        inflatedLayout.setVisibility(View.GONE);
         setCategorySelector();
     }
 
     private void setActionBar(){
-        //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.baseline_chevron_left_24);
-        //getSupportActionBar().setTitle("To Dos -"+" "+CategoriesUtil.categorySelected); //string is custom name you want
-        // getSupportActionBar().setTitle("My Good Things");
         Objects.requireNonNull(getSupportActionBar()).setTitle("");
-        //getSupportActionBar().setBackgroundDrawable(null);
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#70ccfd")));
         getSupportActionBar().setElevation(0);
-        //setBackgroundDrawable(new ColorDrawable(Color.parseColor("#70ccfd")));
     }
 
     private void setInspireOutfit(){
@@ -104,13 +118,31 @@ public class ToDoListActivity extends AppCompatActivity {
         beltSet.setImageResource(CategoriesUtil.beltSelected);
     }
 
+    private void setCategoryStub(){
+        SwitchCompat Catswitch = findViewById(R.id.Catswitch);
+        catViewStub = findViewById(R.id.catRVStub);
+
+        Catswitch.setOnClickListener(view -> {
+
+            if (catViewStub.getInflatedId() == View.NO_ID) {
+                // If ViewStub is not inflated, inflate it
+                catViewStub.inflate();
+               } else {
+                // If ViewStub is already inflated, toggle its visibility
+                if (inflatedLayout != null) {
+                    int visibility = inflatedLayout.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE;
+                    inflatedLayout.setVisibility(visibility);
+                }
+            }
+        });
+    }
+
     private void setGoodTitleView(){
         ImageView categoryImgView = findViewById(R.id.categoryImage);
         TextView categoryTV = findViewById(R.id.categoryTextView);
 
         categoryTV.setText(CategoriesUtil.categorySelected);
         categoryImgView.setImageResource(CategoriesUtil.categoryImgId);
-      //  categoryImgView.setBackgroundColor(Color.parseColor("#70ccfd"));
         categoryTV.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, CategoriesUtil.categoryLogoId, 0);
     }
 
@@ -120,25 +152,33 @@ public class ToDoListActivity extends AppCompatActivity {
             //when a category button is selected update the adapter
             categorySelectorRV.post(() -> categorySelectorAdapter.notifyDataSetChanged());
             //update Title/Img/RV to selected category
-            CategoriesUtil.categorySelected = s;
+            //CategoriesUtil.categorySelected = s;
+            CategoriesUtil.categorySelected = s.getCategoryName();
+            CategoriesUtil.categoryImgId = s.getImgId();
+            CategoriesUtil.categoryLogoId = s.getLogoId();
             setGoodTitleView();
-            //setGoodThingsRecyclerView();
-            new GoodThingsAsyncTask(goodThingsAdapter, toDoThingsDB).execute();
-        };
+            categorySelectorRV.post(() -> pagerAdapter.notifyDataSetChanged());
 
-        //lists all saved categories
-        //ArrayList<GoodCategoryModel> categoryList = goodCategoriesDB.listAllGoodCatsDB();
-        //categoryList.add(new GoodCategoryModel(0, "add category", R.drawable.snowy_mountain, R.drawable.ic_baseline_add_24));
+            pagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
+            viewPager.setAdapter(pagerAdapter);
+            tabLayout.setupWithViewPager(viewPager);
+
+            //FragmentDay fragment = (FragmentDay) getFragmentManager().findFragmentById(R.id.fragmentDay);
+            FragmentDay fragment = (FragmentDay) getSupportFragmentManager().findFragmentById(R.id.fragmentDay);
+            if (fragment != null) {
+                fragment.setGoodThingsList();
+            } else {
+                Log.e("FragmentDay", "Fragment is null");
+            }
+            //setGoodThingsRecyclerView();
+            //new GoodThingsAsyncTask(goodThingsAdapter, toDoThingsDB).execute();
+        };
 
         //displays all saved categories
         //LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         int mNoOfColumns = CategoriesUtil.calculateNoOfColumns(getApplicationContext(),75); //70-80
         GridLayoutManager layoutManager = new GridLayoutManager(this, mNoOfColumns);
 
-        //GridLayoutManager layoutManager = new GridLayoutManager(this, 6);
-
-        //layoutManager.setReverseLayout(true);
-        //layoutManager.setStackFromEnd(true);
         categorySelectorRV.setLayoutManager(layoutManager);
         categorySelectorAdapter = new CategorySelectorAdapter(new ArrayList<>(), itemClickListener, this); //, thisActivity);
         categorySelectorRV.setAdapter(categorySelectorAdapter);
@@ -267,7 +307,7 @@ public class ToDoListActivity extends AppCompatActivity {
         goodThingsRV.setAdapter(goodThingsAdapter);
     }*/
 
-    private static class GoodThingsAsyncTask extends AsyncTask<Void, Void, ArrayList<ToDoStatesModel>> {
+   /* private static class GoodThingsAsyncTask extends AsyncTask<Void, Void, ArrayList<ToDoStatesModel>> {
         private final WeakReference<ToDoStateAdapter> adapterReference;
         private final ToDoThingsDB toDoThingsDB;
 
@@ -318,7 +358,7 @@ public class ToDoListActivity extends AppCompatActivity {
                 thingsInState = toDoThingsDB.listGoodThingsInStateInCatDB(CategoriesUtil.categorySelected, stateList);
             }
         }
-    }
+    } */
 
     private void setAddThingFab(){
         FloatingActionButton addNewGoodThing = findViewById(R.id.addGoodThingFab);

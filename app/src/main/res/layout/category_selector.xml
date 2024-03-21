@@ -1,23 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/categorySelCardView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    app:cardCornerRadius="15dp"
-    app:cardElevation="4dp"
-    android:alpha="0.6"
-    android:backgroundTint="@color/grassGreen">
+    android:alpha="0.6">
 
-    <RadioButton
-        android:id="@+id/categoryRadioButton"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/categorySelCardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:button="@null"
-        android:layout_margin="8dp"
-        android:background="@drawable/ic_baseline_favorite_24"
-        android:backgroundTint="@color/white"
-        android:layout_gravity="center"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="4dp"
+        >
 
-</androidx.cardview.widget.CardView>
+        <RadioButton
+            android:id="@+id/categoryRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:layout_margin="8dp"
+            android:background="@drawable/ic_baseline_favorite_24"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="center"/>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/catSelLine"
+        android:layout_width="50dp"
+        android:layout_height="2dp"
+        app:dividerColor="@color/dragonDark"
+        app:layout_constraintTop_toBottomOf="@id/categorySelCardView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="4dp"
+        android:layout_marginHorizontal="4dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

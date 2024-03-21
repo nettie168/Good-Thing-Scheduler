@@ -93,7 +93,7 @@ public class GoodThingsListActivity extends AppCompatActivity {
 
             if(thingsInState.isEmpty()){
                 String helloMessage = "Add "+CategoriesUtil.categorySelected+" good thing or to do";
-                toDoThingsDB.addGoodThing(new ToDoThingModel(0, CategoriesUtil.categorySelected,helloMessage,"",CategoriesUtil.categoryLogoId,"#FFFFFF","To Do", LocalDate.now().toString(), "date not set","date not set","date"));
+                toDoThingsDB.addGoodThing(new ToDoThingModel(0, CategoriesUtil.categorySelected,helloMessage,"",CategoriesUtil.categoryLogoId,"#FFFFFF","To Do", LocalDate.now().toString(), CategoriesUtil.timeFrame,"date not set","date not set","date"));
             }
 
             if(CategoriesUtil.categorySelected.equals("All Good Things (To Do)")){

@@ -12,6 +12,7 @@ public class CategoriesUtil {
     public static String stateSelected;
     public static String goodThing;
     public static String inspiredBy;
+    public static String timeFrame;
     public static int goodThingId;
     public static int glassesSelected;
     public static int bowSelected;
